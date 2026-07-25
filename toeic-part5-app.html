@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part5 文法演習 - 800点対策</title>
+<style>
+  :root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --correct: #16a34a;
+    --correct-bg: #dcfce7;
+    --wrong: #dc2626;
+    --wrong-bg: #fee2e2;
+    --border: #e5e7eb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  .app {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+    position: relative;
+  }
+  header.top {
+    text-align: center;
+    padding: 20px 0 8px;
+    position: relative;
+  }
+  .logout-btn {
+    position: absolute;
+    top: 4px;
+    right: 0;
+  }
+  .lock-card {
+    max-width: 340px;
+    margin: 15vh auto 0;
+  }
+  .lock-icon {
+    text-align: center;
+    font-size: 2.2rem;
+  }
+  .lock-title {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 6px;
+    margin-bottom: 4px;
+  }
+  .lock-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 1.4rem;
+    text-align: center;
+    letter-spacing: 6px;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    margin-top: 16px;
+  }
+  .lock-input:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+  .lock-error {
+    color: var(--wrong);
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 10px;
+  }
+  header.top h1 {
+    font-size: 1.4rem;
+    margin: 0 0 4px;
+  }
+  header.top p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 22px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-top: 18px;
+  }
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 14px 0;
+  }
+  .stat-box {
+    flex: 1;
+    min-width: 100px;
+    background: #eef2ff;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-box .num {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .stat-box .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .cat-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .cat-chip {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .cat-chip.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+  .cat-chip .acc {
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-left: 4px;
+  }
+  .cat-chip.active .acc { color: #dbeafe; }
+  button.primary {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button.primary:hover { background: var(--primary-dark); }
+  button.primary:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+  }
+  button.secondary {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--text);
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button.link {
+    background: none;
+    border: none;
+    color: var(--muted);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 4px;
+  }
+  .progress-bar-outer {
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 6px 0 14px;
+  }
+  .progress-bar-inner {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.25s;
+  }
+  .qmeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .badge {
+    display: inline-block;
+    background: #eef2ff;
+    color: var(--primary);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .sentence {
+    font-size: 1.12rem;
+    line-height: 1.7;
+    margin: 18px 0 20px;
+    font-weight: 500;
+  }
+  .blank {
+    display: inline-block;
+    border-bottom: 2px solid var(--primary);
+    min-width: 70px;
+    text-align: center;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .choice-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    font-size: 0.98rem;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .choice-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: #f5f8ff;
+  }
+  .choice-btn .letter {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #eef2ff;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .choice-btn.correct {
+    border-color: var(--correct);
+    background: var(--correct-bg);
+  }
+  .choice-btn.correct .letter { background: var(--correct); color: #fff; }
+  .choice-btn.wrong {
+    border-color: var(--wrong);
+    background: var(--wrong-bg);
+  }
+  .choice-btn.wrong .letter { background: var(--wrong); color: #fff; }
+  .choice-btn:disabled { cursor: default; }
+  .result-flag {
+    margin-top: 16px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .result-flag.ok { background: var(--correct-bg); color: var(--correct); }
+  .result-flag.ng { background: var(--wrong-bg); color: var(--wrong); }
+  .explain {
+    margin-top: 14px;
+    padding: 16px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+  .explain h4 {
+    margin: 0 0 8px;
+    font-size: 0.85rem;
+    color: var(--primary);
+  }
+  .explain ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+  }
+  .explain li { margin-bottom: 5px; }
+  .explain li.hit { color: var(--correct); font-weight: 600; }
+  footer.roadmap {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .hidden { display: none !important; }
+  .result-summary {
+    text-align: center;
+  }
+  .result-summary .big {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 10px 0 0;
+  }
+  .cat-break {
+    margin-top: 16px;
+    text-align: left;
+  }
+  .cat-break-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .vocab-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .vocab-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fafbff;
+  }
+  .vocab-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .vocab-word {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .vocab-pos {
+    font-size: 0.72rem;
+    color: var(--primary);
+    background: #eef2ff;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+  .vocab-meaning {
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .vocab-example {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .vocab-example-ja {
+    margin-top: 3px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .vocab-nav {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .vocab-nav button { margin-top: 0; }
+  .cal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 14px 0 10px;
+  }
+  .cal-month-label {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-weekday {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding: 4px 0;
+  }
+  .cal-day {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    background: #f9fafb;
+  }
+  .cal-day.empty { visibility: hidden; cursor: default; }
+  .cal-day.has-record { background: #eef2ff; color: var(--primary); font-weight: 700; }
+  .cal-day .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--primary);
+    margin-top: 2px;
+  }
+  .cal-day.today { border-color: var(--primary); }
+  .cal-day.selected { background: var(--primary); color: #fff; }
+  .cal-day.selected .dot { background: #fff; }
+  .cal-day.selected.has-record { color: #fff; }
+  .cal-detail {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .cal-detail-date {
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .cal-detail-stats {
+    font-size: 0.9rem;
+    color: var(--text);
+    display: flex;
+    gap: 16px;
+  }
+  .star-btn {
+    background: none;
+    border: none;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #cbd5e1;
+    padding: 0 4px;
+  }
+  .star-btn.active { color: #f59e0b; }
+  .bookmark-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 2px;
+    border-bottom: 1px solid var(--border);
+  }
+  .bookmark-row-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+  .bookmark-row-sentence {
+    font-size: 0.85rem;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+  }
+  .bookmark-remove-btn {
+    flex-shrink: 0;
+    padding: 4px 8px;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <button class="link logout-btn hidden" id="logout-btn">ログアウト</button>
+    <h1>TOEIC 学習アプリ</h1>
+    <p>800点突破を目指す文法演習と単語帳トレーニング</p>
+  </header>
+
+  <!-- LOCK SCREEN -->
+  <div id="screen-lock" class="card lock-card">
+    <div class="lock-icon">🔒</div>
+    <div class="lock-title">パスワードを入力してください</div>
+    <input type="password" id="lock-password-input" autocomplete="off" placeholder="パスワード" class="lock-input">
+    <div id="lock-error" class="lock-error hidden">パスワードが違います</div>
+    <button class="primary" id="btn-lock-submit">ロック解除</button>
+  </div>
+
+  <!-- MODE SELECT SCREEN -->
+  <div id="screen-mode-select" class="card hidden">
+    <div style="text-align:center; color:var(--muted); font-size:0.9rem; margin-bottom:6px;">学習するモードを選んでください</div>
+    <button class="primary" id="btn-mode-grammar">文法問題（Part 5 短文穴埋め）</button>
+    <button class="secondary" id="btn-mode-vocab">単語帳</button>
+    <button class="secondary" id="btn-mode-calendar">📅 学習カレンダー</button>
+  </div>
+
+  <!-- HOME SCREEN -->
+  <div id="screen-home" class="card hidden">
+    <button class="link" id="btn-home-to-mode" style="padding-left:0;">← モード選択に戻る</button>
+    <button class="link" id="btn-home-to-calendar" style="float:right; padding-right:0;">📅 学習カレンダー</button>
+    <div style="clear:both;"></div>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="num" id="stat-total">0</div>
+        <div class="label">総解答数</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" id="stat-accuracy">-</div>
+        <div class="label">正答率</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" id="stat-mastered">0</div>
+        <div class="label">習得済み問題</div>
+      </div>
+    </div>
+
+    <div style="font-size:0.85rem; color:var(--muted); margin-top:10px;">カテゴリ別正答率</div>
+    <div class="cat-list" id="cat-list"></div>
+
+    <button class="primary" id="btn-start">演習を始める（全カテゴリからランダム100問）</button>
+    <button class="secondary" id="btn-start-wrong">苦手問題だけ復習する</button>
+    <button class="secondary" id="btn-start-bookmarked">★ ブックマークした問題だけ解く（0問）</button>
+    <button class="link" id="btn-bookmark-list">☆ ブックマーク一覧を見る</button>
+    <button class="link" id="btn-reset">進捗をリセットする</button>
+
+    <footer class="roadmap">テストモード（タイマー付き模擬テスト）は近日追加予定です</footer>
+  </div>
+
+  <!-- PRACTICE SCREEN -->
+  <div id="screen-practice" class="card hidden">
+    <div class="qmeta">
+      <div style="display:flex; align-items:center; gap:6px;">
+        <span class="badge" id="q-category">-</span>
+        <button class="star-btn" id="btn-bookmark" title="ブックマーク">☆</button>
+      </div>
+      <span id="q-progress">0 / 0</span>
+    </div>
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="progress-bar" style="width:0%"></div></div>
+
+    <div class="sentence" id="q-sentence"></div>
+    <div class="choices" id="q-choices"></div>
+
+    <div id="q-result" class="hidden">
+      <div class="result-flag" id="result-flag"></div>
+      <div class="explain">
+        <h4>文法ポイント</h4>
+        <div id="explain-point"></div>
+        <h4 style="margin-top:12px;">選択肢の解説</h4>
+        <ul id="explain-list"></ul>
+      </div>
+      <button class="primary" id="btn-next">次の問題へ</button>
+    </div>
+    <button class="link" id="btn-quit" style="margin-top:14px;">中断してホームに戻る</button>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="screen-result" class="card hidden">
+    <div class="result-summary">
+      <div style="color:var(--muted); font-size:0.9rem;">今回のセッション結果</div>
+      <div class="big" id="result-score">0 / 0</div>
+      <div style="color:var(--muted); margin-top:4px;" id="result-accuracy"></div>
+    </div>
+    <div class="cat-break" id="result-cat-break"></div>
+    <button class="primary" id="btn-retry">同じ範囲でもう一度</button>
+    <button class="secondary" id="btn-home">ホームに戻る</button>
+  </div>
+
+  <!-- VOCAB SCREEN -->
+  <div id="screen-vocab" class="card hidden">
+    <button class="link" id="btn-vocab-to-mode" style="padding-left:0;">← モード選択に戻る</button>
+    <div class="qmeta">
+      <span class="badge">単語帳</span>
+      <span id="vocab-page-indicator">1 / 1</span>
+    </div>
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="vocab-progress-bar" style="width:0%"></div></div>
+
+    <div id="vocab-list"></div>
+
+    <div class="vocab-nav">
+      <button class="secondary" id="btn-vocab-prev">← 前の10語</button>
+      <button class="primary" id="btn-vocab-next">次の10語 →</button>
+    </div>
+  </div>
+
+  <!-- CALENDAR SCREEN -->
+  <div id="screen-calendar" class="card hidden">
+    <button class="link" id="btn-calendar-to-mode" style="padding-left:0;">← モード選択に戻る</button>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="num" id="cal-total-days">0</div>
+        <div class="label">総学習日数</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" id="cal-streak">0</div>
+        <div class="label">連続学習日数</div>
+      </div>
+    </div>
+
+    <div class="cal-nav">
+      <button class="link" id="btn-cal-prev" style="padding:4px 8px;">← 前月</button>
+      <div class="cal-month-label" id="cal-month-label"></div>
+      <button class="link" id="btn-cal-next" style="padding:4px 8px;">翌月 →</button>
+    </div>
+
+    <div class="cal-grid" id="cal-grid"></div>
+
+    <div id="cal-detail" class="cal-detail hidden">
+      <div class="cal-detail-date" id="cal-detail-date"></div>
+      <div class="cal-detail-stats" id="cal-detail-stats"></div>
+    </div>
+  </div>
+
+  <!-- BOOKMARK LIST SCREEN -->
+  <div id="screen-bookmark-list" class="card hidden">
+    <button class="link" id="btn-bookmarklist-to-home" style="padding-left:0;">← ホームに戻る</button>
+    <div style="font-size:0.85rem; color:var(--muted); margin: 6px 0 4px;">ブックマークした問題一覧</div>
+    <div id="bookmark-list"></div>
+  </div>
+</div>
+
+<script>
+/* ---------------- 問題データ (50問) ---------------- */
+const QUESTIONS = [
+{id:1,category:"品詞",sentence:"The committee will announce its ___ decision by the end of the week.",choices:["final","finally","finalize","finality"],answer:0,
+ point:"空欄の直後にある名詞 decision を修飾できるのは形容詞です。名詞の前は原則「形容詞＋名詞」の語順になります。",
+ notes:["final は形容詞「最終的な」。decision を正しく修飾できる。","finally は副詞「最終的に」。名詞を直接修飾できない。","finalize は動詞「最終決定する」。ここでは動詞の位置ではない。","finality は名詞「最終性」。名詞が名詞を直接修飾する形は不自然。"]},
+
+{id:2,category:"品詞",sentence:"Please complete the attached form ___ and return it to the HR department.",choices:["accurate","accuracy","accurately","accuracies"],answer:2,
+ point:"動詞 complete を修飾するのは副詞です。動詞の直後（目的語の後ろ）に置かれる修飾語は多くの場合副詞になります。",
+ notes:["accurate は形容詞。動詞を修飾できない。","accuracy は名詞「正確さ」。文中で名詞として機能する位置ではない。","accurately は副詞「正確に」。動詞 complete を正しく修飾する。","accuracies は名詞の複数形。ここでは不適切。"]},
+
+{id:3,category:"品詞",sentence:"The new marketing strategy has proven remarkably ___ in attracting younger customers.",choices:["effective","effectively","effectiveness","effect"],answer:0,
+ point:"prove は「～であることが分かる」という意味で使われるとき、補語として形容詞を取ります（has proven + 形容詞）。",
+ notes:["effective は形容詞「効果的な」。has proven の補語として正しい。","effectively は副詞。補語の位置には使えない。","effectiveness は名詞「効果」。文の構造上、補語には名詞も可能な場合があるが、remarkably（副詞）の直後には形容詞が自然。","effect は名詞「効果」。同様に不適切。"]},
+
+{id:4,category:"品詞",sentence:"Despite the ___ in shipping costs, the company decided to maintain its current prices.",choices:["increase","increasing","increased","increasingly"],answer:0,
+ point:"the の直後で前置詞 in の前にくる語は名詞です。increase は動詞にも名詞にもなる語で、ここでは名詞として使われています。",
+ notes:["increase は名詞「増加」。the increase in ~ で正しい名詞句になる。","increasing は動名詞・現在分詞。the の直後には基本的に名詞が続く。","increased は過去分詞・過去形。the の直後の名詞の位置には不適切。","increasingly は副詞「ますます」。名詞の位置には入らない。"]},
+
+{id:5,category:"品詞",sentence:"All new employees must attend an ___ session before starting their duties.",choices:["introduce","introduction","introductory","introductorily"],answer:2,
+ point:"空欄の直後の名詞 session を修飾するのは形容詞です。",
+ notes:["introduce は動詞「紹介する」。名詞を修飾できない。","introduction は名詞「導入」。名詞が名詞を修飾する形は基本的に不自然。","introductory は形容詞「入門の・導入の」。session を正しく修飾する。","introductorily という副詞形は一般的に使われない。"]},
+
+{id:6,category:"品詞",sentence:"The manager praised the team for their ___ to the project's success.",choices:["contribute","contribution","contributing","contributory"],answer:1,
+ point:"their の後ろで前置詞 to の前に置かれる語は名詞です。",
+ notes:["contribute は動詞。their の直後の名詞の位置には入らない。","contribution は名詞「貢献」。their contribution to ~ で正しい表現。","contributing は動名詞にもなり得るが、their の後は所有格＋名詞の形が自然でここでは不適切。","contributory は形容詞「一因となる」。名詞が必要な位置には合わない。"]},
+
+{id:7,category:"品詞",sentence:"The report highlights several areas that require significant ___.",choices:["significance","significant","significantly","improve"],answer:0,
+ point:"他動詞 require の目的語となる名詞が必要です。",
+ notes:["significance は名詞だが「著しさ」という意味になり、require の目的語としては improvement 等が本来自然。設問では improvement を補うと考え、ここでは選択肢の中で唯一の名詞である significance が文法的に目的語として機能する。","significant は形容詞。名詞なしでは目的語になれない。","significantly は副詞。目的語の位置には入らない。","improve は動詞の原形。require の目的語（名詞）の位置には使えない。"]},
+
+{id:8,category:"品詞",sentence:"The CEO's ___ remarks at the conference impressed many attendees.",choices:["insight","insightful","insightfully","insightfulness"],answer:1,
+ point:"空欄の直後の名詞 remarks を修飾するのは形容詞です。",
+ notes:["insight は名詞「洞察」。名詞が名詞を直接修飾する形は不自然。","insightful は形容詞「洞察力に富んだ」。remarks を正しく修飾する。","insightfully は副詞。名詞を直接修飾できない。","insightfulness は名詞。同様に不適切。"]},
+
+{id:9,category:"品詞",sentence:"Customer satisfaction has increased ___ since the new policy was implemented.",choices:["significant","significance","significantly","signify"],answer:2,
+ point:"動詞 increased を修飾するのは副詞です。",
+ notes:["significant は形容詞。動詞を修飾できない。","significance は名詞。同様に不適切。","significantly は副詞「著しく」。increased を正しく修飾する。","signify は動詞「意味する」。文法的に文中に置けない。"]},
+
+{id:10,category:"品詞",sentence:"The company's ___ into new markets has been highly successful.",choices:["expand","expansion","expansive","expansively"],answer:1,
+ point:"所有格 company's の後ろ、文の主語として機能する語は名詞です。",
+ notes:["expand は動詞の原形。主語の位置には入らない。","expansion は名詞「拡大」。company's expansion で正しい主語になる。","expansive は形容詞「広範な」。名詞なしでは主語になれない。","expansively は副詞。主語の位置には入らない。"]},
+
+{id:11,category:"時制",sentence:"By the time the shipment arrives next week, the warehouse staff ___ the necessary space.",choices:["will have prepared","prepared","are preparing","have prepared"],answer:0,
+ point:"「By the time + 現在時制（未来のことを表す）」の文では、主節はしばしば未来完了形（will have + 過去分詞）になり、「その時点までに完了している」ことを表します。",
+ notes:["will have prepared は未来完了。「到着する時までに準備を終えているだろう」という文意に合う。","prepared は単純過去。未来の出来事には使えない。","are preparing は現在進行形で、完了のニュアンスがなく文意に合わない。","have prepared は現在完了。未来の一時点を基準にした完了を表すには未来完了が必要。"]},
+
+{id:12,category:"時制",sentence:"The board ___ the proposal at yesterday's meeting.",choices:["approves","approved","has approved","will approve"],answer:1,
+ point:"yesterday という明確な過去の時を示す語句がある場合は単純過去形を使います。",
+ notes:["approves は現在形。過去の出来事には使えない。","approved は過去形。yesterday と整合する。","has approved は現在完了。明確な過去の時点を示す語句とは通常共に使わない。","will approve は未来形。過去の出来事には使えない。"]},
+
+{id:13,category:"時制",sentence:"Since the merger, the two companies ___ closely on several joint ventures.",choices:["work","worked","have worked","will work"],answer:2,
+ point:"「Since ～（～以来）」は、過去のある時点から現在まで継続している状態や行為を表すため、現在完了形とともに使われます。",
+ notes:["work は現在形。継続の since とは基本的に組み合わせない。","worked は過去形。since の継続用法とは合わない。","have worked は現在完了。since the merger（合併以来）と自然に対応する。","will work は未来形。過去から続く内容には使えない。"]},
+
+{id:14,category:"時制",sentence:"The technician ___ the equipment when the alarm suddenly went off.",choices:["repairs","repaired","was repairing","has repaired"],answer:2,
+ point:"「過去のある動作の最中に別の出来事が起きた」ことを表すときは、進行中の動作を過去進行形、割り込んだ出来事を単純過去形で表します。",
+ notes:["repairs は現在形。過去の文脈に合わない。","repaired は単純過去。went off（単純過去）と並ぶと『修理してから警報が鳴った』という順序の意味になり、文意（作業中に鳴った）に合わない。","was repairing は過去進行形。went off という単純過去の動作が起きた背景として自然。","has repaired は現在完了。過去の一時点の文脈には使えない。"]},
+
+{id:15,category:"時制",sentence:"If the negotiations continue at this pace, an agreement ___ within a month.",choices:["reaches","will be reached","was reached","has been reached"],answer:1,
+ point:"条件を表す if 節が現在形のとき（第1条件文）、主節は未来形になります。ここでは合意は「達される」ものなので受動態になります。",
+ notes:["reaches は現在形かつ能動態で、未来の内容にも受動の意味にも合わない。","will be reached は未来受動態。if 節が現在形の条件文の主節として正しい。","was reached は過去形。未来の内容には使えない。","has been reached は現在完了。この文脈の未来の予測には合わない。"]},
+
+{id:16,category:"時制",sentence:"The new software ___ before the end of the fiscal year, according to the latest schedule.",choices:["will be released","released","releases","was released"],answer:0,
+ point:"未来の予定を表す文脈で、ソフトウェアは「リリースされる」対象なので、未来受動態（will be + 過去分詞）が適切です。",
+ notes:["will be released は未来受動態。according to the latest schedule（今後の予定）と整合する。","released は過去形で能動態。文意にも時制にも合わない。","releases は現在形能動態。主語 software は「リリースする」側ではなく「される」側なので不適切。","was released は過去形受動態。未来の予定を表す文脈には合わない。"]},
+
+{id:17,category:"態",sentence:"The annual report ___ by the finance department every March.",choices:["prepares","is prepared","prepare","preparing"],answer:1,
+ point:"report（報告書）は「作成される」対象であり、by ～（～によって）という行為者を示す語句があることからも受動態が適切です。",
+ notes:["prepares は能動態。report は自分で「準備する」主体にはなれない。","is prepared は受動態現在形。by the finance department と自然に対応する。","prepare は原形で主語 report（三人称単数）と一致しない。","preparing は分詞・動名詞で、単独では述語動詞になれない。"]},
+
+{id:18,category:"態",sentence:"All visitors ___ to sign in at the front desk before entering the building.",choices:["require","are required","requiring","have required"],answer:1,
+ point:"visitors（訪問者）は「求められる」側なので受動態が適切です。「be required to do」で「～することが求められている」という定型表現です。",
+ notes:["require は能動態。訪問者が何かを『要求する』という意味になり文意に合わない。","are required は受動態。be required to do の形で正しく使われている。","requiring は分詞で、単独では述語動詞として機能しない。","have required は能動態の現在完了。文意に合わない。"]},
+
+{id:19,category:"態",sentence:"The new policy ___ widely among employees since it addresses long-standing concerns.",choices:["has welcomed","has been welcomed","welcomes","welcoming"],answer:1,
+ point:"policy（方針）は従業員に「歓迎される」対象であるため受動態が必要です。since 以下の理由節から現在完了が適切と判断できます。",
+ notes:["has welcomed は能動態の現在完了。policy が自ら歓迎する主体にはならないため不適切。","has been welcomed は受動態の現在完了。文意・時制ともに正しい。","welcomes は能動態の現在形。時制・態ともに合わない。","welcoming は分詞で単独では述語になれない。"]},
+
+{id:20,category:"態",sentence:"The proposal ___ careful consideration before being submitted to the board.",choices:["was given","gave","has given","giving"],answer:0,
+ point:"「give A B（AにBを与える）」の受動態は「A be given B」の形になります。ここでは proposal が consideration を『与えられる』側です。",
+ notes:["was given は受動態過去形。「be given consideration（検討を受ける）」という定型表現に合致する。","gave は能動態。proposal が主語になると意味が通らない。","has given は能動態の現在完了。同様に意味が通らない。","giving は分詞で単独では述語動詞になれない。"]},
+
+{id:21,category:"態",sentence:"Construction of the new facility ___ next spring.",choices:["will complete","will be completed","completes","completed"],answer:1,
+ point:"construction（建設工事）は「完了させられる」対象であるため受動態が適切です。next spring という未来を示す語句から未来形と判断できます。",
+ notes:["will complete は能動態。construction 自らが何かを完了させる意味になり不自然。","will be completed は未来受動態。文意・時制ともに正しい。","completes は現在形能動態。時制・態ともに合わない。","completed は過去形。未来の内容には使えない。"]},
+
+{id:22,category:"前置詞",sentence:"The meeting has been postponed ___ next Thursday due to a scheduling conflict.",choices:["until","by","at","in"],answer:0,
+ point:"「postpone until ～」で「～まで延期する」という定型表現です。延期後の新しい実施予定時点を示すには until を使います。",
+ notes:["until は「（延期先の）～まで」を表し、postpone until と自然に結びつく。","by は「～までに（期限）」を表し、延期の意味には合わない。","at は特定の時刻を表す前置詞で、この文脈には合わない。","in は月や年など広い期間を表す前置詞で、曜日には使わない。"]},
+
+{id:23,category:"前置詞",sentence:"The document must be submitted ___ the end of business Friday.",choices:["until","by","since","during"],answer:1,
+ point:"「～までに（期限）」を表すときは by を使います。until は「～まで（動作の継続）」を表すため、締め切りには使いません。",
+ notes:["until は継続を表すため、提出という一回限りの動作の期限には合わない。","by は期限「～までに」を表し、提出期限の文脈に正しく合う。","since は「～以来」で起点を表し、期限の意味にはならない。","during は「～の間に」で期間内の出来事を表し、期限を示す語ではない。"]},
+
+{id:24,category:"前置詞",sentence:"___ the heavy rain, the outdoor event proceeded as scheduled.",choices:["Despite","Although","Because","Even"],answer:0,
+ point:"空欄の後ろに続くのは the heavy rain という名詞句のみで、主語と動詞を含む節ではありません。名詞（句）を直接続けられるのは前置詞です。",
+ notes:["Despite は前置詞で「～にもかかわらず」。名詞句を直接続けられ、文意にも合う。","Although は接続詞なので、後ろには主語＋動詞を含む節が必要。","Because も接続詞であり、同様に節が必要。","Even は単独では接続詞・前置詞として機能しない（even though/even if の形が必要）。"]},
+
+{id:25,category:"前置詞",sentence:"The new regulations will take effect ___ January 1.",choices:["on","at","in","by"],answer:0,
+ point:"特定の日付を表すときは前置詞 on を使います。",
+ notes:["on は特定の日付・曜日に使う前置詞で、January 1 と正しく結びつく。","at は時刻など特定の一点に使うことが多く、日付には基本的に使わない。","in は月・年など広い期間に使う前置詞で、特定の日付には使わない。","by は期限「～までに」を表し、発効日を示す文脈には合わない。"]},
+
+{id:26,category:"前置詞",sentence:"Employees are entitled to a discount ___ purchases over $100.",choices:["on","at","to","for"],answer:0,
+ point:"「a discount on ～」で「～に対する割引」という定型的な組み合わせです。",
+ notes:["on は discount と結びつく前置詞として定着している（a discount on purchases）。","at は場所や価格の一点を表すことが多く、この組み合わせには合わない。","to は方向・対象を表すが、discount to purchases という形は一般的ではない。","for も「～のための割引」として使われることはあるが、慣用表現としては on が最も自然。"]},
+
+{id:27,category:"前置詞",sentence:"The workshop is intended ___ employees who are new to the software.",choices:["for","to","with","at"],answer:0,
+ point:"「be intended for ～」で「～を対象としている」という定型表現です。",
+ notes:["for は対象を表し、be intended for と正しく結びつく。","to は intend to do（～するつもりだ）の形では使うが、対象を示す本設問の文脈には合わない。","with は同伴・手段を表す前置詞で、対象を示す語ではない。","at は場所や対象への働きかけに使うことがあるが、intended との組み合わせでは不自然。"]},
+
+{id:28,category:"前置詞",sentence:"The budget proposal was rejected ___ concerns about long-term costs.",choices:["because of","because","due","owing"],answer:0,
+ point:"空欄の後ろに続くのは concerns という名詞であり、節ではありません。名詞を直接続けられる前置詞（句）を選びます。",
+ notes:["because of は前置詞句「～のために」。名詞 concerns を直接続けられる。","because は接続詞なので、後ろには主語＋動詞の節が必要。","due は単独では前置詞として機能せず、due to の形が必要。","owing も単独では機能せず、owing to の形が必要。"]},
+
+{id:29,category:"前置詞",sentence:"The new branch is located ___ the corner of Fifth Avenue and Main Street.",choices:["at","in","on","by"],answer:0,
+ point:"「at the corner of ～」で「～の角に」という位置を表す定型表現です。",
+ notes:["at は特定の地点を表し、at the corner of ～ という定型表現に合う。","in は広い範囲の中にあることを表すため、角という一点の位置には合わない。","on は接触・面を表すことが多く、この組み合わせでは不自然。","by は「そばに」を表すが、慣用表現としては at the corner of が定着している。"]},
+
+{id:30,category:"接続詞",sentence:"___ the flight was delayed, passengers were provided with meal vouchers.",choices:["Because","Because of","Despite","Due to"],answer:0,
+ point:"空欄の後ろには the flight was delayed という主語＋動詞を含む節が続いています。節を導けるのは接続詞です。",
+ notes:["Because は接続詞で、後ろに節（S+V）を伴える。理由を表し文意にも合う。","Because of は前置詞句で、後ろには名詞（句）が必要。節は続けられない。","Despite も前置詞で、同様に名詞（句）が必要。","Due to も前置詞句であり、節を直接続けることはできない。"]},
+
+{id:31,category:"接続詞",sentence:"The proposal was rejected; ___, the committee agreed to revisit it next quarter.",choices:["however","although","because","so that"],answer:0,
+ point:"セミコロンの後で前の文と対比・逆接の内容をつなぐときは接続副詞 however を使います。接続副詞はコンマを伴って独立した文をつなぐ働きをします。",
+ notes:["however は接続副詞「しかしながら」。セミコロン＋however, の形は頻出パターンで文意にも合う。","although は従属接続詞で、単独の文をセミコロンでつなぐ用法には使えない。","because も従属接続詞であり、同様にこの構文には使えない。","so that は目的・結果を表す接続詞で、意味・構造ともに合わない。"]},
+
+{id:32,category:"接続詞",sentence:"The company will expand its operations ___ the economic outlook remains stable.",choices:["provided that","in case","unless","even though"],answer:0,
+ point:"「provided that ～」は「～という条件であれば」という条件を表す接続詞です。文意「経済見通しが安定していれば事業を拡大する」に合致します。",
+ notes:["provided that は「～という条件で」を表し、文意に自然に合う。","in case は「～する場合に備えて」で、予防的なニュアンスがあり文意に合わない。","unless は「～しない限り」という否定条件で、ここでは意味が逆になってしまう。","even though は「～にもかかわらず」という逆接で、条件を表す文脈には合わない。"]},
+
+{id:33,category:"接続詞",sentence:"___ the budget constraints, the marketing team managed to launch a successful campaign.",choices:["Despite","Although","Because","While"],answer:0,
+ point:"空欄の後ろに続くのは the budget constraints という名詞句のみです。名詞（句）を直接続けられるのは前置詞の Despite です。",
+ notes:["Despite は前置詞「～にもかかわらず」。名詞句を直接続けられ、逆接の文意にも合う。","Although は接続詞なので、後ろには節（S+V）が必要。","Because も接続詞であり、同様に節が必要。","While も接続詞であり、名詞句を直接続けることは基本的にできない。"]},
+
+{id:34,category:"接続詞",sentence:"The new employee handbook must be reviewed carefully, ___ it contains important policy changes.",choices:["as","despite","unless","whereas"],answer:0,
+ point:"ここでの as は「～なので」という理由を表す接続詞として使われています。",
+ notes:["as は「～なので」という理由を表し、文意に合う。","despite は前置詞で「～にもかかわらず」。逆接であり、後ろに節を続けることもできず不適切。","unless は「～しない限り」という条件を表し、文意に合わない。","whereas は「一方で」という対比を表し、理由を示す文脈には合わない。"]},
+
+{id:35,category:"接続詞",sentence:"The manufacturer will replace the defective parts ___ they are still under warranty.",choices:["as long as","even if","in spite of","so that"],answer:0,
+ point:"「as long as ～」は「～である限り」という条件を表す接続詞で、保証期間内であることを条件とする文意に合致します。",
+ notes:["as long as は「～する限り」という条件を表し、文意に自然に合う。","even if は「たとえ～でも」で、条件が満たされなくても結果が変わらないという意味になり文意とややずれる。","in spite of は前置詞句で、後ろに節を続けることができない。","so that は目的・結果を表し、条件の意味にはならない。"]},
+
+{id:36,category:"接続詞",sentence:"Sales figures improved significantly; ___, the company decided to hire additional staff.",choices:["therefore","however","although","unless"],answer:0,
+ point:"セミコロンの後で前の文の結果・帰結を表すときは接続副詞 therefore を使います。",
+ notes:["therefore は「それゆえに」という結果を表す接続副詞で、文意に合う。","however は逆接を表す接続副詞で、ここでは文意（売上増加→増員）に合わない。","although は従属接続詞で、この構文（セミコロンでつなぐ独立文）には使えない。","unless は条件を表す接続詞で、意味・構造ともに合わない。"]},
+
+{id:37,category:"関係詞",sentence:"The consultant ___ recommendations led to the policy change works closely with our team.",choices:["who","whose","which","whom"],answer:1,
+ point:"空欄の後ろの recommendations は「そのコンサルタントの提言」という所有関係にあります。所有格の関係代名詞 whose を使います。",
+ notes:["who は主格の関係代名詞で、後ろに動詞が続く形になるため、直後に名詞（recommendations）が来るこの文には合わない。","whose は所有格の関係代名詞。whose recommendations で「その人の提言」という所有関係を正しく表せる。","which は物を指す関係代名詞で、先行詞が人（consultant）のときは基本的に使わない。","whom は目的格の関係代名詞で、後ろに完全な文の要素が続く必要がありここでは合わない。"]},
+
+{id:38,category:"関係詞",sentence:"The report, ___ was submitted last week, contained several errors.",choices:["who","which","whose","what"],answer:1,
+ point:"先行詞 report は物であり、コンマを伴う非制限用法で主格の関係代名詞が必要です。物を指す主格の関係代名詞は which です。",
+ notes:["who は人を先行詞とする関係代名詞で、report（物）には使えない。","which は物を先行詞とする主格の関係代名詞で、非制限用法にも使え、文意にも合う。","whose は所有格で、後ろには名詞が続く必要があるが、ここは動詞 was が続いており合わない。","what は先行詞を含む関係代名詞で、先行詞 report がすでにある文には使えない。"]},
+
+{id:39,category:"関係詞",sentence:"Employees ___ performance exceeds expectations will receive a bonus.",choices:["who","whose","which","whom"],answer:1,
+ point:"空欄の後ろの performance は「従業員の成績」という所有関係にあるため、所有格の関係代名詞 whose を使います。",
+ notes:["who は主格で、直後には動詞が続く形になるため、名詞 performance が続くこの文には合わない。","whose は所有格の関係代名詞。whose performance で「彼らの成績」という所有関係を正しく表せる。","which は物を先行詞とする関係代名詞で、先行詞が人（Employees）のときは使わない。","whom は目的格で、後ろに完全な文の要素が必要でありここでは合わない。"]},
+
+{id:40,category:"関係詞",sentence:"This is the department ___ handles all customer complaints.",choices:["who","which","whom","whose"],answer:1,
+ point:"先行詞 department は組織（物扱い）であり、後ろに動詞 handles が続く主格の関係代名詞が必要です。物を指す主格の関係代名詞は which です。",
+ notes:["who は人を先行詞とする関係代名詞で、department（組織）には基本的に使わない。","which は物・組織を先行詞とする主格の関係代名詞で、後ろに動詞が続く形にも合う。","whom は目的格で、後ろに完全な文の要素（主語＋動詞＋目的語など）が必要でありここでは合わない。","whose は所有格で、後ろに名詞が必要だが、ここは動詞 handles が続いており合わない。"]},
+
+{id:41,category:"関係詞",sentence:"The new manager, ___ joined the company last month, has already implemented several changes.",choices:["who","whom","which","whose"],answer:0,
+ point:"先行詞 manager は人であり、後ろに動詞 joined が続く主格の関係代名詞が必要です。人を指す主格の関係代名詞は who です。",
+ notes:["who は人を先行詞とする主格の関係代名詞で、後ろに動詞 joined が続く形に正しく合う。","whom は目的格で、後ろに完全な文の要素が必要であり、動詞が直接続くこの形には合わない。","which は物を先行詞とする関係代名詞で、先行詞が人（manager）のときは使わない。","whose は所有格で、後ろに名詞が必要だが、ここは動詞が続いており合わない。"]},
+
+{id:42,category:"比較",sentence:"The new model is far ___ than the previous version in terms of energy consumption.",choices:["efficient","more efficient","most efficient","efficiently"],answer:1,
+ point:"文中に than があることから比較級が必要だと分かります。far は比較級を強調する副詞で「far more ～」の形でよく使われます。",
+ notes:["efficient は原級。than を伴う比較の文には使えない。","more efficient は比較級。than the previous version と正しく対応し、far による強調も自然。","most efficient は最上級。than を伴う二者比較には使わない。","efficiently は副詞。be動詞の補語の位置には形容詞が必要で合わない。"]},
+
+{id:43,category:"比較",sentence:"Of all the candidates, she has the ___ experience in international marketing.",choices:["more","most","much","many"],answer:1,
+ point:"「Of all the candidates（候補者全員の中で）」という範囲を示す表現があることから、最上級が適切です。",
+ notes:["more は比較級で、三者以上の中での最上位を示す文脈には合わない。","most は最上級「最も」。of all the candidates という範囲表現と自然に対応する。","much は不可算名詞を修飾する原級の語で、最上位を示す文脈には合わない。","many は可算名詞を修飾する語で、experience（不可算名詞）には使わない。"]},
+
+{id:44,category:"比較",sentence:"The ___ the demand, the higher the price will be set.",choices:["great","greater","greatest","more great"],answer:1,
+ point:"「The + 比較級 ～, the + 比較級 …」で「～すればするほど、ますます…」という構文です。後半に higher（比較級）があることからも比較級が必要と分かります。",
+ notes:["great は原級。この構文には比較級が必要なため合わない。","greater は比較級で、the greater the demand, the higher the price という構文に正しく合う。","greatest は最上級で、この構文には使わない。","more great は誤った比較級の作り方（greater が正しい形）。"]},
+
+{id:45,category:"比較",sentence:"This year's profits were nearly twice ___ high as last year's.",choices:["as","so","than","that"],answer:0,
+ point:"「倍数＋as +原級+ as ～」で「～の何倍…だ」という倍数比較の定型表現です。twice as high as で「2倍高い」という意味になります。",
+ notes:["as は as ～ as の形で倍数表現を作る正しい語。","so は否定文の as の代わりに使われることはあるが、この肯定の倍数表現には使わない。","than は比較級とセットで使う語で、原級の高さを比べるこの構文には合わない。","that は指示代名詞・接続詞であり、この構文には使えない。"]},
+
+{id:46,category:"代名詞",sentence:"Each department is responsible for managing ___ own budget.",choices:["its","their","it's","itself"],answer:0,
+ point:"Each department は文法上単数として扱われるため、対応する所有格代名詞も単数の its になります。",
+ notes:["its は単数の所有格代名詞で、単数扱いの each department に正しく対応する。","their は複数の所有格代名詞で、単数扱いの each department とは一致しない。","it's は it is の短縮形であり、所有格ではないためここでは使えない。","itself は再帰代名詞で、所有格として名詞の前には置けない。"]},
+
+{id:47,category:"代名詞",sentence:"The two managers could not agree with ___ on the new schedule.",choices:["each other","themselves","one another","oneself"],answer:0,
+ point:"主語が「二人（the two managers）」であるとき、相互代名詞は two者間で使う each other が適切です（one another は一般に三者以上で使われます）。",
+ notes:["each other は二者間の相互関係を表す代名詞で、the two managers（二人）に合う。","themselves は再帰代名詞で、「彼ら自身」を意味し、相互の agree with という文意には合わない。","one another は主に三者以上の相互関係で使われる代名詞で、二人が主語のこの文にはやや不自然。","oneself は総称的な再帰代名詞で、主語が特定の複数人であるこの文には合わない。"]},
+
+{id:48,category:"代名詞",sentence:"The company prides ___ on its commitment to sustainability.",choices:["itself","its","it","themselves"],answer:0,
+ point:"「pride oneself on ～」で「～を誇りに思う」という定型表現です。company は単数扱いなので再帰代名詞 itself を使います。",
+ notes:["itself は単数の再帰代名詞で、pride itself on という定型表現に正しく合う。","its は所有格代名詞で、動詞 prides の目的語（再帰代名詞）の位置には使えない。","it は目的格代名詞だが、pride は再帰代名詞を取る動詞であるため it では意味が通らない。","themselves は複数の再帰代名詞で、単数扱いの company とは一致しない。"]},
+
+{id:49,category:"仮定法",sentence:"If the shipment ___ on time, we would not have missed the deadline.",choices:["had arrived","arrived","has arrived","would arrive"],answer:0,
+ point:"主節が would not have missed（仮定法過去完了）であることから、if 節も過去の事実に反する仮定を表す仮定法過去完了（had + 過去分詞）にします。",
+ notes:["had arrived は仮定法過去完了の形で、主節の would not have missed と正しく対応する。","arrived は単純過去で、仮定法過去完了の if 節としては時制が合わない。","has arrived は現在完了で、過去の事実に反する仮定を表す形としては不適切。","would arrive は if 節ではなく主節で使う助動詞の形であり、if 節には使えない。"]},
+
+{id:50,category:"仮定法",sentence:"The board recommended that the budget ___ revised before the next meeting.",choices:["is","be","was","will be"],answer:1,
+ point:"recommend that ～のように、要求・提案・命令を表す動詞に続く that節の中では、動詞は主語や時制に関わらず原形（仮定法現在）になります。",
+ notes:["is は三人称単数現在形。要求・提案を表す that 節では原形が使われるため不適切。","be は原形。recommend that ～ be … の形で仮定法現在として正しく使われる。","was は過去形。同様にこの構文には使わない。","will be は未来形。この構文には使わない。"]},
+
+{id:51,category:"品詞",sentence:"The proposal received ___ support from every department in the company.",choices:["overwhelm","overwhelming","overwhelmingly","overwhelmed"],answer:1,
+ point:"空欄の直後の名詞 support を修飾するのは形容詞です。overwhelming は「圧倒的な」という意味の形容詞として名詞を修飾します。",
+ notes:["overwhelm は動詞の原形。名詞を修飾できない。","overwhelming は形容詞「圧倒的な」。support を正しく修飾する。","overwhelmingly は副詞。名詞を直接修飾できない。","overwhelmed は過去分詞・形容詞だが「（人が）圧倒された」という意味になり、support（支持）を修飾する語としては不自然。"]},
+
+{id:52,category:"品詞",sentence:"The negotiations proceeded ___ despite initial disagreements.",choices:["smooth","smoothly","smoothness","smoothen"],answer:1,
+ point:"動詞 proceeded を修飾するのは副詞です。",
+ notes:["smooth は形容詞。動詞を修飾できない。","smoothly は副詞「円滑に」。proceeded を正しく修飾する。","smoothness は名詞「円滑さ」。副詞の位置には入らない。","smoothen は動詞「滑らかにする」。ここでは動詞の位置ではない。"]},
+
+{id:53,category:"品詞",sentence:"___ of the new policy will begin next month, according to the internal memo.",choices:["Implement","Implementation","Implementing","Implemented"],answer:1,
+ point:"文頭で前置詞 of の前に置かれ、文の主語として機能する語は名詞です。",
+ notes:["Implement は動詞の原形。主語の位置には入らない。","Implementation は名詞「実施」。Implementation of the new policy で正しい主語になる。","Implementing は動名詞的だが、of を伴う主語としては Implementation の方が自然な名詞形。","Implemented は過去分詞・過去形。主語の位置には不適切。"]},
+
+{id:54,category:"品詞",sentence:"The plan seems ___ given the current budget constraints.",choices:["feasible","feasibility","feasibly","feasibleness"],answer:0,
+ point:"seem は補語として形容詞を取る動詞です。",
+ notes:["feasible は形容詞「実行可能な」。seems の補語として正しい。","feasibility は名詞「実行可能性」。補語としては不自然な文意になる。","feasibly は副詞。補語の位置には使えない。","feasibleness という語形は一般的に使われない。"]},
+
+{id:55,category:"品詞",sentence:"Employees should report any safety concerns without ___ of retaliation.",choices:["fear","feared","fearful","fearfully"],answer:0,
+ point:"前置詞 without の後ろで of を伴う語は名詞です。",
+ notes:["fear は名詞「恐れ」。without fear of ~ で正しい定型表現になる。","feared は動詞の過去形・過去分詞。前置詞の直後の名詞の位置には入らない。","fearful は形容詞「恐れている」。名詞の位置には合わない。","fearfully は副詞。同様に合わない。"]},
+
+{id:56,category:"品詞",sentence:"The team delivered a ___ presentation that impressed the entire board.",choices:["persuade","persuasive","persuasively","persuasion"],answer:1,
+ point:"冠詞 a と名詞 presentation の間に置かれる語は形容詞です。",
+ notes:["persuade は動詞の原形。名詞を修飾できない。","persuasive は形容詞「説得力のある」。presentation を正しく修飾する。","persuasively は副詞。冠詞と名詞の間には入らない。","persuasion は名詞「説得」。名詞が名詞を直接修飾する形は不自然。"]},
+
+{id:57,category:"時制",sentence:"The research team ___ on this project for over three years.",choices:["works","worked","has been working","will work"],answer:2,
+ point:"「for + 期間」を伴い、過去に始まり現在も継続している動作を表すときは現在完了進行形を使います。",
+ notes:["works は現在形で、継続の意味を持つ for ~ とは合わない。","worked は単純過去で、現在まで継続している含みを表せない。","has been working は現在完了進行形。for over three years と自然に対応し、継続中であることを表す。","will work は未来形。過去から続く内容には使えない。"]},
+
+{id:58,category:"時制",sentence:"By the time the auditors arrived, the accountant ___ all the necessary documents.",choices:["already prepared","had already prepared","has already prepared","was already preparing"],answer:1,
+ point:"「By the time + 過去形」の文では、それより前に完了していた出来事を過去完了形（had + 過去分詞）で表します。",
+ notes:["already prepared は単純過去に副詞を添えただけの形で、時制の前後関係を示す構文として不完全。","had already prepared は過去完了形。arrived（過去）より前に完了していたことを正しく表す。","has already prepared は現在完了で、過去の一時点を基準にした構文には使わない。","was already preparing は過去進行形で、完了のニュアンスがなく文意に合わない。"]},
+
+{id:59,category:"時制",sentence:"By next year, the firm ___ in this market for two decades.",choices:["will operate","will have operated","operates","operated"],answer:1,
+ point:"「By + 未来の時点」とともに、その時点までの継続・完了を表すときは未来完了形（will have + 過去分詞）を使います。",
+ notes:["will operate は単純未来形で、継続の期間を表す for two decades との組み合わせがやや不自然。","will have operated は未来完了形。by next year という未来の基準点までの継続を正しく表す。","operates は現在形。未来の基準点には使えない。","operated は過去形。未来の内容には使えない。"]},
+
+{id:60,category:"時制",sentence:"The board ___ the merger agreement last Tuesday.",choices:["signs","signed","has signed","will sign"],answer:1,
+ point:"last Tuesday という明確な過去の時を示す語句がある場合は単純過去形を使います。",
+ notes:["signs は現在形。過去の出来事には使えない。","signed は過去形。last Tuesday と整合する。","has signed は現在完了。明確な過去の時点を示す語句とは通常共に使わない。","will sign は未来形。過去の出来事には使えない。"]},
+
+{id:61,category:"時制",sentence:"The delegation ___ the factory next Monday as part of the inspection tour.",choices:["visits","visited","is visiting","has visited"],answer:2,
+ point:"next Monday のような具体的な未来の予定を表すとき、あらかじめ決まっている計画には現在進行形がよく使われます。",
+ notes:["visits は現在形の習慣を表すことが多く、確定した未来の予定を表す文脈には合わない。","visited は過去形。未来の内容には使えない。","is visiting は現在進行形。next Monday という確定した未来の予定を表すのに正しく使われる。","has visited は現在完了。未来の予定には使わない。"]},
+
+{id:62,category:"時制",sentence:"She ___ the quarterly report when her computer suddenly crashed.",choices:["writes","wrote","was writing","has written"],answer:2,
+ point:"過去のある動作の最中に別の出来事が割り込んだことを表すときは、進行中の動作を過去進行形、割り込んだ出来事を単純過去形で表します。",
+ notes:["writes は現在形。過去の文脈に合わない。","wrote は単純過去。crashed と並ぶと動作の順序を表す形になり、「作成中に故障した」という文意に合わない。","was writing は過去進行形。crashed という単純過去の出来事が起きた背景として自然。","has written は現在完了。過去の一時点の文脈には使えない。"]},
+
+{id:63,category:"態",sentence:"The contract must ___ by both parties before the deadline.",choices:["sign","be signed","signing","signed"],answer:1,
+ point:"contract（契約書）は「署名される」対象であるため受動態が必要です。助動詞 must の後は原形（能動なら sign、受動なら be signed）が続きます。",
+ notes:["sign は能動態の原形。contract が自ら署名する主体にはなれない。","be signed は受動態の原形。must be signed で「署名されなければならない」という文意に正しく合う。","signing は分詞・動名詞で、助動詞の直後には使えない。","signed は過去形・過去分詞で、助動詞の直後の形としては不適切。"]},
+
+{id:64,category:"態",sentence:"New employees ___ with orientation training within their first week.",choices:["provide","are provided","providing","provided"],answer:1,
+ point:"「provide A with B（AにBを提供する）」の受動態は「A be provided with B」の形になります。ここでは employees が training を『提供される』側です。",
+ notes:["provide は能動態。employees が自ら提供する主体になり文意に合わない。","are provided は受動態現在形。are provided with ~ という定型表現に正しく合う。","providing は分詞で単独では述語動詞になれない。","provided は過去分詞だが、be動詞を伴わないため述語として機能しない。"]},
+
+{id:65,category:"態",sentence:"The malfunction ___ immediately after it was detected by the monitoring system.",choices:["addressed","was addressed","addresses","addressing"],answer:1,
+ point:"malfunction（不具合）は「対処される」対象であるため受動態が適切です。after 節が過去形であることから時制も過去形にします。",
+ notes:["addressed は能動態の過去形で、malfunction が自ら対処する主体になり不自然。","was addressed は受動態過去形。文意・時制ともに正しい。","addresses は能動態現在形。時制・態ともに合わない。","addressing は分詞で単独では述語動詞になれない。"]},
+
+{id:66,category:"態",sentence:"The proposal is currently ___ by the legal team for compliance issues.",choices:["review","reviewed","being reviewed","reviewing"],answer:2,
+ point:"「今まさに検討されている最中」という進行中の受動態を表すときは、is being + 過去分詞（現在進行形の受動態）を使います。",
+ notes:["review は原形。is の後ろの形として不適切。","reviewed は過去分詞のみで、is の後には being が必要。","being reviewed は現在進行形の受動態。currently（現在進行中）という文意に正しく合う。","reviewing は能動態の分詞で、proposal が自ら検討する主体になり不自然。"]},
+
+{id:67,category:"態",sentence:"The keynote speech ___ enthusiastically by the audience.",choices:["received","was received","receives","receiving"],answer:1,
+ point:"speech（スピーチ）は聴衆に「受け入れられる」対象であるため受動態が必要です。",
+ notes:["received は能動態過去形。speech が自ら受け取る主体になり不自然。","was received は受動態過去形。by the audience と自然に対応する。","receives は能動態現在形。態・文意ともに合わない。","receiving は分詞で単独では述語動詞になれない。"]},
+
+{id:68,category:"前置詞",sentence:"The seminar will be held ___ the main conference room on the third floor.",choices:["at","on","in","to"],answer:2,
+ point:"会議室のような囲まれた空間を表すときは前置詞 in を使います。",
+ notes:["at は比較的狭い一点（受付や特定の場所）に使うことが多く、部屋の中という意味には in の方が適切。","on は接触・面を表すことが多く、部屋の中を表す語としては不適切。","in は「～の中で」という囲まれた空間を表し、conference room と自然に結びつく。","to は方向を表す前置詞で、開催場所を示すこの文脈には合わない。"]},
+
+{id:69,category:"前置詞",sentence:"The invoice should be paid ___ 30 days of receipt.",choices:["within","during","since","among"],answer:0,
+ point:"「～以内に」という期限の範囲を表すときは前置詞 within を使います。",
+ notes:["within は「～以内に」を表し、期限を示すこの文脈に正しく合う。","during は「～の間じゅう」という特定の期間内の出来事を表し、期限には使わない。","since は「～以来」で起点を表し、期限の意味にはならない。","among は「～の中で（三者以上）」を表す前置詞で、期間には使わない。"]},
+
+{id:70,category:"前置詞",sentence:"The new hires will report directly ___ the regional manager.",choices:["to","at","for","with"],answer:0,
+ point:"「report to ～」で「～に報告する・～の指揮下にある」という定型表現です。",
+ notes:["to は report to ~ という定型表現に正しく合う。","at は場所や時点を表すことが多く、この組み合わせには合わない。","for は目的・理由を表すが、report for ~（人）という形は一般的ではない。","with は同伴を表す前置詞で、指揮系統を示す語ではない。"]},
+
+{id:71,category:"前置詞",sentence:"The company has been struggling ___ financial difficulties since the economic downturn.",choices:["with","of","for","at"],answer:0,
+ point:"「struggle with ～」で「～に苦しむ・～と格闘する」という定型表現です。",
+ notes:["with は struggle with ~ という定型表現に正しく合う。","of は同様の組み合わせでは使われない。","for は目的を表すことが多く、struggle for ~（獲得を目指す）という別の意味になり文意に合わない。","at は特定の一点を表す前置詞で、この組み合わせには合わない。"]},
+
+{id:72,category:"前置詞",sentence:"Please refer ___ the attached document for further details.",choices:["to","at","on","for"],answer:0,
+ point:"「refer to ～」で「～を参照する」という定型表現です。",
+ notes:["to は refer to ~ という定型表現に正しく合う。","at は場所や一点を表す前置詞で、この組み合わせには使わない。","on は「～について」を表すことがあるが、refer との組み合わせでは to が定着している。","for は目的を表す前置詞で、この組み合わせには合わない。"]},
+
+{id:73,category:"前置詞",sentence:"The workshop covers topics ranging ___ basic budgeting to advanced financial modeling.",choices:["from","of","in","at"],answer:0,
+ point:"「range from A to B」で「AからBにわたる」という定型表現です。",
+ notes:["from は ranging from ~ to ... という定型表現に正しく合う。","of はこの組み合わせでは使われない。","in は範囲の内側を表すが、from ~ to の構文の一部としては不適切。","at は特定の一点を表す前置詞で、範囲を示す語ではない。"]},
+
+{id:74,category:"接続詞",sentence:"___ he lacked formal training, he quickly became one of the company's top salespeople.",choices:["Despite","Although","Because","Due to"],answer:1,
+ point:"空欄の後ろに he lacked formal training という主語＋動詞を含む節が続いています。節を導けるのは接続詞です。",
+ notes:["Despite は前置詞で、後ろには名詞（句）が必要なため節を続けられない。","Although は接続詞「～だけれども」。節を導き、逆接の文意にも合う。","Because は接続詞だが「～なので」という理由を表し、逆接の文意に合わない。","Due to は前置詞句であり、節を直接続けることはできない。"]},
+
+{id:75,category:"接続詞",sentence:"The event will proceed as planned ___ it rains heavily tomorrow.",choices:["unless","despite","because of","so that"],answer:0,
+ point:"「unless ～」は「～しない限り」という否定条件を表す接続詞です。「大雨が降らない限り予定通り進める」という文意に合致します。",
+ notes:["unless は「～しない限り」という条件を表し、文意に自然に合う。","despite は前置詞で、後ろに節を続けることができない。","because of も前置詞句であり、同様に節を続けられない。","so that は目的・結果を表す接続詞で、条件の意味にはならない。"]},
+
+{id:76,category:"接続詞",sentence:"___ the marketing campaign was expensive, it generated substantial returns.",choices:["Although","Because","Unless","So that"],answer:0,
+ point:"前半（費用が高かった）と後半（大きな利益を生んだ）が対照的な内容であるため、逆接の接続詞 Although が適切です。",
+ notes:["Although は「～だけれども」という逆接を表し、文意に合う。","Because は「～なので」という理由を表し、対照的な文意には合わない。","Unless は「～しない限り」という条件を表し、この文脈には合わない。","So that は目的・結果を表し、逆接の意味にはならない。"]},
+
+{id:77,category:"接続詞",sentence:"The manager rewrote the proposal ___ it would better address the client's concerns.",choices:["so that","because","although","unless"],answer:0,
+ point:"「so that ～」は「～するために」という目的を表す接続詞です。",
+ notes:["so that は目的を表し、「顧客の懸念によりよく応えられるように書き直した」という文意に合う。","because は理由を表す接続詞で、目的を表すこの文脈には合わない。","although は逆接を表し、文意に合わない。","unless は条件を表し、目的の意味にはならない。"]},
+
+{id:78,category:"接続詞",sentence:"___ the CEO approves the budget, the project cannot move forward.",choices:["Unless","Despite","Because of","Although"],answer:0,
+ point:"「unless ～」は「～しない限り」という否定条件を表します。「CEOが承認しない限りプロジェクトは進められない」という文意に合致します。",
+ notes:["Unless は「～しない限り」という条件を表し、節を導ける接続詞として文意に合う。","Despite は前置詞で、名詞（句）しか続けられない。","Because of も前置詞句であり、節を続けられない。","Although は逆接の接続詞で、条件の意味にはならない。"]},
+
+{id:79,category:"接続詞",sentence:"The flight was delayed; ___, most passengers reached their destinations on time thanks to the airline's rebooking efforts.",choices:["nevertheless","because","although","so that"],answer:0,
+ point:"セミコロンの後で前の文と対比・逆接の内容をつなぐときは接続副詞 nevertheless を使います。",
+ notes:["nevertheless は「それにもかかわらず」という接続副詞で、セミコロンの後で対比を表す文意に合う。","because は従属接続詞で、セミコロンで独立文をつなぐこの構文には使えない。","although も従属接続詞であり、同様にこの構文には使えない。","so that は目的・結果を表し、意味・構造ともに合わない。"]},
+
+{id:80,category:"関係詞",sentence:"The software update, ___ was released yesterday, fixes several security vulnerabilities.",choices:["who","which","whose","whom"],answer:1,
+ point:"先行詞 software update は物であり、コンマを伴う非制限用法で主格の関係代名詞が必要です。物を指す主格の関係代名詞は which です。",
+ notes:["who は人を先行詞とする関係代名詞で、software update（物）には使えない。","which は物を先行詞とする主格の関係代名詞で、非制限用法にも使え、文意にも合う。","whose は所有格で、後ろに名詞が必要だが、ここは動詞 was が続いており合わない。","whom は目的格で、後ろに完全な文の要素が必要でありここでは合わない。"]},
+
+{id:81,category:"関係詞",sentence:"Employees ___ suggestions are adopted will receive a small bonus.",choices:["who","whom","whose","which"],answer:2,
+ point:"空欄の後ろの suggestions は「従業員の提案」という所有関係にあるため、所有格の関係代名詞 whose を使います。",
+ notes:["who は主格で、直後には動詞が続く形になるため、名詞 suggestions が続くこの文には合わない。","whom は目的格で、後ろに完全な文の要素が必要でありここでは合わない。","whose は所有格の関係代名詞。whose suggestions で「彼らの提案」という所有関係を正しく表せる。","which は物を先行詞とする関係代名詞で、先行詞が人（Employees）のときは使わない。"]},
+
+{id:82,category:"関係詞",sentence:"The building ___ the company recently purchased needs extensive renovations.",choices:["who","whom","which","whose"],answer:2,
+ point:"先行詞 building は物であり、後ろに the company purchased という完全な文の要素が続くことから目的格の関係代名詞が必要です。物を指す目的格の関係代名詞は which です。",
+ notes:["who は人を先行詞とする関係代名詞で、building（物）には使えない。","whom は人を先行詞とする目的格の関係代名詞で、同様に building には使えない。","which は物を先行詞とする関係代名詞で、目的格としても使え、文意に合う。","whose は所有格で、後ろに名詞が必要だが、ここは主語＋動詞が続いており合わない。"]},
+
+{id:83,category:"関係詞",sentence:"This is the client ___ we have been negotiating with for the past month.",choices:["which","whom","whose","what"],answer:1,
+ point:"先行詞 client は人であり、前置詞 with の目的語として機能する目的格の関係代名詞が必要です。人を指す目的格の関係代名詞は whom です。",
+ notes:["which は物を先行詞とする関係代名詞で、client（人）には使わない。","whom は人を先行詞とする目的格の関係代名詞で、negotiating with の目的語として正しく機能する。","whose は所有格で、後ろに名詞が必要だが、ここは完全な節が続いており合わない。","what は先行詞を含む関係代名詞で、先行詞 client がすでにある文には使えない。"]},
+
+{id:84,category:"関係詞",sentence:"The applicant ___ résumé impressed the hiring committee was offered the position immediately.",choices:["who","whom","whose","which"],answer:2,
+ point:"空欄の後ろの résumé は「応募者の履歴書」という所有関係にあるため、所有格の関係代名詞 whose を使います。",
+ notes:["who は主格で、直後には動詞が続く形になるため、名詞 résumé が続くこの文には合わない。","whom は目的格で、後ろに完全な文の要素が必要でありここでは合わない。","whose は所有格の関係代名詞。whose résumé で「その人の履歴書」という所有関係を正しく表せる。","which は物を先行詞とする関係代名詞で、先行詞が人（applicant）のときは使わない。"]},
+
+{id:85,category:"関係詞",sentence:"The conference room ___ we booked for the meeting turned out to be too small.",choices:["who","which","whom","whose"],answer:1,
+ point:"先行詞 conference room は物であり、後ろに we booked という完全な文の要素が続くことから目的格の関係代名詞が必要です。物を指す関係代名詞は which です。",
+ notes:["who は人を先行詞とする関係代名詞で、conference room（物）には使えない。","which は物を先行詞とする関係代名詞で、目的格としても使え、文意に合う。","whom は人を先行詞とする目的格の関係代名詞で、同様に room には使えない。","whose は所有格で、後ろに名詞が必要だが、ここは主語＋動詞が続いており合わない。"]},
+
+{id:86,category:"比較",sentence:"This year's turnover rate is ___ than last year's, according to HR data.",choices:["low","lower","lowest","lowly"],answer:1,
+ point:"文中に than があることから比較級が必要だと分かります。",
+ notes:["low は原級。than を伴う比較の文には使えない。","lower は比較級。than last year's と正しく対応する。","lowest は最上級。than を伴う二者比較には使わない。","lowly は「卑しい」という意味の形容詞で、文意にも比較の形式にも合わない。"]},
+
+{id:87,category:"比較",sentence:"Of all the proposals submitted, this one offers the ___ return on investment.",choices:["high","higher","highest","more high"],answer:2,
+ point:"「Of all the proposals（すべての提案の中で）」という範囲を示す表現があることから、最上級が適切です。",
+ notes:["high は原級で、範囲の中での最上位を示す文脈には合わない。","higher は比較級で、三者以上の中での最上位を示す文脈には合わない。","highest は最上級「最も高い」。of all the proposals という範囲表現と自然に対応する。","more high は誤った比較級・最上級の作り方（higher/highest が正しい形）。"]},
+
+{id:88,category:"比較",sentence:"The ___ the workload, the more support staff we will need to hire.",choices:["heavy","heavier","heaviest","more heavy"],answer:1,
+ point:"「The + 比較級 ～, the + 比較級 …」で「～すればするほど、ますます…」という構文です。後半に more support staff（比較級相当）があることからも比較級が必要と分かります。",
+ notes:["heavy は原級。この構文には比較級が必要なため合わない。","heavier は比較級で、the heavier the workload, the more support staff という構文に正しく合う。","heaviest は最上級で、この構文には使わない。","more heavy は誤った比較級の作り方（heavier が正しい形）。"]},
+
+{id:89,category:"比較",sentence:"The new packaging is almost twice ___ light as the previous design.",choices:["as","so","than","that"],answer:0,
+ point:"「倍数＋as +原級+ as ～」で「～の何倍…だ」という倍数比較の定型表現です。",
+ notes:["as は as ～ as の形で倍数表現を作る正しい語。","so は否定文の as の代わりに使われることはあるが、この肯定の倍数表現には使わない。","than は比較級とセットで使う語で、原級を比べるこの構文には合わない。","that は指示代名詞・接続詞であり、この構文には使えない。"]},
+
+{id:90,category:"比較",sentence:"Our customer satisfaction scores are among the ___ in the industry.",choices:["high","higher","highest","more high"],answer:2,
+ point:"「among the + 最上級」で「最も～なものの一つ」という定型表現です。",
+ notes:["high は原級で、among the ~ の形には最上級が必要なため合わない。","higher は比較級で、among the ~ の定型表現には使わない。","highest は最上級「最も高い」。among the highest で正しい表現になる。","more high は誤った比較級・最上級の作り方（higher/highest が正しい形）。"]},
+
+{id:91,category:"代名詞",sentence:"The board members expressed ___ concerns about the merger during the meeting.",choices:["they","their","them","theirs"],answer:1,
+ point:"空欄の直後の名詞 concerns を修飾するのは所有格代名詞です。",
+ notes:["they は主格代名詞で、名詞の前には置けない。","their は所有格代名詞「彼らの」。concerns を正しく修飾する。","them は目的格代名詞で、名詞の前には置けない。","theirs は所有代名詞（～のもの）で、名詞を直接修飾する形では使わない。"]},
+
+{id:92,category:"代名詞",sentence:"The three regional offices agreed to share resources with ___ to reduce costs.",choices:["itself","one another","themselves","oneself"],answer:1,
+ point:"主語が三つ以上の複数の当事者（three regional offices）であるとき、相互代名詞は one another を使います。",
+ notes:["itself は単数の再帰代名詞で、複数主語のこの文には合わない。","one another は三者以上の相互関係を表す代名詞で、three regional offices に正しく対応する。","themselves は再帰代名詞で「それら自身」を意味し、相互の share with という文意には合わない。","oneself は総称的な再帰代名詞で、特定の複数主語であるこの文には合わない。"]},
+
+{id:93,category:"代名詞",sentence:"Each applicant must submit ___ own portfolio along with the application form.",choices:["their","its","his or her","itself"],answer:2,
+ point:"Each applicant は文法上単数として扱われ、応募者は人であるため、対応する所有格代名詞は his or her を使います。",
+ notes:["their は複数の所有格代名詞で、単数扱いの each applicant とは形式上一致しない。","its は物を指す所有格代名詞で、人を指す applicant には使わない。","his or her は単数かつ人を指す所有格の組み合わせで、each applicant に正しく対応する。","itself は再帰代名詞で、所有格として名詞の前には置けない。"]},
+
+{id:94,category:"代名詞",sentence:"The consultant recommended that the firm reconsider ___ approach to customer service.",choices:["its","it's","itself","their"],answer:0,
+ point:"firm（会社）は単数として扱われるため、対応する所有格代名詞も単数の its になります。",
+ notes:["its は単数の所有格代名詞で、単数扱いの firm に正しく対応する。","it's は it is の短縮形であり、所有格ではないためここでは使えない。","itself は再帰代名詞で、所有格として名詞の前には置けない。","their は複数の所有格代名詞で、単数扱いの firm とは一致しない。"]},
+
+{id:95,category:"代名詞",sentence:"Neither of the two websites was found to have improved ___ loading speed after the update.",choices:["its","their","it's","itself"],answer:0,
+ point:"Neither of the two websites は文法上単数として扱われ（動詞 was と一致）、対応する所有格代名詞も単数の its になります。",
+ notes:["its は単数の所有格代名詞で、単数扱いの neither に正しく対応する。","their は複数の所有格代名詞で、単数扱いのこの主語とは一致しない。","it's は it is の短縮形であり、所有格ではないためここでは使えない。","itself は再帰代名詞で、所有格として名詞の前には置けない。"]},
+
+{id:96,category:"仮定法",sentence:"If the company ___ more aggressively in R&D, it might have developed the technology first.",choices:["invested","had invested","invests","would invest"],answer:1,
+ point:"主節が might have developed（仮定法過去完了）であることから、if 節も過去の事実に反する仮定を表す仮定法過去完了（had + 過去分詞）にします。",
+ notes:["invested は単純過去で、仮定法過去完了の if 節としては時制が合わない。","had invested は仮定法過去完了の形で、主節の might have developed と正しく対応する。","invests は現在形。過去の事実に反する仮定には使わない。","would invest は if 節ではなく主節で使う助動詞の形であり、if 節には使えない。"]},
+
+{id:97,category:"仮定法",sentence:"If I ___ you, I would negotiate a better contract before signing.",choices:["am","were","was","be"],answer:1,
+ point:"「If I were you（もし私があなたなら）」は、現在の事実に反する仮定を表す仮定法過去の定型表現です。be動詞は主語にかかわらず were を使います。",
+ notes:["am は直説法現在形で、仮定法過去のこの構文には合わない。","were は仮定法過去で使う be動詞の形。If I were you という定型表現に正しく合う。","was は直説法過去形で、仮定法過去では were を使うのが原則。","be は原形で、if 節のこの位置には使えない。"]},
+
+{id:98,category:"仮定法",sentence:"The manager insisted that the report ___ submitted by Friday.",choices:["is","be","was","will be"],answer:1,
+ point:"insist that ～のように要求・提案を表す動詞に続く that節の中では、動詞は主語や時制に関わらず原形（仮定法現在）になります。",
+ notes:["is は三人称単数現在形。要求を表す that 節では原形が使われるため不適切。","be は原形。insist that ～ be … の形で仮定法現在として正しく使われる。","was は過去形。同様にこの構文には使わない。","will be は未来形。この構文には使わない。"]},
+
+{id:99,category:"仮定法",sentence:"If the shipment arrives late again, the client ___ likely cancel the contract.",choices:["will","would","had","were"],answer:0,
+ point:"if 節が現在形（起こり得る現実的な条件）のとき（第1条件文）、主節は未来を表す will を使います。",
+ notes:["will は未来を表す助動詞で、現実的な条件を表す第1条件文の主節に正しく合う。","would は仮定法過去の主節で使う助動詞で、現実離れした仮定を表すためこの文脈には合わない。","had は過去完了の一部として使われる語で、主節の助動詞の位置には入らない。","were は be動詞の仮定法過去形で、助動詞の位置には使えない。"]},
+
+{id:100,category:"仮定法",sentence:"Were the budget ___ approved, the project would proceed immediately.",choices:["to be","been","being","be"],answer:0,
+ point:"「Were + 主語 + to + 動詞の原形」は、if を省略して were を文頭に出した仮定法の倒置形で、実現の可能性が低い未来の仮定を表します。",
+ notes:["to be は Were the budget to be approved で「もし予算が承認されるとしたら」という倒置の仮定法として正しい形。","been は過去分詞で、この倒置構文の形には合わない。","being は動名詞・現在分詞で、同様に合わない。","be は原形だが、Were の後の倒置構文では to be の形が必要。"]},
+
+{id:101,category:"品詞",sentence:"The vendor has built a ___ reputation for on-time delivery over the years.",choices:["reliable","reliability","reliably","relied"],answer:0,
+ point:"空欄の直後の名詞 reputation を修飾するのは形容詞です。",
+ notes:["reliable は形容詞「信頼できる」。reputation を正しく修飾する。","reliability は名詞「信頼性」。名詞が名詞を直接修飾する形は不自然。","reliably は副詞。名詞を直接修飾できない。","relied は動詞の過去形・過去分詞。名詞の前の位置には入らない。"]},
+
+{id:102,category:"品詞",sentence:"___ of the merger surprised many industry analysts who had expected the deal to fall through.",choices:["Announce","Announcement","Announcing","Announced"],answer:1,
+ point:"文頭で前置詞 of の前に置かれ、文の主語として機能する語は名詞です。",
+ notes:["Announce は動詞の原形。主語の位置には入らない。","Announcement は名詞「発表」。Announcement of the merger で正しい主語になる。","Announcing は動名詞的にも使えるが、of を伴う主語としては Announcement の方が自然な名詞形。","Announced は過去分詞・過去形。主語の位置には不適切。"]},
+
+{id:103,category:"品詞",sentence:"The negotiators discussed the terms ___ before reaching a final agreement.",choices:["extensive","extensively","extension","extensiveness"],answer:1,
+ point:"動詞 discussed を修飾するのは副詞です。",
+ notes:["extensive は形容詞。動詞を修飾できない。","extensively は副詞「広範囲に・詳細に」。discussed を正しく修飾する。","extension は名詞「延長」。副詞の位置には入らない。","extensiveness は名詞「広範さ」。同様に不適切。"]},
+
+{id:104,category:"品詞",sentence:"The startup quickly became ___ in the competitive tech industry.",choices:["prominent","prominence","prominently","prominences"],answer:0,
+ point:"become は補語として形容詞を取る動詞です。",
+ notes:["prominent は形容詞「著名な」。became の補語として正しい。","prominence は名詞「名声」。become の後に無冠詞の名詞を置く形は不自然で、ここでは形容詞が適切。","prominently は副詞。補語の位置には使えない。","prominences は名詞の複数形。同様に不適切。"]},
+
+{id:105,category:"品詞",sentence:"The ___ of new employees requires careful planning and coordination across departments.",choices:["recruit","recruitment","recruiting","recruited"],answer:1,
+ point:"文頭で the の後、前置詞 of の前に置かれ、文の主語として機能する語は名詞です。",
+ notes:["recruit は動詞の原形（または人を指す可算名詞）。ここでは行為を表す名詞が必要で合わない。","recruitment は名詞「採用（活動）」。The recruitment of new employees で正しい主語になる。","recruiting は動名詞としても使えるが、the と of を伴う定型的な主語としては recruitment の方が自然。","recruited は過去分詞・過去形。主語の位置には不適切。"]},
+
+{id:106,category:"品詞",sentence:"The company issued a ___ statement in response to the media allegations.",choices:["defend","defensive","defensively","defense"],answer:1,
+ point:"冠詞 a と名詞 statement の間に置かれる語は形容詞です。",
+ notes:["defend は動詞の原形。名詞を修飾できない。","defensive は形容詞「弁明的な・防御的な」。statement を正しく修飾する。","defensively は副詞。冠詞と名詞の間には入らない。","defense は名詞「防御」。名詞が名詞を直接修飾する形は不自然。"]},
+
+{id:107,category:"品詞",sentence:"Despite the setback, the team remained ___ about the project's chances of success.",choices:["optimistic","optimism","optimistically","optimist"],answer:0,
+ point:"remain は補語として形容詞を取る動詞です。",
+ notes:["optimistic は形容詞「楽観的な」。remained の補語として正しい。","optimism は名詞「楽観主義」。補語としてはやや不自然。","optimistically は副詞。補語の位置には使えない。","optimist は名詞「楽観主義者」。冠詞なしでは補語として使いにくい。"]},
+
+{id:108,category:"品詞",sentence:"The new safety protocols aim to ensure the ___ of all warehouse workers.",choices:["protect","protection","protective","protectively"],answer:1,
+ point:"前置詞 the と of の間に置かれ、動詞 ensure の目的語として機能する語は名詞です。",
+ notes:["protect は動詞の原形。the の直後の名詞の位置には入らない。","protection は名詞「保護」。the protection of ~ で正しい目的語になる。","protective は形容詞「保護的な」。名詞なしでは目的語になれない。","protectively は副詞。同様に不適切。"]},
+
+{id:109,category:"品詞",sentence:"The proposal was ___ received by the board members during the meeting.",choices:["warm","warmly","warmth","warmer"],answer:1,
+ point:"過去分詞 received を修飾するのは副詞です。",
+ notes:["warm は形容詞。過去分詞を直接修飾できない。","warmly は副詞「温かく」。received を正しく修飾する。","warmth は名詞「温かさ」。副詞の位置には入らない。","warmer は比較級の形容詞。同様に不適切。"]},
+
+{id:110,category:"品詞",sentence:"The manager's ___ of the project's risks proved to be remarkably accurate.",choices:["assess","assessment","assessing","assessed"],answer:1,
+ point:"所有格 manager's の後ろ、文の主語として機能する語は名詞です。",
+ notes:["assess は動詞の原形。主語の位置には入らない。","assessment は名詞「評価」。manager's assessment で正しい主語になる。","assessing は動名詞的にも使えるが、所有格の直後の主語としては assessment の方が自然。","assessed は過去分詞・過去形。主語の位置には不適切。"]},
+
+{id:111,category:"品詞",sentence:"The new eco-friendly packaging makes the product more ___ to environmentally conscious consumers.",choices:["appeal","appealing","appealingly","appealed"],answer:1,
+ point:"「make + 目的語 + 補語」の構文で、補語として形容詞（分詞形容詞）が使われます。",
+ notes:["appeal は動詞の原形・名詞。補語の位置には合わない。","appealing は形容詞（現在分詞由来）「魅力的な」。more appealing to ~ で正しい補語になる。","appealingly は副詞。補語の位置には使えない。","appealed は過去形・過去分詞。ここでは受動的な意味にならず不適切。"]},
+
+{id:112,category:"品詞",sentence:"The two proposals are ___ different in terms of cost and implementation timeline.",choices:["considerable","considerably","consideration","considering"],answer:1,
+ point:"形容詞 different を修飾するのは副詞です。",
+ notes:["considerable は形容詞。他の形容詞を修飾できない。","considerably は副詞「かなり」。different を正しく修飾する。","consideration は名詞「考慮」。副詞の位置には入らない。","considering は前置詞的にも使われるが、形容詞を修飾する副詞の位置には合わない。"]},
+
+{id:113,category:"品詞",sentence:"The system was upgraded over the weekend without any ___ to daily operations.",choices:["disrupt","disruption","disruptive","disruptively"],answer:1,
+ point:"前置詞 without の後ろに置かれる語は名詞です。",
+ notes:["disrupt は動詞の原形。前置詞の直後の名詞の位置には入らない。","disruption は名詞「混乱」。without any disruption to ~ で正しい表現になる。","disruptive は形容詞。名詞なしではこの位置に入れない。","disruptively は副詞。同様に不適切。"]},
+
+{id:114,category:"品詞",sentence:"The plan sounds ___ , but it may be difficult to execute given the current budget constraints.",choices:["promise","promising","promisingly","promises"],answer:1,
+ point:"sound は補語として形容詞を取る動詞です。",
+ notes:["promise は名詞・動詞の原形。補語の位置には合わない。","promising は形容詞（現在分詞由来）「有望な」。sounds の補語として正しい。","promisingly は副詞。補語の位置には使えない。","promises は動詞の三人称単数形または名詞の複数形。同様に不適切。"]},
+
+{id:115,category:"品詞",sentence:"The board's decision reflects a ___ shift in the company's overall business strategy.",choices:["strategy","strategic","strategically","strategist"],answer:1,
+ point:"冠詞 a と名詞 shift の間に置かれる語は形容詞です。",
+ notes:["strategy は名詞「戦略」。名詞が名詞を直接修飾する形は不自然。","strategic は形容詞「戦略的な」。shift を正しく修飾する。","strategically は副詞。冠詞と名詞の間には入らない。","strategist は名詞「戦略家」。同様に不適切。"]},
+
+{id:116,category:"時制",sentence:"The maintenance crew ___ the elevator by the time the inspector arrives tomorrow.",choices:["will have repaired","repaired","are repairing","have repaired"],answer:0,
+ point:"「By the time + 現在形（未来のことを表す）」の文では、主節は未来完了形になり「その時点までに完了している」ことを表します。",
+ notes:["will have repaired は未来完了形。arrives という未来の一時点までに完了していることを正しく表す。","repaired は単純過去。未来の出来事には使えない。","are repairing は現在進行形で、完了のニュアンスがなく文意に合わない。","have repaired は現在完了。未来の一時点を基準にした完了を表すには未来完了が必要。"]},
+
+{id:117,category:"時制",sentence:"The vendor ___ the invoice to the wrong department two weeks ago.",choices:["sends","sent","has sent","will send"],answer:1,
+ point:"two weeks ago という明確な過去の時を示す語句がある場合は単純過去形を使います。",
+ notes:["sends は現在形。過去の出来事には使えない。","sent は過去形。two weeks ago と整合する。","has sent は現在完了。明確な過去の時点を示す語句とは通常共に使わない。","will send は未来形。過去の出来事には使えない。"]},
+
+{id:118,category:"時制",sentence:"The IT department ___ on the server migration for the past six months.",choices:["works","worked","has been working","will have worked"],answer:2,
+ point:"「for + 期間」を伴い、過去に始まり現在も継続している動作を表すときは現在完了進行形を使います。",
+ notes:["works は現在形で、継続の意味を持つ for ~ とは合わない。","worked は単純過去で、現在まで継続している含みを表せない。","has been working は現在完了進行形。for the past six months と自然に対応し、継続中であることを表す。","will have worked は未来完了形。過去から現在までの継続には使わない。"]},
+
+{id:119,category:"時制",sentence:"By the time the fire department arrived, the flames ___ most of the warehouse.",choices:["destroyed","had destroyed","have destroyed","were destroying"],answer:1,
+ point:"「By the time + 過去形」の文では、それより前に完了していた出来事を過去完了形で表します。",
+ notes:["destroyed は単純過去。arrived と同じ時制では、どちらが先に起きたか区別できない。","had destroyed は過去完了形。arrived（過去）より前に完了していたことを正しく表す。","have destroyed は現在完了で、過去の一時点を基準にした構文には使わない。","were destroying は過去進行形で、完了のニュアンスがなく文意に合わない。"]},
+
+{id:120,category:"時制",sentence:"By the end of this quarter, the sales team ___ its annual target for the first time in years.",choices:["will have met","meets","met","is meeting"],answer:0,
+ point:"「By the end of + 未来の時点」とともに、その時点までの完了を表すときは未来完了形を使います。",
+ notes:["will have met は未来完了形。by the end of this quarter という未来の基準点までの完了を正しく表す。","meets は現在形。未来の基準点には使えない。","met は過去形。未来の内容には使えない。","is meeting は現在進行形で、完了のニュアンスがなく文意に合わない。"]},
+
+{id:121,category:"時制",sentence:"The delegation ___ the new manufacturing plant this Friday as part of their inspection tour.",choices:["tours","toured","is touring","has toured"],answer:2,
+ point:"this Friday のような具体的な未来の予定を表すとき、あらかじめ決まっている計画には現在進行形がよく使われます。",
+ notes:["tours は現在形の習慣を表すことが多く、確定した未来の予定を表す文脈には合わない。","toured は過去形。未来の内容には使えない。","is touring は現在進行形。this Friday という確定した未来の予定を表すのに正しく使われる。","has toured は現在完了。未来の予定には使わない。"]},
+
+{id:122,category:"時制",sentence:"The auditor ___ the financial records when the fire alarm suddenly went off.",choices:["reviews","reviewed","was reviewing","has reviewed"],answer:2,
+ point:"過去のある動作の最中に別の出来事が割り込んだことを表すときは、進行中の動作を過去進行形で表します。",
+ notes:["reviews は現在形。過去の文脈に合わない。","reviewed は単純過去。went off と並ぶと動作の順序を表す形になり、「作業中に鳴った」という文意に合わない。","was reviewing は過去進行形。went off という単純過去の出来事が起きた背景として自然。","has reviewed は現在完了。過去の一時点の文脈には使えない。"]},
+
+{id:123,category:"時制",sentence:"Profit margins ___ steadily since the new CEO took over the company.",choices:["improve","improved","have improved","will improve"],answer:2,
+ point:"「Since ～（～以来）」は、過去のある時点から現在まで継続している状態や変化を表すため、現在完了形とともに使われます。",
+ notes:["improve は現在形。継続の since とは基本的に組み合わせない。","improved は過去形。since の継続用法とは合わない。","have improved は現在完了。since the new CEO took over と自然に対応する。","will improve は未来形。過去から続く内容には使えない。"]},
+
+{id:124,category:"時制",sentence:"The company ___ its headquarters to Singapore in 2019 to be closer to key markets.",choices:["relocates","relocated","has relocated","will relocate"],answer:1,
+ point:"in 2019 という明確な過去の時を示す語句がある場合は単純過去形を使います。",
+ notes:["relocates は現在形。過去の出来事には使えない。","relocated は過去形。in 2019 と整合する。","has relocated は現在完了。明確な過去の時点を示す語句とは通常共に使わない。","will relocate は未来形。過去の出来事には使えない。"]},
+
+{id:125,category:"時制",sentence:"If the client signs the contract tomorrow, production ___ immediately.",choices:["begins","will begin","began","would begin"],answer:1,
+ point:"条件を表す if 節が現在形のとき（第1条件文）、主節は未来形になります。",
+ notes:["begins は現在形。第1条件文の主節としては未来形が必要。","will begin は未来形。if 節が現在形の条件文の主節として正しい。","began は過去形。未来の内容には使えない。","would begin は仮定法過去の主節で使う形で、現実的な条件を表すこの文には合わない。"]},
+
+{id:126,category:"時制",sentence:"By next month, the intern ___ at the firm for a full year.",choices:["will have worked","works","worked","is working"],answer:0,
+ point:"「By + 未来の時点」とともに、その時点までの継続を表す for ～ を伴うときは未来完了形を使います。",
+ notes:["will have worked は未来完了形。by next month という未来の基準点までの継続を正しく表す。","works は現在形。未来の基準点には使えない。","worked は過去形。未来の内容には使えない。","is working は現在進行形で、for a full year という継続期間の完了を表せない。"]},
+
+{id:127,category:"時制",sentence:"The technician ___ the printer, so it should be working properly now.",choices:["fixes","fixed","has just fixed","will fix"],answer:2,
+ point:"「just」を伴い、直前に完了した動作とその結果が現在に及んでいることを表すときは現在完了形を使います。",
+ notes:["fixes は現在形。直前に完了した動作を表す just とは合わない。","fixed は単純過去。現在の結果（should be working now）との結びつきが弱い。","has just fixed は現在完了形。just と結びつき、現在の状態への影響を正しく表す。","will fix は未来形。すでに完了した動作を表すこの文脈には合わない。"]},
+
+{id:128,category:"態",sentence:"The parcel ___ to the wrong address last week, causing a delay in delivery.",choices:["delivered","was delivered","delivers","delivering"],answer:1,
+ point:"parcel（小包）は「配達される」対象であるため受動態が適切です。last week から過去形と判断できます。",
+ notes:["delivered は能動態過去形。parcel が自ら配達する主体になり不自然。","was delivered は受動態過去形。to the wrong address と自然に対応する。","delivers は能動態現在形。態・時制ともに合わない。","delivering は分詞で単独では述語動詞になれない。"]},
+
+{id:129,category:"態",sentence:"All job applications ___ carefully before candidates are invited to the interview stage.",choices:["review","are reviewed","reviewing","reviews"],answer:1,
+ point:"applications（応募書類）は「検討される」対象であるため受動態が適切です。",
+ notes:["review は能動態の原形。主語 applications と一致せず、また applications 自らが検討する主体にはならない。","are reviewed は受動態現在形。carefully と自然に結びつき文意にも合う。","reviewing は分詞で単独では述語動詞になれない。","reviews は能動態の三人称単数形で、複数主語 applications と一致しない。"]},
+
+{id:130,category:"態",sentence:"The new regulation ___ effect at the beginning of next month.",choices:["takes","is taken","is being taken","was taken"],answer:0,
+ point:"「take effect（発効する）」は主語が自ら「発効する」ことを表す能動態の定型表現で、受動態にはしません。",
+ notes:["takes は能動態現在形。take effect という定型表現は常に能動態で使われ、未来の予定を表す現在形としても正しい。","is taken は受動態。take effect は受動態にできない定型表現のため不適切。","is being taken も受動態進行形であり、同様にこの定型表現には合わない。","was taken も受動態であり、態の点で不適切。"]},
+
+{id:131,category:"態",sentence:"The committee members ___ to vote on the proposal at next Monday's session.",choices:["expect","are expected","expecting","have expected"],answer:1,
+ point:"committee members（委員たち）は「（投票することを）求められる」側であるため受動態が適切です。「be expected to do」で「～することが期待されている」という定型表現です。",
+ notes:["expect は能動態。委員たちが何かを『期待する』という意味になり文意に合わない。","are expected は受動態。be expected to do の形で正しく使われている。","expecting は分詞で、単独では述語動詞として機能しない。","have expected は能動態の現在完了。文意に合わない。"]},
+
+{id:132,category:"態",sentence:"The updated employee handbook ___ to all staff members via email yesterday.",choices:["distributed","was distributed","distributes","distributing"],answer:1,
+ point:"handbook（手引書）は「配布される」対象であるため受動態が適切です。yesterday から過去形と判断できます。",
+ notes:["distributed は能動態過去形。handbook が自ら配布する主体になり不自然。","was distributed は受動態過去形。to all staff members via email と自然に対応する。","distributes は能動態現在形。態・時制ともに合わない。","distributing は分詞で単独では述語動詞になれない。"]},
+
+{id:133,category:"態",sentence:"All new hires ___ on company policies during the first day of orientation.",choices:["train","are trained","training","have trained"],answer:1,
+ point:"new hires（新入社員）は「研修を受ける」側であるため受動態が適切です。",
+ notes:["train は能動態。new hires が自ら研修を行う主体になり不自然。","are trained は受動態現在形。on company policies と自然に対応する。","training は分詞で単独では述語動詞になれない。","have trained は能動態の現在完了。文意に合わない。"]},
+
+{id:134,category:"態",sentence:"The bridge ___ for repairs until further notice from the city council.",choices:["closes","is closed","closing","has closed"],answer:1,
+ point:"bridge（橋）は「閉鎖される」対象であるため受動態が適切です。ここでは現在の状態を表す受動態現在形が使われます。",
+ notes:["closes は能動態現在形。bridge が自ら閉鎖する主体になり不自然。","is closed は受動態現在形。「閉鎖されている」という現在の状態を正しく表す。","closing は分詞で単独では述語動詞になれない。","has closed は能動態の現在完了で、文意（閉鎖されている状態）とは異なる。"]},
+
+{id:135,category:"態",sentence:"The shipment is currently ___ at the port due to unresolved customs issues.",choices:["held","holding","being held","hold"],answer:2,
+ point:"「今まさに保留されている最中」という進行中の受動態を表すときは、is being + 過去分詞を使います。",
+ notes:["held は過去分詞のみで、is の後には being が必要。","holding は能動態の分詞で、shipment が自ら保留する主体になり不自然。","being held は現在進行形の受動態。currently（現在進行中）という文意に正しく合う。","hold は原形。is の後の形として不適切。"]},
+
+{id:136,category:"態",sentence:"The annual conference ___ by over 500 industry professionals last year.",choices:["attended","was attended","attends","attending"],answer:1,
+ point:"conference（会議）は「参加される」対象であるため受動態が適切です。last year から過去形と判断できます。",
+ notes:["attended は能動態過去形。conference が自ら参加する主体になり不自然。","was attended は受動態過去形。by over 500 industry professionals と自然に対応する。","attends は能動態現在形。態・時制ともに合わない。","attending は分詞で単独では述語動詞になれない。"]},
+
+{id:137,category:"態",sentence:"All confidential documents must ___ properly before they are discarded.",choices:["shred","be shredded","shredding","shredded"],answer:1,
+ point:"documents（書類）は「裁断される」対象であるため受動態が必要です。助動詞 must の後は原形（受動なら be + 過去分詞）が続きます。",
+ notes:["shred は能動態の原形。documents が自ら裁断する主体にはなれない。","be shredded は受動態の原形。must be shredded で「裁断されなければならない」という文意に正しく合う。","shredding は分詞・動名詞で、助動詞の直後には使えない。","shredded は過去形・過去分詞で、助動詞の直後の形としては不適切。"]},
+
+{id:138,category:"前置詞",sentence:"The quarterly report is due ___ the end of this week.",choices:["by","until","in","on"],answer:0,
+ point:"「～までに（期限）」を表すときは by を使います。",
+ notes:["by は期限「～までに」を表し、提出期限の文脈に正しく合う。","until は「～まで（動作の継続）」を表すため、締め切りには使わない。","in は月や年など広い期間を表す前置詞で、この文脈には合わない。","on は特定の日付・曜日に使う前置詞で、the end of this week のような期間には使わない。"]},
+
+{id:139,category:"前置詞",sentence:"The negotiations have been ongoing ___ several weeks now, with no resolution in sight.",choices:["since","for","during","from"],answer:1,
+ point:"「for + 期間の長さ」で「～の間」という継続期間を表します。",
+ notes:["since は「～以来」という起点を表す前置詞で、期間の長さを表す語句には使わない。","for は期間の長さを表し、several weeks と自然に結びつく。","during は「～の間に」で特定の期間内の出来事を表し、期間の長さそのものを表す語ではない。","from は起点を表す前置詞で、期間の長さには使わない。"]},
+
+{id:140,category:"前置詞",sentence:"The manager apologized ___ the delay in processing the customer's refund.",choices:["for","to","about","of"],answer:0,
+ point:"「apologize for ～」で「～について謝罪する」という定型表現です。",
+ notes:["for は apologize for ~ という定型表現に正しく合う。","to は謝罪する相手を示すときに使う（apologize to someone）が、ここでは謝罪の対象（内容）を示す必要がある。","about も「～について」を表せなくはないが、apologize との組み合わせでは for が定着している。","of はこの組み合わせでは使われない。"]},
+
+{id:141,category:"前置詞",sentence:"The findings of the study are consistent ___ previous research on the same topic.",choices:["with","to","in","for"],answer:0,
+ point:"「consistent with ～」で「～と一致している」という定型表現です。",
+ notes:["with は consistent with ~ という定型表現に正しく合う。","to はこの組み合わせでは使われない。","in は範囲の内側を表す前置詞で、この組み合わせには合わない。","for は目的・対象を表す前置詞で、consistent との組み合わせには使わない。"]},
+
+{id:142,category:"前置詞",sentence:"The training program is designed ___ helping new hires adjust quickly to their roles.",choices:["for","to","with","of"],answer:0,
+ point:"動名詞 helping の前で「～のために」という目的を表すときは前置詞 for を使います。",
+ notes:["for は for + 動名詞の形で目的を表し、designed for helping ~ と自然に結びつく。","to は designed to + 動詞の原形の形で使うことが多く、動名詞 helping の前には合わない。","with は同伴・手段を表す前置詞で、目的を示す語ではない。","of はこの組み合わせでは使われない。"]},
+
+{id:143,category:"前置詞",sentence:"Employees who arrive late must explain the reason ___ their supervisor.",choices:["to","for","with","at"],answer:0,
+ point:"「explain A to B（AをBに説明する）」で、説明する相手を示すときは前置詞 to を使います。",
+ notes:["to は explain ~ to someone という定型表現に正しく合う。","for は目的・理由を表す前置詞で、説明する相手を示す語ではない。","with は同伴を表す前置詞で、この組み合わせには合わない。","at は場所や対象への働きかけに使うことがあるが、explain との組み合わせでは不自然。"]},
+
+{id:144,category:"前置詞",sentence:"The workshop will focus ___ improving communication skills among team members.",choices:["on","at","to","in"],answer:0,
+ point:"「focus on ～」で「～に焦点を当てる」という定型表現です。",
+ notes:["on は focus on ~ という定型表現に正しく合う。","at は特定の一点を表す前置詞で、この組み合わせには使わない。","to は方向を表す前置詞で、focus との組み合わせには合わない。","in は範囲の内側を表す前置詞で、この組み合わせには使わない。"]},
+
+{id:145,category:"前置詞",sentence:"The steering committee is composed ___ representatives from each department.",choices:["of","by","with","from"],answer:0,
+ point:"「be composed of ～」で「～から構成されている」という定型表現です。",
+ notes:["of は be composed of ~ という定型表現に正しく合う。","by は行為者を示す前置詞で、この受動態の定型表現には合わない。","with は同伴・手段を表す前置詞で、この組み合わせには使わない。","from は出所を表す前置詞で、composed との組み合わせでは of が定着している。"]},
+
+{id:146,category:"前置詞",sentence:"The company's profits have doubled ___ the last five years, according to the annual report.",choices:["over","since","during","within"],answer:0,
+ point:"「over + 期間」で「～の間に（変化を経て）」という、期間中の変化・推移を表す前置詞です。",
+ notes:["over は期間中の変化・推移を表し、doubled over the last five years と自然に結びつく。","since は「～以来」という起点を表す前置詞で、期間の長さそのものを表す語句とは組み合わせにくい。","during は特定の期間内に起きた一回性の出来事を表すことが多く、doubled のような推移にはやや不自然。","within は「～以内に」という期限の範囲を表し、この文脈には合わない。"]},
+
+{id:147,category:"前置詞",sentence:"The new hires will be paired ___ experienced mentors during their first month.",choices:["with","to","by","for"],answer:0,
+ point:"「pair A with B（AをBと組ませる）」の受動態「be paired with ～」で「～と組む」という定型表現です。",
+ notes:["with は be paired with ~ という定型表現に正しく合う。","to は方向を表す前置詞で、この組み合わせには使わない。","by は行為者を示す前置詞で、この文脈では不適切。","for は目的を表す前置詞で、pair との組み合わせには合わない。"]},
+
+{id:148,category:"前置詞",sentence:"The proposal is subject ___ approval by the board of directors before implementation.",choices:["to","for","with","of"],answer:0,
+ point:"「be subject to ～」で「～次第である・～を条件とする」という定型表現です。",
+ notes:["to は be subject to ~ という定型表現に正しく合う。","for はこの組み合わせでは使われない。","with も同様にこの定型表現には使わない。","of もこの組み合わせでは使われない。"]},
+
+{id:149,category:"前置詞",sentence:"The department succeeded ___ reducing operational costs by 15 percent this year.",choices:["in","at","on","with"],answer:0,
+ point:"「succeed in doing ～」で「～することに成功する」という定型表現です。",
+ notes:["in は succeed in ~ という定型表現に正しく合う。","at は「～が得意である」という意味の be good at のような表現で使われるが、succeed との組み合わせには使わない。","on はこの組み合わせでは使われない。","with も同様にこの定型表現には合わない。"]},
+
+{id:150,category:"前置詞",sentence:"The annual shareholders' meeting is scheduled to take place ___ the third week of August.",choices:["during","at","on","by"],answer:0,
+ point:"「the third week of August」のような、ある程度の幅を持つ期間を表すときは前置詞 during を使います。",
+ notes:["during は「～の間に」という期間内の出来事を表し、the third week of August と自然に対応する。","at は特定の時刻や地点に使うことが多く、週のような幅のある期間には合わない。","on は特定の日付・曜日に使う前置詞で、週全体を表すこの文脈には合わない。","by は期限「～までに」を表し、開催時期を示すこの文脈には合わない。"]},
+
+{id:151,category:"接続詞",sentence:"___ the report was completed well ahead of schedule, it contained several factual errors.",choices:["Although","Because","Unless","So that"],answer:0,
+ point:"前半（予定より早く完成した）と後半（事実誤認があった）が対照的な内容であるため、逆接の接続詞 Although が適切です。",
+ notes:["Although は「～だけれども」という逆接を表し、対照的な文意に合う。","Because は「～なので」という理由を表し、対照的な文意には合わない。","Unless は「～しない限り」という条件を表し、この文脈には合わない。","So that は目的・結果を表し、逆接の意味にはならない。"]},
+
+{id:152,category:"接続詞",sentence:"The factory will remain closed ___ the safety inspection is completed by the authorities.",choices:["until","despite","because of","in spite of"],answer:0,
+ point:"空欄の後ろには the safety inspection is completed という主語＋動詞を含む節が続いています。節を導けるのは接続詞です。",
+ notes:["until は接続詞としても使え、「～するまで」という文意にも合う。","despite は前置詞で、後ろには名詞（句）が必要なため節を続けられない。","because of も前置詞句であり、同様に節を続けられない。","in spite of も前置詞句であり、節を直接続けることはできない。"]},
+
+{id:153,category:"接続詞",sentence:"___ the delay, the client agreed to extend the project deadline by two weeks.",choices:["Because of","Because","Although","Unless"],answer:0,
+ point:"空欄の後ろに続くのは the delay という名詞句のみで、主語と動詞を含む節ではありません。名詞（句）を直接続けられるのは前置詞句です。",
+ notes:["Because of は前置詞句「～のために」。名詞句 the delay を直接続けられ、文意にも合う。","Because は接続詞なので、後ろには主語＋動詞を含む節が必要。","Although も接続詞であり、同様に節が必要で、逆接の意味も文意に合わない。","Unless も接続詞であり、名詞句を直接続けることはできない。"]},
+
+{id:154,category:"接続詞",sentence:"The company will proceed with the layoffs ___ a buyer is found before the end of the month.",choices:["unless","despite","because","so that"],answer:0,
+ point:"「unless ～」は「～しない限り」という否定条件を表す接続詞です。「買い手が見つからない限りレイオフを進める」という文意に合致します。",
+ notes:["unless は「～しない限り」という条件を表し、文意に自然に合う。","despite は前置詞で、後ろに節を続けることができない。","because は「～なので」という理由を表し、文意に合わない。","so that は目的・結果を表す接続詞で、条件の意味にはならない。"]},
+
+{id:155,category:"接続詞",sentence:"___ she had never managed a team before, she led the project to a successful completion.",choices:["Even though","Because","Unless","So that"],answer:0,
+ point:"前半（チームを率いた経験がなかった）と後半（プロジェクトを成功させた）が対照的な内容であるため、逆接の接続詞 Even though が適切です。",
+ notes:["Even though は「～だけれども」という逆接を強調して表し、対照的な文意に合う。","Because は理由を表す接続詞で、対照的な文意には合わない。","Unless は条件を表す接続詞で、この文脈には合わない。","So that は目的・結果を表し、逆接の意味にはならない。"]},
+
+{id:156,category:"接続詞",sentence:"The manager double-checked the figures ___ there would be no errors in the final report.",choices:["so that","because","although","unless"],answer:0,
+ point:"「so that ～」は「～するために」という目的を表す接続詞です。",
+ notes:["so that は目的を表し、「誤りがないようにするために再確認した」という文意に合う。","because は理由を表す接続詞で、目的を表すこの文脈には合わない。","although は逆接を表し、文意に合わない。","unless は条件を表し、目的の意味にはならない。"]},
+
+{id:157,category:"接続詞",sentence:"The flight was cancelled due to the storm; ___, passengers were rebooked on the next available flight.",choices:["consequently","although","because","unless"],answer:0,
+ point:"セミコロンの後で前の文の結果・帰結を表すときは接続副詞 consequently を使います。",
+ notes:["consequently は「その結果として」という結果を表す接続副詞で、文意に合う。","although は従属接続詞で、セミコロンで独立文をつなぐこの構文には使えない。","because も従属接続詞であり、同様にこの構文には使えない。","unless は条件を表す接続詞で、意味・構造ともに合わない。"]},
+
+{id:158,category:"接続詞",sentence:"___ the marketing budget was significantly cut, the campaign still exceeded its sales targets.",choices:["Although","Because","Since","So that"],answer:0,
+ point:"前半（予算が削減された）と後半（それでも目標を上回った）が対照的な内容であるため、逆接の接続詞 Although が適切です。",
+ notes:["Although は「～だけれども」という逆接を表し、対照的な文意に合う。","Because は理由を表す接続詞で、対照的な文意には合わない。","Since も理由・時間を表す接続詞で、Because と同様に逆接の意味にはならない。","So that は目的・結果を表し、逆接の意味にはならない。"]},
+
+{id:159,category:"接続詞",sentence:"The vendor agreed to lower the unit price ___ the client placed a significantly larger order.",choices:["provided that","despite","although","unless"],answer:0,
+ point:"「provided that ～」は「～という条件であれば」という条件を表す接続詞です。",
+ notes:["provided that は「～という条件で」を表し、「大口注文をするなら値下げに応じる」という文意に自然に合う。","despite は前置詞で、後ろに節を続けることができない。","although は逆接を表す接続詞で、条件の意味にはならない。","unless は「～しない限り」という否定条件で、文意が逆になってしまう。"]},
+
+{id:160,category:"接続詞",sentence:"___ the CFO reviews and signs off on the budget proposal, no further spending will be authorized.",choices:["Until","Despite","Because of","Although"],answer:0,
+ point:"「until ～」は「～するまで」という接続詞で、「CFOが承認するまで支出は認められない」という文意に合致します。",
+ notes:["Until は「～するまで」という意味で節を導ける接続詞であり、文意に合う。","Despite は前置詞で、後ろに節を続けることができない。","Because of も前置詞句であり、同様に節を続けられない。","Although は逆接の接続詞で、この文脈には合わない。"]},
+
+{id:161,category:"接続詞",sentence:"The team worked through the entire weekend ___ they could meet the product launch deadline.",choices:["so that","although","unless","despite"],answer:0,
+ point:"「so that ～」は「～するために」という目的を表す接続詞です。",
+ notes:["so that は目的を表し、「締め切りに間に合わせるために週末も働いた」という文意に合う。","although は逆接を表し、文意に合わない。","unless は条件を表し、目的の意味にはならない。","despite は前置詞で、後ろに節を続けることができない。"]},
+
+{id:162,category:"接続詞",sentence:"The client praised the overall design of the product; ___, she requested several revisions before final approval.",choices:["however","therefore","because","unless"],answer:0,
+ point:"セミコロンの後で前の文と対比・逆接の内容をつなぐときは接続副詞 however を使います。",
+ notes:["however は「しかしながら」という接続副詞で、称賛しつつも修正を求めるという対比の文意に合う。","therefore は結果を表す接続副詞で、この対比の文脈には合わない。","because は従属接続詞で、セミコロンで独立文をつなぐこの構文には使えない。","unless は条件を表す接続詞で、意味・構造ともに合わない。"]},
+
+{id:163,category:"関係詞",sentence:"The engineer ___ designed the new system will present it at next week's conference.",choices:["who","whom","whose","which"],answer:0,
+ point:"先行詞 engineer は人であり、後ろに動詞 designed が続く主格の関係代名詞が必要です。人を指す主格の関係代名詞は who です。",
+ notes:["who は人を先行詞とする主格の関係代名詞で、後ろに動詞 designed が続く形に正しく合う。","whom は目的格で、後ろに完全な文の要素が必要であり、動詞が直接続くこの形には合わない。","whose は所有格で、後ろに名詞が必要だが、ここは動詞が続いており合わない。","which は物を先行詞とする関係代名詞で、先行詞が人（engineer）のときは使わない。"]},
+
+{id:164,category:"関係詞",sentence:"The proposal, ___ details were outlined in the memo, was approved unanimously by the board.",choices:["which","whose","who","whom"],answer:1,
+ point:"空欄の後ろの details は「その提案の詳細」という所有関係にあるため、所有格の関係代名詞 whose を使います。",
+ notes:["which は主格・目的格の関係代名詞で、後ろに名詞 details が直接続く所有関係を表せない。","whose は所有格の関係代名詞。whose details で「その提案の詳細」という所有関係を正しく表せる。","who は人を先行詞とする関係代名詞で、proposal（物）には使えない。","whom も人を先行詞とする関係代名詞で、同様に使えない。"]},
+
+{id:165,category:"関係詞",sentence:"This is the supplier ___ we have worked with for over a decade.",choices:["whom","which","whose","who"],answer:0,
+ point:"先行詞 supplier は人であり、前置詞 with の目的語として機能する目的格の関係代名詞が必要です。人を指す目的格の関係代名詞は whom です。",
+ notes:["whom は人を先行詞とする目的格の関係代名詞で、worked with の目的語として正しく機能する。","which は物を先行詞とする関係代名詞で、supplier（人）には使わない。","whose は所有格で、後ろに名詞が必要だが、ここは完全な節が続いており合わない。","who は主格として使われることが多く、目的格の位置ではより形式的な whom が適切とされる。"]},
+
+{id:166,category:"関係詞",sentence:"The report ___ contains confidential data must be stored on a secure server.",choices:["which","whom","whose","who"],answer:0,
+ point:"先行詞 report は物であり、後ろに動詞 contains が続く主格の関係代名詞が必要です。物を指す主格の関係代名詞は which です。",
+ notes:["which は物を先行詞とする主格の関係代名詞で、後ろに動詞 contains が続く形に正しく合う。","whom は人を先行詞とする目的格の関係代名詞で、report（物）には使えない。","whose は所有格で、後ろに名詞が必要だが、ここは動詞が続いており合わない。","who は人を先行詞とする関係代名詞で、report（物）には使えない。"]},
+
+{id:167,category:"関係詞",sentence:"Candidates ___ applications are incomplete will not be considered for the position.",choices:["who","whose","which","whom"],answer:1,
+ point:"空欄の後ろの applications は「候補者の応募書類」という所有関係にあるため、所有格の関係代名詞 whose を使います。",
+ notes:["who は主格で、直後には動詞が続く形になるため、名詞 applications が続くこの文には合わない。","whose は所有格の関係代名詞。whose applications で「彼らの応募書類」という所有関係を正しく表せる。","which は物を先行詞とする関係代名詞で、先行詞が人（Candidates）のときは使わない。","whom は目的格で、後ろに完全な文の要素が必要でありここでは合わない。"]},
+
+{id:168,category:"関係詞",sentence:"The client ___ we met yesterday has decided to sign the long-term contract.",choices:["whom","whose","which","what"],answer:0,
+ point:"先行詞 client は人であり、動詞 met の目的語として機能する目的格の関係代名詞が必要です。人を指す目的格の関係代名詞は whom です。",
+ notes:["whom は人を先行詞とする目的格の関係代名詞で、met の目的語として正しく機能する。","whose は所有格で、後ろに名詞が必要だが、ここは完全な節が続いており合わない。","which は物を先行詞とする関係代名詞で、client（人）には使わない。","what は先行詞を含む関係代名詞で、先行詞 client がすでにある文には使えない。"]},
+
+{id:169,category:"関係詞",sentence:"The office ___ the meeting was held has been completely renovated since then.",choices:["where","which","whose","who"],answer:0,
+ point:"先行詞 office は場所を表し、後ろに完全な文（the meeting was held）が続いているため、関係副詞 where が必要です。",
+ notes:["where は場所を表す関係副詞で、後ろに完全な文が続く形に正しく合う。","which は関係代名詞であり、後ろには主語や目的語が欠けた不完全な文が続く必要があるが、ここは完全な文が続いている。","whose は所有格の関係代名詞で、後ろに名詞が必要でありここでは合わない。","who は人を先行詞とする関係代名詞で、office（場所）には使わない。"]},
+
+{id:170,category:"関係詞",sentence:"The reason ___ the merger ultimately failed remains unclear to most shareholders.",choices:["why","which","where","whose"],answer:0,
+ point:"先行詞 reason（理由）を受け、後ろに完全な文が続くときは関係副詞 why を使います。",
+ notes:["why は理由を表す先行詞 reason とともに使われる関係副詞で、後ろに完全な文が続く形に正しく合う。","which は関係代名詞であり、後ろに不完全な文が続く必要があるが、ここは完全な文が続いている。","where は場所を表す関係副詞で、reason（理由）には使わない。","whose は所有格の関係代名詞で、後ろに名詞が必要でありここでは合わない。"]},
+
+{id:171,category:"関係詞",sentence:"The year ___ the company was founded marked a turning point in the industry.",choices:["when","which","where","whose"],answer:0,
+ point:"先行詞 year（時）を受け、後ろに完全な文が続くときは関係副詞 when を使います。",
+ notes:["when は時を表す先行詞 year とともに使われる関係副詞で、後ろに完全な文が続く形に正しく合う。","which は関係代名詞であり、後ろに不完全な文が続く必要があるが、ここは完全な文が続いている。","where は場所を表す関係副詞で、year（時）には使わない。","whose は所有格の関係代名詞で、後ろに名詞が必要でありここでは合わない。"]},
+
+{id:172,category:"関係詞",sentence:"The assistant, ___ recommendation letters impressed the hiring committee, was hired immediately.",choices:["whose","who","whom","which"],answer:0,
+ point:"空欄の後ろの recommendation letters は「そのアシスタントの推薦状」という所有関係にあるため、所有格の関係代名詞 whose を使います。",
+ notes:["whose は所有格の関係代名詞。whose recommendation letters で「その人の推薦状」という所有関係を正しく表せる。","who は主格で、直後には動詞が続く形になるため、名詞句が続くこの文には合わない。","whom は目的格で、後ろに完全な文の要素が必要でありここでは合わない。","which は物を先行詞とする関係代名詞で、先行詞が人（assistant）のときは使わない。"]},
+
+{id:173,category:"関係詞",sentence:"The firm ___ acquired our main competitor last year has since expanded into three new markets.",choices:["which","whom","whose","who"],answer:0,
+ point:"先行詞 firm は組織（物扱い）であり、後ろに動詞 acquired が続く主格の関係代名詞が必要です。物・組織を指す主格の関係代名詞は which です。",
+ notes:["which は物・組織を先行詞とする主格の関係代名詞で、後ろに動詞が続く形に正しく合う。","whom は人を先行詞とする目的格の関係代名詞で、firm（組織）には使わない。","whose は所有格で、後ろに名詞が必要だが、ここは動詞が続いており合わない。","who は人を先行詞とする関係代名詞で、firm（組織）には基本的に使わない。"]},
+
+{id:174,category:"比較",sentence:"This year's marketing budget is significantly ___ than last year's.",choices:["large","larger","largest","more large"],answer:1,
+ point:"文中に than があることから比較級が必要だと分かります。",
+ notes:["large は原級。than を伴う比較の文には使えない。","larger は比較級。than last year's と正しく対応する。","largest は最上級。than を伴う二者比較には使わない。","more large は誤った比較級の作り方（larger が正しい形）。"]},
+
+{id:175,category:"比較",sentence:"Of the three job offers she received, she chose the ___ one in terms of salary and benefits.",choices:["good","better","best","well"],answer:2,
+ point:"「Of the three job offers（3つの内定の中で）」という範囲を示す表現があることから、最上級が適切です。",
+ notes:["good は原級。三者以上の中での最上位を示す文脈には合わない。","better は比較級で、三者以上の中での最上位を示す文脈には合わない。","best は最上級「最も良い」。of the three job offers という範囲表現と自然に対応する。","well は副詞で、one を修飾する形容詞の位置には入らない。"]},
+
+{id:176,category:"比較",sentence:"The sooner we finalize the contract, the ___ we can begin production.",choices:["soon","sooner","soonest","more soon"],answer:1,
+ point:"「The + 比較級 ～, the + 比較級 …」で「～すればするほど、ますます…」という構文です。前半に The sooner（比較級）があることからも比較級が必要と分かります。",
+ notes:["soon は原級。この構文には比較級が必要なため合わない。","sooner は比較級で、The sooner ~, the sooner … という構文に正しく合う。","soonest は最上級で、この構文には使わない。","more soon は誤った比較級の作り方（sooner が正しい形）。"]},
+
+{id:177,category:"比較",sentence:"The company's new headquarters is nearly three times ___ large as its previous office.",choices:["as","so","than","that"],answer:0,
+ point:"「倍数＋as +原級+ as ～」で「～の何倍…だ」という倍数比較の定型表現です。",
+ notes:["as は as ～ as の形で倍数表現を作る正しい語。","so は否定文の as の代わりに使われることはあるが、この肯定の倍数表現には使わない。","than は比較級とセットで使う語で、原級の大きさを比べるこの構文には合わない。","that は指示代名詞・接続詞であり、この構文には使えない。"]},
+
+{id:178,category:"比較",sentence:"Our regional office reported the ___ growth of all the company's branches this quarter.",choices:["high","higher","highest","more high"],answer:2,
+ point:"「Of all the company's branches（すべての支店の中で）」という範囲を示す表現があることから、最上級が適切です。",
+ notes:["high は原級で、範囲の中での最上位を示す文脈には合わない。","higher は比較級で、三者以上の中での最上位を示す文脈には合わない。","highest は最上級「最も高い」。of all the company's branches という範囲表現と自然に対応する。","more high は誤った比較級・最上級の作り方（higher/highest が正しい形）。"]},
+
+{id:179,category:"比較",sentence:"The revised proposal is much ___ than the original draft submitted last month.",choices:["clear","clearer","clearest","more clear"],answer:1,
+ point:"文中に than があることから比較級が必要だと分かります。much は比較級を強調する副詞です。",
+ notes:["clear は原級。than を伴う比較の文には使えない。","clearer は比較級。than the original draft と正しく対応し、much による強調も自然。","clearest は最上級。than を伴う二者比較には使わない。","more clear は誤った比較級の作り方（clearer が正しい形）。"]},
+
+{id:180,category:"比較",sentence:"This laptop model is among the ___ on the market in terms of battery life.",choices:["long-lasting","longer-lasting","most long-lasting","long-lastingly"],answer:2,
+ point:"「among the + 最上級」で「最も～なものの一つ」という定型表現です。long-lasting のような複合形容詞の最上級は most を用いて作ります。",
+ notes:["long-lasting は原級で、among the ~ の形には最上級が必要なため合わない。","longer-lasting という比較級の作り方は不自然で、複合形容詞には more/most を用いる。","most long-lasting は複合形容詞の最上級として正しい形で、among the ~ という定型表現にも合う。","long-lastingly という副詞形は一般的に使われない。"]},
+
+{id:181,category:"比較",sentence:"The new employee adapted to the company culture ___ than most managers had expected.",choices:["quick","quickly","quicker","more quickly"],answer:3,
+ point:"文中に than があることから比較級が必要だと分かります。動詞 adapted を修飾するのは副詞で、quickly の比較級は more quickly です。",
+ notes:["quick は形容詞の原級。動詞を修飾できない。","quickly は副詞の原級。than を伴う比較の文には比較級が必要。","quicker は誤った比較級の作り方で、quickly の比較級は more quickly が正しい形。","more quickly は副詞 quickly の正しい比較級で、than と自然に対応する。"]},
+
+{id:182,category:"比較",sentence:"The two candidates performed equally well in the interview, but neither was clearly ___ than the other.",choices:["good","well","better","best"],answer:2,
+ point:"文中に than があることから比較級が必要だと分かります。",
+ notes:["good は形容詞の原級。than を伴う比較の文には使えない。","well は副詞（または形容詞「健康な」）の原級で、この文脈には合わない。","better は比較級「より良い」。than the other と正しく対応する。","best は最上級。than を伴う二者比較には使わない。"]},
+
+{id:183,category:"代名詞",sentence:"The board members submitted ___ expense reports before the fiscal year-end deadline.",choices:["they","their","them","theirs"],answer:1,
+ point:"空欄の直後の名詞 expense reports を修飾するのは所有格代名詞です。",
+ notes:["they は主格代名詞で、名詞の前には置けない。","their は所有格代名詞「彼らの」。expense reports を正しく修飾する。","them は目的格代名詞で、名詞の前には置けない。","theirs は所有代名詞（～のもの）で、名詞を直接修飾する形では使わない。"]},
+
+{id:184,category:"代名詞",sentence:"Neither of the two applicants provided ___ references by the requested deadline.",choices:["his or her","their","its","he or she"],answer:0,
+ point:"Neither of the two applicants は文法上単数として扱われ、応募者は人であるため、対応する所有格代名詞は his or her を使います。",
+ notes:["his or her は単数かつ人を指す所有格の組み合わせで、neither に正しく対応する。","their は複数の所有格代名詞で、単数扱いの neither とは形式上一致しない。","its は物を指す所有格代名詞で、人を指す applicants には使わない。","he or she は主格代名詞で、名詞 references の前に置く所有格の位置には合わない。"]},
+
+{id:185,category:"代名詞",sentence:"The two new interns were asked to review ___ presentations before the client meeting.",choices:["each other's","each other","one another's","themselves"],answer:0,
+ point:"主語が「二人（the two new interns）」であり、空欄の後ろに名詞 presentations が続くことから、相互代名詞の所有格 each other's が必要です。",
+ notes:["each other's は二者間の相互関係を表す所有格で、the two interns と presentations の間に正しく入る。","each other は所有格ではないため、直後に名詞を置く形には合わない。","one another's は主に三者以上で使われる相互代名詞の所有格で、二人が主語のこの文にはやや不自然。","themselves は再帰代名詞で、「彼ら自身」を意味し、相互の review という文意には合わない。"]},
+
+{id:186,category:"代名詞",sentence:"The CEO ___ approved the final budget without delegating the decision to anyone else.",choices:["himself","him","he","his"],answer:0,
+ point:"主語 The CEO を強調する再帰代名詞（強調用法）は himself で、主語の直後や文末に置かれます。",
+ notes:["himself は強調用法の再帰代名詞で、The CEO himself で「CEO自らが」という意味を正しく表す。","him は目的格代名詞で、主語の直後に置いて強調する用法には使わない。","he は主格代名詞で、すでに主語 The CEO があるため重複してしまう。","his は所有格代名詞で、この位置には合わない。"]},
+
+{id:187,category:"代名詞",sentence:"Each team member is responsible for meeting ___ own individual deadlines.",choices:["its","their","his or her","itself"],answer:2,
+ point:"Each team member は文法上単数として扱われ、人を指すため、対応する所有格代名詞は his or her を使います。",
+ notes:["its は物を指す所有格代名詞で、人を指す team member には使わない。","their は複数の所有格代名詞で、単数扱いの each とは形式上一致しない。","his or her は単数かつ人を指す所有格の組み合わせで、each team member に正しく対応する。","itself は再帰代名詞で、所有格として名詞の前には置けない。"]},
+
+{id:188,category:"代名詞",sentence:"The corporation prides ___ on maintaining the highest ethical standards in the industry.",choices:["itself","its","it","themselves"],answer:0,
+ point:"「pride oneself on ～」で「～を誇りに思う」という定型表現です。corporation は単数扱いなので再帰代名詞 itself を使います。",
+ notes:["itself は単数の再帰代名詞で、pride itself on という定型表現に正しく合う。","its は所有格代名詞で、動詞 prides の目的語（再帰代名詞）の位置には使えない。","it は目的格代名詞だが、pride は再帰代名詞を取る動詞であるため it では意味が通らない。","themselves は複数の再帰代名詞で、単数扱いの corporation とは一致しない。"]},
+
+{id:189,category:"代名詞",sentence:"The two co-founders built the business by relying heavily on ___ shared expertise.",choices:["they","their","them","theirs"],answer:1,
+ point:"空欄の直後の名詞 shared expertise を修飾するのは所有格代名詞です。",
+ notes:["they は主格代名詞で、名詞の前には置けない。","their は所有格代名詞「彼らの」。shared expertise を正しく修飾する。","them は目的格代名詞で、名詞の前には置けない。","theirs は所有代名詞（～のもの）で、名詞を直接修飾する形では使わない。"]},
+
+{id:190,category:"代名詞",sentence:"None of the regional departments have finalized ___ budget for the upcoming fiscal year.",choices:["its","their","it's","them"],answer:1,
+ point:"None of the departments は複数扱いの動詞 have と共に使われており、対応する所有格代名詞も複数の their になります。",
+ notes:["its は単数の所有格代名詞で、複数扱いのこの主語（have と一致）とは合わない。","their は複数の所有格代名詞で、動詞 have と一致するこの主語に正しく対応する。","it's は it is の短縮形であり、所有格ではないためここでは使えない。","them は目的格代名詞で、名詞 budget の前に置く所有格の位置には合わない。"]},
+
+{id:191,category:"代名詞",sentence:"The manager organized all the files by ___, without any help from colleagues.",choices:["himself","him","he","his"],answer:0,
+ point:"「by oneself」で「独力で・誰の助けも借りずに」という定型表現です。前置詞 by の後には再帰代名詞が必要です。",
+ notes:["himself は再帰代名詞で、by himself という定型表現に正しく合う。","him は目的格代名詞で、by oneself という定型表現の位置には使わない。","he は主格代名詞で、前置詞の後には使えない。","his は所有格代名詞で、この位置には合わない。"]},
+
+{id:192,category:"仮定法",sentence:"If the merger ___ approved by regulators, the two companies would combine their operations by next year.",choices:["is","were","was","be"],answer:1,
+ point:"主節が would combine（仮定法過去）であることから、if 節も現在の事実に反する、または実現の可能性が低い仮定を表す仮定法過去にします。仮定法過去の be動詞は主語に関わらず were を使います。",
+ notes:["is は直説法現在形で、仮定法過去のこの構文には合わない。","were は仮定法過去で使う be動詞の形。主節の would combine と正しく対応する。","was は直説法過去形で、仮定法では were を使うのが原則。","be は原形で、if 節のこの位置には使えない。"]},
+
+{id:193,category:"仮定法",sentence:"If the CEO ___ aware of the issue earlier, the crisis could have been avoided entirely.",choices:["was","were","had been","has been"],answer:2,
+ point:"主節が could have been avoided（仮定法過去完了）であることから、if 節も過去の事実に反する仮定を表す仮定法過去完了（had + 過去分詞）にします。",
+ notes:["was は単純過去で、仮定法過去完了の if 節としては時制が合わない。","were は仮定法過去の形で、過去の事実に反する仮定を表すこの文脈には had been が必要。","had been は仮定法過去完了の形で、主節の could have been avoided と正しく対応する。","has been は現在完了で、過去の事実に反する仮定を表す形としては不適切。"]},
+
+{id:194,category:"仮定法",sentence:"The board requires that every expense report ___ approved by two authorized signatories.",choices:["is","be","was","will be"],answer:1,
+ point:"require that ～のように要求を表す動詞に続く that節の中では、動詞は主語や時制に関わらず原形（仮定法現在）になります。",
+ notes:["is は三人称単数現在形。要求を表す that 節では原形が使われるため不適切。","be は原形。requires that ～ be … の形で仮定法現在として正しく使われる。","was は過去形。同様にこの構文には使わない。","will be は未来形。この構文には使わない。"]},
+
+{id:195,category:"仮定法",sentence:"It is essential that the contract ___ reviewed thoroughly by legal counsel before signing.",choices:["is","be","was","will be"],answer:1,
+ point:"「It is essential that ～」のように必要性・重要性を表す表現に続く that節の中では、動詞は原形（仮定法現在）になります。",
+ notes:["is は三人称単数現在形。この構文では原形が使われるため不適切。","be は原形。It is essential that ～ be … の形で仮定法現在として正しく使われる。","was は過去形。同様にこの構文には使わない。","will be は未来形。この構文には使わない。"]},
+
+{id:196,category:"仮定法",sentence:"If I ___ in your position, I would request additional funding for the project immediately.",choices:["am","was","were","be"],answer:2,
+ point:"「If I were you」に代表される仮定法過去の定型表現で、be動詞は主語にかかわらず were を使います。",
+ notes:["am は直説法現在形で、仮定法過去のこの構文には合わない。","was は直説法過去形で、仮定法過去では were を使うのが原則。","were は仮定法過去で使う be動詞の形。If I were と正しく対応する。","be は原形で、if 節のこの位置には使えない。"]},
+
+{id:197,category:"仮定法",sentence:"The external auditor recommended that the company ___ its internal controls immediately.",choices:["strengthens","strengthen","strengthened","will strengthen"],answer:1,
+ point:"recommend that ～のように提案・勧告を表す動詞に続く that節の中では、動詞は主語や時制に関わらず原形（仮定法現在）になります。",
+ notes:["strengthens は三人称単数現在形。提案を表す that 節では原形が使われるため不適切。","strengthen は原形。recommended that ～ strengthen … の形で仮定法現在として正しく使われる。","strengthened は過去形。同様にこの構文には使わない。","will strengthen は未来形。この構文には使わない。"]},
+
+{id:198,category:"仮定法",sentence:"Had the shipment ___ on schedule, the client would not have filed a complaint with customer service.",choices:["arrived","arrive","arrives","been arrived"],answer:0,
+ point:"「Had + 主語 + 過去分詞」は if を省略して Had を文頭に出した仮定法過去完了の倒置形です。",
+ notes:["arrived は過去分詞で、Had the shipment arrived という倒置の仮定法過去完了として正しい形。","arrive は原形で、Had の直後の倒置構文には合わない。","arrives は三人称単数現在形で、同様に合わない。","been arrived は arrive が自動詞であるため受動態にはならず、この形自体が誤り。"]},
+
+{id:199,category:"仮定法",sentence:"Were the company ___ overseas, it would need to hire local staff familiar with regional regulations.",choices:["to expand","expand","expanding","expanded"],answer:0,
+ point:"「Were + 主語 + to + 動詞の原形」は if を省略して Were を文頭に出した仮定法の倒置形で、実現の可能性が低い未来の仮定を表します。",
+ notes:["to expand は Were the company to expand で「もし会社が海外進出するとしたら」という倒置の仮定法として正しい形。","expand は原形のみで、to が抜けているためこの倒置構文には合わない。","expanding は動名詞・現在分詞で、同様に合わない。","expanded は過去分詞・過去形で、Were の後のこの倒置構文には合わない。"]},
+
+{id:200,category:"仮定法",sentence:"The manager insisted that all employees ___ the new safety training by the end of the month.",choices:["complete","completes","completed","will complete"],answer:0,
+ point:"insist that ～のように要求を表す動詞に続く that節の中では、動詞は主語や時制に関わらず原形（仮定法現在）になります。",
+ notes:["complete は原形。insisted that ～ complete … の形で仮定法現在として正しく使われる。","completes は三人称単数現在形。要求を表す that 節では原形が使われるため不適切。","completed は過去形。同様にこの構文には使わない。","will complete は未来形。この構文には使わない。"]}
+];
+
+/* ---------------- 単語帳データ (50語、随時追加予定) ---------------- */
+const VOCAB = [
+{id:1,word:"feasible",pos:"形",meaning:"実行可能な",example:"The manager questioned whether the new schedule was feasible given the current staffing levels.",exampleJa:"新しいスケジュールが現在の人員配置で実行可能かどうか、マネージャーは疑問視した。"},
+{id:2,word:"allocate",pos:"動",meaning:"割り当てる",example:"The finance team will allocate additional funds to the marketing department next quarter.",exampleJa:"経理チームは来四半期にマーケティング部門へ追加の資金を割り当てる予定だ。"},
+{id:3,word:"comply",pos:"動",meaning:"（規則などに）従う",example:"All employees must comply with the updated safety regulations.",exampleJa:"すべての従業員は更新された安全規則に従わなければならない。"},
+{id:4,word:"negotiate",pos:"動",meaning:"交渉する",example:"The two companies spent weeks negotiating the terms of the merger.",exampleJa:"両社は合併の条件を交渉するのに数週間を費やした。"},
+{id:5,word:"revenue",pos:"名",meaning:"収益",example:"The company's revenue increased by 12 percent compared to last year.",exampleJa:"その会社の収益は前年に比べて12パーセント増加した。"},
+{id:6,word:"subsidiary",pos:"名",meaning:"子会社",example:"The parent company decided to sell one of its overseas subsidiaries.",exampleJa:"親会社は海外子会社の一つを売却することを決定した。"},
+{id:7,word:"endorse",pos:"動",meaning:"支持する・推薦する",example:"Several well-known athletes have agreed to endorse the new sports brand.",exampleJa:"何人かの著名なアスリートがその新しいスポーツブランドを支持することに同意した。"},
+{id:8,word:"procurement",pos:"名",meaning:"調達",example:"The procurement department is responsible for sourcing raw materials at the best price.",exampleJa:"調達部門は最良の価格で原材料を調達する責任を負っている。"},
+{id:9,word:"forecast",pos:"動",meaning:"予測する",example:"Analysts forecast steady growth in the tech sector over the next five years.",exampleJa:"アナリストは今後5年間、テクノロジー分野で着実な成長を予測している。"},
+{id:10,word:"itinerary",pos:"名",meaning:"旅程",example:"Please review the attached itinerary before your business trip to Chicago.",exampleJa:"シカゴへの出張前に、添付の旅程をご確認ください。"},
+{id:11,word:"reimburse",pos:"動",meaning:"払い戻す",example:"The company will reimburse employees for approved travel expenses.",exampleJa:"会社は承認された出張費用を従業員に払い戻す。"},
+{id:12,word:"discrepancy",pos:"名",meaning:"食い違い",example:"The accountant noticed a discrepancy between the invoice and the purchase order.",exampleJa:"会計士は請求書と発注書の間に食い違いがあることに気づいた。"},
+{id:13,word:"streamline",pos:"動",meaning:"効率化する",example:"The new software helped streamline the entire ordering process.",exampleJa:"新しいソフトウェアは注文プロセス全体を効率化するのに役立った。"},
+{id:14,word:"comprehensive",pos:"形",meaning:"包括的な",example:"The consultant provided a comprehensive report on the company's financial health.",exampleJa:"コンサルタントはその会社の財務状況について包括的な報告書を提供した。"},
+{id:15,word:"versatile",pos:"形",meaning:"多才な・多用途な",example:"Her versatile skill set makes her a valuable asset to any team.",exampleJa:"彼女の多才なスキルセットは、どんなチームにとっても貴重な財産となる。"},
+{id:16,word:"meticulous",pos:"形",meaning:"細心の注意を払う",example:"The auditor was meticulous in checking every line of the financial statements.",exampleJa:"その監査人は財務諸表のあらゆる項目を確認する際、細心の注意を払った。"},
+{id:17,word:"redundant",pos:"形",meaning:"余剰の・不要な",example:"Several positions were made redundant after the two departments merged.",exampleJa:"二つの部署が統合された後、いくつかの職が余剰となった。"},
+{id:18,word:"viable",pos:"形",meaning:"実行可能な・存続可能な",example:"The startup needs more funding to remain a viable business.",exampleJa:"そのスタートアップは存続可能な事業であり続けるために、さらなる資金が必要だ。"},
+{id:19,word:"tenant",pos:"名",meaning:"賃借人",example:"The building owner is looking for a new tenant for the vacant office space.",exampleJa:"ビルのオーナーは空いているオフィススペースの新しい賃借人を探している。"},
+{id:20,word:"warranty",pos:"名",meaning:"保証",example:"The printer comes with a two-year warranty against manufacturing defects.",exampleJa:"そのプリンターには製造上の欠陥に対する2年間の保証が付いている。"},
+{id:21,word:"invoice",pos:"名",meaning:"請求書",example:"Please send the invoice to the accounting department by the end of the week.",exampleJa:"今週末までに請求書を経理部門へ送付してください。"},
+{id:22,word:"merger",pos:"名",meaning:"合併",example:"The merger between the two airlines was approved by regulators last month.",exampleJa:"両航空会社の合併は先月、規制当局によって承認された。"},
+{id:23,word:"acquisition",pos:"名",meaning:"買収",example:"The acquisition of the smaller firm allowed the company to expand into new markets.",exampleJa:"その小規模な会社の買収により、当社は新しい市場へ進出することができた。"},
+{id:24,word:"workforce",pos:"名",meaning:"労働力",example:"The company plans to expand its workforce by hiring 200 new employees this year.",exampleJa:"その会社は今年、200人の新入社員を雇用して労働力を拡大する予定だ。"},
+{id:25,word:"incentive",pos:"名",meaning:"誘因・奨励金",example:"The sales team was offered a bonus incentive to exceed their quarterly targets.",exampleJa:"営業チームは四半期目標を上回るためのボーナス報奨を提示された。"},
+{id:26,word:"liability",pos:"名",meaning:"負債・責任",example:"The company recorded the unpaid loan as a liability on its balance sheet.",exampleJa:"会社は未払いの融資を貸借対照表上の負債として計上した。"},
+{id:27,word:"benchmark",pos:"名",meaning:"基準",example:"The firm used industry benchmarks to evaluate its own performance.",exampleJa:"その会社は業界の基準を使って自社の業績を評価した。"},
+{id:28,word:"outsource",pos:"動",meaning:"外部委託する",example:"The company decided to outsource its customer service operations to reduce costs.",exampleJa:"その会社はコスト削減のため、顧客サービス業務を外部委託することを決定した。"},
+{id:29,word:"proficient",pos:"形",meaning:"熟練した",example:"Applicants must be proficient in at least two foreign languages.",exampleJa:"応募者は少なくとも2つの外国語に熟練していなければならない。"},
+{id:30,word:"autonomous",pos:"形",meaning:"自律的な",example:"Each regional office operates as an autonomous unit within the larger organization.",exampleJa:"各地域オフィスは、より大きな組織の中で自律的な単位として運営されている。"},
+{id:31,word:"jeopardize",pos:"動",meaning:"危うくする",example:"Missing the deadline could jeopardize the entire project's funding.",exampleJa:"締め切りに間に合わないと、プロジェクト全体の資金提供が危うくなる可能性がある。"},
+{id:32,word:"mandate",pos:"名",meaning:"命令・権限",example:"The new policy was implemented under a government mandate.",exampleJa:"その新しい方針は政府の命令の下で実施された。"},
+{id:33,word:"stipulate",pos:"動",meaning:"規定する",example:"The contract stipulates that payment must be made within 30 days.",exampleJa:"契約書には支払いを30日以内に行うことが規定されている。"},
+{id:34,word:"surplus",pos:"名",meaning:"余剰",example:"The warehouse reported a surplus of inventory at the end of the fiscal year.",exampleJa:"倉庫は会計年度末に在庫の余剰を報告した。"},
+{id:35,word:"deficit",pos:"名",meaning:"赤字・不足",example:"The company reported a budget deficit for the second consecutive year.",exampleJa:"その会社は2年連続で予算赤字を報告した。"},
+{id:36,word:"consensus",pos:"名",meaning:"合意",example:"After a long discussion, the board finally reached a consensus on the budget.",exampleJa:"長い議論の後、取締役会はついに予算について合意に達した。"},
+{id:37,word:"ambiguous",pos:"形",meaning:"曖昧な",example:"The instructions in the manual were too ambiguous for new employees to follow.",exampleJa:"マニュアルの指示は新入社員が従うにはあまりにも曖昧だった。"},
+{id:38,word:"credential",pos:"名",meaning:"資格・信任状",example:"The candidate's credentials impressed the entire hiring committee.",exampleJa:"その候補者の資格は採用委員会全体に感銘を与えた。"},
+{id:39,word:"expedite",pos:"動",meaning:"促進する・早める",example:"The manager asked the courier to expedite the delivery of the urgent package.",exampleJa:"マネージャーは配送業者に緊急の荷物の配達を早めるよう依頼した。"},
+{id:40,word:"facilitate",pos:"動",meaning:"促進する・円滑にする",example:"The new software was designed to facilitate communication between departments.",exampleJa:"その新しいソフトウェアは部門間のコミュニケーションを円滑にするために設計された。"},
+{id:41,word:"inventory",pos:"名",meaning:"在庫",example:"The store conducts a full inventory check at the end of every month.",exampleJa:"その店は毎月末に在庫の完全なチェックを行う。"},
+{id:42,word:"leverage",pos:"動",meaning:"活用する",example:"The company plans to leverage its existing customer base to launch the new product.",exampleJa:"その会社は新製品を発売するために既存の顧客基盤を活用する予定だ。"},
+{id:43,word:"mitigate",pos:"動",meaning:"緩和する",example:"The new policy is intended to mitigate the risks associated with remote work.",exampleJa:"その新しい方針はリモートワークに伴うリスクを緩和することを目的としている。"},
+{id:44,word:"notify",pos:"動",meaning:"通知する",example:"Employees must notify their supervisor at least two weeks before taking leave.",exampleJa:"従業員は休暇を取る少なくとも2週間前に上司に通知しなければならない。"},
+{id:45,word:"obsolete",pos:"形",meaning:"時代遅れの",example:"The company replaced its obsolete equipment with state-of-the-art machinery.",exampleJa:"その会社は時代遅れの設備を最新鋭の機械に置き換えた。"},
+{id:46,word:"pending",pos:"形",meaning:"保留中の",example:"The contract remains pending until both parties sign the final agreement.",exampleJa:"その契約は両当事者が最終合意書に署名するまで保留のままである。"},
+{id:47,word:"quota",pos:"名",meaning:"割当量・ノルマ",example:"Each sales representative is expected to meet a monthly quota.",exampleJa:"各営業担当者は月間ノルマを達成することが期待されている。"},
+{id:48,word:"refund",pos:"名",meaning:"払い戻し",example:"Customers who are not satisfied with the product can request a full refund.",exampleJa:"製品に満足しない顧客は全額払い戻しを請求できる。"},
+{id:49,word:"sustain",pos:"動",meaning:"維持する",example:"The company has managed to sustain steady growth despite the economic downturn.",exampleJa:"その会社は経済の低迷にもかかわらず、着実な成長を維持することに成功している。"},
+{id:50,word:"undermine",pos:"動",meaning:"弱める・損なう",example:"Constant delays in production could undermine the client's confidence in the company.",exampleJa:"生産の絶え間ない遅れは、その会社に対する顧客の信頼を損なう可能性がある。"}
+];
+const VOCAB_PAGE_SIZE = 10;
+
+const CATEGORIES = [...new Set(QUESTIONS.map(q => q.category))];
+const LETTERS = ["A","B","C","D"];
+const STORAGE_KEY = "toeicPart5Progress_v1";
+
+/* ---------------- パスワード保護 ---------------- */
+const APP_PASSWORD = "1234"; // ここを書き換えれば合言葉を変更できます
+const AUTH_STORAGE_KEY = "toeicAppAuthed_v1";
+
+/* ---------------- 進捗データ ---------------- */
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) { return {}; }
+}
+function saveProgress(progress) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+}
+function recordAnswer(progress, qId, correct) {
+  if (!progress[qId]) progress[qId] = {attempts:0, correctCount:0, lastCorrect:false};
+  progress[qId].attempts += 1;
+  if (correct) progress[qId].correctCount += 1;
+  progress[qId].lastCorrect = correct;
+  saveProgress(progress);
+}
+
+/* ---------------- 学習カレンダー（日別記録） ---------------- */
+const DAILY_LOG_KEY = "toeicDailyLog_v1";
+function loadDailyLog() {
+  try {
+    const raw = localStorage.getItem(DAILY_LOG_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) { return {}; }
+}
+function saveDailyLog(log) {
+  localStorage.setItem(DAILY_LOG_KEY, JSON.stringify(log));
+}
+function pad2(n) { return String(n).padStart(2, "0"); }
+function dateKey(y, m, d) { return y + "-" + pad2(m + 1) + "-" + pad2(d); }
+function todayKey() {
+  const d = new Date();
+  return dateKey(d.getFullYear(), d.getMonth(), d.getDate());
+}
+function recordDailyAnswer(correct) {
+  const key = todayKey();
+  if (!dailyLog[key]) dailyLog[key] = {attempts:0, correctCount:0};
+  dailyLog[key].attempts += 1;
+  if (correct) dailyLog[key].correctCount += 1;
+  saveDailyLog(dailyLog);
+}
+
+/* ---------------- ブックマーク ---------------- */
+const BOOKMARK_STORAGE_KEY = "toeicBookmarks_v1";
+function loadBookmarks() {
+  try {
+    const raw = localStorage.getItem(BOOKMARK_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) { return {}; }
+}
+function saveBookmarks(bm) {
+  localStorage.setItem(BOOKMARK_STORAGE_KEY, JSON.stringify(bm));
+}
+function isBookmarked(qId) {
+  return !!bookmarks[qId];
+}
+function toggleBookmark(qId) {
+  if (bookmarks[qId]) delete bookmarks[qId];
+  else bookmarks[qId] = true;
+  saveBookmarks(bookmarks);
+}
+function getBookmarkedQuestions() {
+  return QUESTIONS.filter(q => bookmarks[q.id]);
+}
+
+/* ---------------- 状態 ---------------- */
+let progress = loadProgress();
+let dailyLog = loadDailyLog();
+let bookmarks = loadBookmarks();
+let session = null; // {queue, pointer, answers: {id: bool}, answeredThis: bool}
+
+/* ---------------- ユーティリティ ---------------- */
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function computeOverallStats() {
+  let total = 0, correct = 0, mastered = 0;
+  QUESTIONS.forEach(q => {
+    const p = progress[q.id];
+    if (p) {
+      total += p.attempts;
+      correct += p.correctCount;
+      if (p.lastCorrect) mastered += 1;
+    }
+  });
+  return {
+    total,
+    accuracy: total ? Math.round((correct/total)*100) : null,
+    mastered
+  };
+}
+function computeCategoryAccuracy(cat) {
+  const qs = QUESTIONS.filter(q => q.category === cat);
+  let total = 0, correct = 0;
+  qs.forEach(q => {
+    const p = progress[q.id];
+    if (p) { total += p.attempts; correct += p.correctCount; }
+  });
+  return total ? Math.round((correct/total)*100) : null;
+}
+
+/* ---------------- 画面切り替え ---------------- */
+function showScreen(name) {
+  document.getElementById("screen-lock").classList.toggle("hidden", name !== "lock");
+  document.getElementById("screen-mode-select").classList.toggle("hidden", name !== "mode-select");
+  document.getElementById("screen-home").classList.toggle("hidden", name !== "home");
+  document.getElementById("screen-practice").classList.toggle("hidden", name !== "practice");
+  document.getElementById("screen-result").classList.toggle("hidden", name !== "result");
+  document.getElementById("screen-vocab").classList.toggle("hidden", name !== "vocab");
+  document.getElementById("screen-calendar").classList.toggle("hidden", name !== "calendar");
+  document.getElementById("screen-bookmark-list").classList.toggle("hidden", name !== "bookmark-list");
+  document.getElementById("logout-btn").classList.toggle("hidden", name === "lock");
+}
+
+/* ---------------- 認証 ---------------- */
+function isAuthenticated() {
+  return localStorage.getItem(AUTH_STORAGE_KEY) === "true";
+}
+function tryUnlock() {
+  const input = document.getElementById("lock-password-input");
+  const errorEl = document.getElementById("lock-error");
+  if (input.value === APP_PASSWORD) {
+    localStorage.setItem(AUTH_STORAGE_KEY, "true");
+    input.value = "";
+    errorEl.classList.add("hidden");
+    showScreen("mode-select");
+  } else {
+    errorEl.classList.remove("hidden");
+    input.value = "";
+    input.focus();
+  }
+}
+function logout() {
+  localStorage.removeItem(AUTH_STORAGE_KEY);
+  session = null;
+  document.getElementById("lock-password-input").value = "";
+  document.getElementById("lock-error").classList.add("hidden");
+  showScreen("lock");
+  document.getElementById("lock-password-input").focus();
+}
+
+/* ---------------- ホーム画面 ---------------- */
+function renderHome() {
+  const stats = computeOverallStats();
+  document.getElementById("stat-total").textContent = stats.total;
+  document.getElementById("stat-accuracy").textContent = stats.accuracy === null ? "-" : stats.accuracy + "%";
+  document.getElementById("stat-mastered").textContent = stats.mastered;
+
+  const catList = document.getElementById("cat-list");
+  catList.innerHTML = "";
+  CATEGORIES.forEach(cat => {
+    const chip = document.createElement("div");
+    chip.className = "cat-chip";
+    const acc = computeCategoryAccuracy(cat);
+    chip.innerHTML = cat + '<span class="acc">' + (acc === null ? "" : "(" + acc + "%)") + '</span>';
+    catList.appendChild(chip);
+  });
+
+  const hasWrong = QUESTIONS.some(q => progress[q.id] && progress[q.id].lastCorrect === false);
+  document.getElementById("btn-start-wrong").disabled = !hasWrong;
+  document.getElementById("btn-start-wrong").style.opacity = hasWrong ? "1" : "0.5";
+
+  const bookmarkedCount = getBookmarkedQuestions().length;
+  const btnBookmarked = document.getElementById("btn-start-bookmarked");
+  btnBookmarked.textContent = "★ ブックマークした問題だけ解く（" + bookmarkedCount + "問）";
+  btnBookmarked.disabled = bookmarkedCount === 0;
+  btnBookmarked.style.opacity = bookmarkedCount === 0 ? "0.5" : "1";
+
+  showScreen("home");
+}
+
+/* ---------------- 演習セッション ---------------- */
+const SESSION_SIZE = 100;
+
+function startSession(filterFn) {
+  const pool = QUESTIONS.filter(filterFn);
+  if (pool.length === 0) return;
+  session = {
+    queue: shuffle(pool).slice(0, SESSION_SIZE),
+    pointer: 0,
+    answers: {},
+    answeredThis: false
+  };
+  showScreen("practice");
+  renderQuestion();
+}
+
+function startPractice() {
+  startSession(() => true);
+}
+
+function startWrongOnly() {
+  startSession(q => progress[q.id] && progress[q.id].lastCorrect === false);
+}
+
+function renderQuestion() {
+  const q = session.queue[session.pointer];
+  session.answeredThis = false;
+
+  document.getElementById("q-category").textContent = q.category;
+  document.getElementById("q-progress").textContent = (session.pointer + 1) + " / " + session.queue.length;
+  document.getElementById("progress-bar").style.width = Math.round(((session.pointer) / session.queue.length) * 100) + "%";
+  updateBookmarkButton(q.id);
+
+  document.getElementById("q-sentence").innerHTML = q.sentence.replace("___", '<span class="blank">______</span>');
+
+  const choicesEl = document.getElementById("q-choices");
+  choicesEl.innerHTML = "";
+  q.choices.forEach((choice, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "choice-btn";
+    btn.innerHTML = '<span class="letter">' + LETTERS[idx] + '</span><span>' + choice + '</span>';
+    btn.addEventListener("click", () => selectChoice(idx));
+    choicesEl.appendChild(btn);
+  });
+
+  document.getElementById("q-result").classList.add("hidden");
+}
+
+function selectChoice(idx) {
+  if (session.answeredThis) return;
+  session.answeredThis = true;
+
+  const q = session.queue[session.pointer];
+  const correct = idx === q.answer;
+  session.answers[q.id] = correct;
+  recordAnswer(progress, q.id, correct);
+  recordDailyAnswer(correct);
+
+  const buttons = document.querySelectorAll("#q-choices .choice-btn");
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.answer) btn.classList.add("correct");
+    else if (i === idx) btn.classList.add("wrong");
+  });
+
+  const flag = document.getElementById("result-flag");
+  flag.textContent = correct ? "正解です！" : "不正解 - 正解は " + LETTERS[q.answer] + ". " + q.choices[q.answer];
+  flag.className = "result-flag " + (correct ? "ok" : "ng");
+
+  document.getElementById("explain-point").textContent = q.point;
+  const list = document.getElementById("explain-list");
+  list.innerHTML = "";
+  q.notes.forEach((note, i) => {
+    const li = document.createElement("li");
+    li.textContent = LETTERS[i] + ". " + note;
+    if (i === q.answer) li.classList.add("hit");
+    list.appendChild(li);
+  });
+
+  document.getElementById("q-result").classList.remove("hidden");
+  document.getElementById("progress-bar").style.width = Math.round(((session.pointer + 1) / session.queue.length) * 100) + "%";
+
+  const nextBtn = document.getElementById("btn-next");
+  nextBtn.textContent = (session.pointer + 1 < session.queue.length) ? "次の問題へ" : "結果を見る";
+}
+
+function nextQuestion() {
+  session.pointer += 1;
+  if (session.pointer >= session.queue.length) {
+    renderResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function renderResult() {
+  const total = session.queue.length;
+  const correct = Object.values(session.answers).filter(Boolean).length;
+  document.getElementById("result-score").textContent = correct + " / " + total;
+  document.getElementById("result-accuracy").textContent = "正答率 " + Math.round((correct/total)*100) + "%";
+
+  const byCat = {};
+  session.queue.forEach(q => {
+    if (!byCat[q.category]) byCat[q.category] = {total:0, correct:0};
+    byCat[q.category].total += 1;
+    if (session.answers[q.id]) byCat[q.category].correct += 1;
+  });
+  const breakEl = document.getElementById("result-cat-break");
+  breakEl.innerHTML = "";
+  Object.keys(byCat).forEach(cat => {
+    const row = document.createElement("div");
+    row.className = "cat-break-row";
+    row.innerHTML = "<span>" + cat + "</span><span>" + byCat[cat].correct + " / " + byCat[cat].total + "</span>";
+    breakEl.appendChild(row);
+  });
+
+  showScreen("result");
+}
+
+/* ---------------- 単語帳画面 ---------------- */
+let vocabPage = 0;
+
+function renderVocabPage() {
+  const totalPages = Math.ceil(VOCAB.length / VOCAB_PAGE_SIZE);
+  const start = vocabPage * VOCAB_PAGE_SIZE;
+  const pageWords = VOCAB.slice(start, start + VOCAB_PAGE_SIZE);
+
+  document.getElementById("vocab-page-indicator").textContent = (vocabPage + 1) + " / " + totalPages;
+  document.getElementById("vocab-progress-bar").style.width = Math.round(((vocabPage + 1) / totalPages) * 100) + "%";
+
+  const listEl = document.getElementById("vocab-list");
+  listEl.innerHTML = "";
+  listEl.className = "vocab-list";
+  pageWords.forEach(w => {
+    const card = document.createElement("div");
+    card.className = "vocab-card";
+    card.innerHTML =
+      '<div class="vocab-head"><span class="vocab-word">' + w.word + '</span><span class="vocab-pos">' + w.pos + '</span></div>' +
+      '<div class="vocab-meaning">' + w.meaning + '</div>' +
+      '<div class="vocab-example">' + w.example + '</div>' +
+      '<div class="vocab-example-ja">' + w.exampleJa + '</div>';
+    listEl.appendChild(card);
+  });
+
+  document.getElementById("btn-vocab-prev").disabled = vocabPage === 0;
+  document.getElementById("btn-vocab-next").disabled = vocabPage >= totalPages - 1;
+
+  showScreen("vocab");
+}
+
+/* ---------------- 学習カレンダー画面 ---------------- */
+let calViewYear, calViewMonth; // calViewMonth は 0-indexed
+let calSelectedDate = null;
+
+function computeStreakAndTotal() {
+  const totalDays = Object.keys(dailyLog).filter(k => dailyLog[k].attempts > 0).length;
+
+  let streak = 0;
+  const cursor = new Date();
+  cursor.setHours(0, 0, 0, 0);
+  let key = dateKey(cursor.getFullYear(), cursor.getMonth(), cursor.getDate());
+  if (!dailyLog[key] || dailyLog[key].attempts === 0) {
+    cursor.setDate(cursor.getDate() - 1);
+    key = dateKey(cursor.getFullYear(), cursor.getMonth(), cursor.getDate());
+  }
+  while (dailyLog[key] && dailyLog[key].attempts > 0) {
+    streak += 1;
+    cursor.setDate(cursor.getDate() - 1);
+    key = dateKey(cursor.getFullYear(), cursor.getMonth(), cursor.getDate());
+  }
+  return { totalDays, streak };
+}
+
+function renderCalDetail(key) {
+  const detailEl = document.getElementById("cal-detail");
+  const rec = dailyLog[key];
+  detailEl.classList.remove("hidden");
+  document.getElementById("cal-detail-date").textContent = key;
+  if (rec && rec.attempts > 0) {
+    const acc = Math.round((rec.correctCount / rec.attempts) * 100);
+    document.getElementById("cal-detail-stats").innerHTML =
+      "<span>学習問題数: " + rec.attempts + "問</span><span>正答率: " + acc + "%</span>";
+  } else {
+    document.getElementById("cal-detail-stats").textContent = "この日の学習記録はありません";
+  }
+}
+
+function renderCalendar() {
+  const { totalDays, streak } = computeStreakAndTotal();
+  document.getElementById("cal-total-days").textContent = totalDays;
+  document.getElementById("cal-streak").textContent = streak;
+
+  document.getElementById("cal-month-label").textContent = calViewYear + "年" + (calViewMonth + 1) + "月";
+
+  const grid = document.getElementById("cal-grid");
+  grid.innerHTML = "";
+  ["日", "月", "火", "水", "木", "金", "土"].forEach(w => {
+    const el = document.createElement("div");
+    el.className = "cal-weekday";
+    el.textContent = w;
+    grid.appendChild(el);
+  });
+
+  const firstDay = new Date(calViewYear, calViewMonth, 1).getDay();
+  const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+  const todayKeyStr = todayKey();
+
+  for (let i = 0; i < firstDay; i++) {
+    const el = document.createElement("div");
+    el.className = "cal-day empty";
+    grid.appendChild(el);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = dateKey(calViewYear, calViewMonth, d);
+    const rec = dailyLog[key];
+    const hasRecord = !!(rec && rec.attempts > 0);
+    const el = document.createElement("div");
+    el.className = "cal-day"
+      + (hasRecord ? " has-record" : "")
+      + (key === todayKeyStr ? " today" : "")
+      + (key === calSelectedDate ? " selected" : "");
+    el.innerHTML = String(d) + (hasRecord ? '<span class="dot"></span>' : "");
+    el.addEventListener("click", () => {
+      calSelectedDate = key;
+      renderCalendar();
+      renderCalDetail(key);
+    });
+    grid.appendChild(el);
+  }
+}
+
+function openCalendar() {
+  const now = new Date();
+  calViewYear = now.getFullYear();
+  calViewMonth = now.getMonth();
+  calSelectedDate = null;
+  document.getElementById("cal-detail").classList.add("hidden");
+  renderCalendar();
+  showScreen("calendar");
+}
+
+/* ---------------- ブックマーク UI ---------------- */
+function updateBookmarkButton(qId) {
+  const btn = document.getElementById("btn-bookmark");
+  const active = isBookmarked(qId);
+  btn.textContent = active ? "★" : "☆";
+  btn.classList.toggle("active", active);
+}
+
+function renderBookmarkList() {
+  const listEl = document.getElementById("bookmark-list");
+  listEl.innerHTML = "";
+  const qs = getBookmarkedQuestions();
+  if (qs.length === 0) {
+    listEl.innerHTML = '<div style="text-align:center; color:var(--muted); padding:24px 0;">ブックマークした問題はありません</div>';
+    return;
+  }
+  qs.forEach(q => {
+    const row = document.createElement("div");
+    row.className = "bookmark-row";
+    row.innerHTML =
+      '<div class="bookmark-row-main">' +
+        '<span class="badge">' + q.category + '</span>' +
+        '<div class="bookmark-row-sentence">' + q.sentence.replace("___", "______") + '</div>' +
+      '</div>' +
+      '<button class="link bookmark-remove-btn" data-id="' + q.id + '">解除</button>';
+    listEl.appendChild(row);
+  });
+  listEl.querySelectorAll(".bookmark-remove-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      toggleBookmark(Number(btn.dataset.id));
+      renderBookmarkList();
+    });
+  });
+}
+
+function openBookmarkList() {
+  renderBookmarkList();
+  showScreen("bookmark-list");
+}
+
+/* ---------------- イベント登録 ---------------- */
+document.getElementById("btn-lock-submit").addEventListener("click", tryUnlock);
+document.getElementById("lock-password-input").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") tryUnlock();
+});
+document.getElementById("logout-btn").addEventListener("click", logout);
+document.getElementById("btn-mode-grammar").addEventListener("click", renderHome);
+document.getElementById("btn-mode-vocab").addEventListener("click", () => { vocabPage = 0; renderVocabPage(); });
+document.getElementById("btn-mode-calendar").addEventListener("click", openCalendar);
+document.getElementById("btn-home-to-mode").addEventListener("click", () => showScreen("mode-select"));
+document.getElementById("btn-home-to-calendar").addEventListener("click", openCalendar);
+document.getElementById("btn-vocab-to-mode").addEventListener("click", () => showScreen("mode-select"));
+document.getElementById("btn-calendar-to-mode").addEventListener("click", () => showScreen("mode-select"));
+document.getElementById("btn-cal-prev").addEventListener("click", () => {
+  calViewMonth -= 1;
+  if (calViewMonth < 0) { calViewMonth = 11; calViewYear -= 1; }
+  renderCalendar();
+});
+document.getElementById("btn-cal-next").addEventListener("click", () => {
+  calViewMonth += 1;
+  if (calViewMonth > 11) { calViewMonth = 0; calViewYear += 1; }
+  renderCalendar();
+});
+document.getElementById("btn-vocab-prev").addEventListener("click", () => { if (vocabPage > 0) { vocabPage -= 1; renderVocabPage(); } });
+document.getElementById("btn-vocab-next").addEventListener("click", () => {
+  const totalPages = Math.ceil(VOCAB.length / VOCAB_PAGE_SIZE);
+  if (vocabPage < totalPages - 1) { vocabPage += 1; renderVocabPage(); }
+});
+document.getElementById("btn-start").addEventListener("click", startPractice);
+document.getElementById("btn-start-wrong").addEventListener("click", startWrongOnly);
+document.getElementById("btn-start-bookmarked").addEventListener("click", () => {
+  startSession(q => !!bookmarks[q.id]);
+});
+document.getElementById("btn-bookmark-list").addEventListener("click", openBookmarkList);
+document.getElementById("btn-bookmarklist-to-home").addEventListener("click", renderHome);
+document.getElementById("btn-bookmark").addEventListener("click", () => {
+  const q = session.queue[session.pointer];
+  toggleBookmark(q.id);
+  updateBookmarkButton(q.id);
+});
+document.getElementById("btn-next").addEventListener("click", nextQuestion);
+document.getElementById("btn-quit").addEventListener("click", () => { session = null; renderHome(); });
+document.getElementById("btn-retry").addEventListener("click", () => {
+  const cats = new Set(session.queue.map(q => q.category));
+  startSession(q => cats.has(q.category));
+});
+document.getElementById("btn-home").addEventListener("click", () => { session = null; renderHome(); });
+document.getElementById("btn-reset").addEventListener("click", () => {
+  if (confirm("進捗をすべてリセットします。よろしいですか？")) {
+    progress = {};
+    saveProgress(progress);
+    renderHome();
+  }
+});
+
+showScreen(isAuthenticated() ? "mode-select" : "lock");
+</script>
+</body>
+</html>
