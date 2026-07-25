@@ -2013,6 +2013,14 @@ document.getElementById("btn-reset").addEventListener("click", () => {
 });
 
 showScreen(isAuthenticated() ? "mode-select" : "lock");
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch((err) => {
+      console.error("Service worker registration failed:", err);
+    });
+  });
+}
 </script>
 </body>
 </html>
