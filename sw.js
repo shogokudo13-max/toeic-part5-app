@@ -1,4 +1,4 @@
-const CACHE_NAME = "toeic-part5-cache-v3";
+const CACHE_NAME = "toeic-part5-cache-v2";
 const ASSETS = [
   "./",
   "./index.html",
