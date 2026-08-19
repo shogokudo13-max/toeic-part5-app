@@ -632,7 +632,7 @@
 </div>
 
 <script>
-/* ---------------- 問題データ (450問) ---------------- */
+/* ---------------- 問題データ (550問) ---------------- */
 const QUESTIONS = [
 {id:1,category:"品詞",sentence:"The committee will announce its ___ decision by the end of the week.",choices:["final","finally","finalize","finality"],answer:0,
  point:"空欄の直後にある名詞 decision を修飾できるのは形容詞です。名詞の前は原則「形容詞＋名詞」の語順になります。",
@@ -2432,7 +2432,407 @@ const QUESTIONS = [
 
 {id:450,category:"代名詞",sentence:"Neither of the candidates submitted ___ application on time.",choices:["his","hers","their","theirs"],answer:2,
  point:"neither や each などの不定代名詞を受ける所有格には、性別を限定しない their が現代英語では広く使われます。",
- notes:["his は男性限定の所有格代名詞。候補者の性別が特定されていないため不適切。","hers は女性限定の所有代名詞で、後ろに名詞が続く所有格の位置には使えない。","their は性別を限定しない所有格代名詞。neither of the candidates を受ける代名詞として自然に使われる。","theirs は所有代名詞。後ろに名詞 application が続く所有格の位置には使えない。"]}
+ notes:["his は男性限定の所有格代名詞。候補者の性別が特定されていないため不適切。","hers は女性限定の所有代名詞で、後ろに名詞が続く所有格の位置には使えない。","their は性別を限定しない所有格代名詞。neither of the candidates を受ける代名詞として自然に使われる。","theirs は所有代名詞。後ろに名詞 application が続く所有格の位置には使えない。"]},
+
+{id:451,category:"品詞",sentence:"The consultant's ___ approach to problem-solving impressed the entire management team.",choices:["efficiently","efficient","efficiency","efficiencies"],answer:1,
+ point:"空欄の直後の名詞 approach を修飾できるのは形容詞です。",
+ notes:["efficiently は副詞「効率的に」。名詞を直接修飾できない。","efficient は形容詞「効率的な」。名詞 approach を正しく修飾できる。","efficiency は名詞「効率性」。名詞は名詞を直接修飾しない。","efficiencies は名詞の複数形。同様に形容詞の位置には入らない。"]},
+
+{id:452,category:"品詞",sentence:"The new packaging was developed to protect the products more ___ during shipping.",choices:["secure","securely","secures","security"],answer:1,
+ point:"動詞 protect を修飾し、比較級 more の後ろに置かれる語は副詞です。",
+ notes:["secure は形容詞「安全な」。動詞を修飾する副詞の位置には入らない。","securely は副詞「安全に」。動詞 protect を正しく修飾できる。","secures は動詞の三人称単数形。副詞の位置には入らない。","security は名詞「安全性」。動詞を修飾できない。"]},
+
+{id:453,category:"品詞",sentence:"The board expressed strong ___ for the newly proposed merger.",choices:["supportively","support","supportive","supporting"],answer:1,
+ point:"strong の後ろで前置詞 for の前に置かれる語は名詞です。",
+ notes:["supportively は副詞「協力的に」。名詞の位置には入らない。","support は名詞「支持」。strong に修飾される名詞として正しい。","supportive は形容詞「協力的な」。名詞の位置には入らない。","supporting は動名詞/現在分詞。ここでは名詞 support の方が自然。"]},
+
+{id:454,category:"品詞",sentence:"Employees who complete the training program will receive a ___ increase in their base salary.",choices:["substance","substantial","substantiate","substantially"],answer:1,
+ point:"空欄の直後の名詞 increase を修飾する語は形容詞です。",
+ notes:["substance は名詞「実質」。名詞は名詞を直接修飾しない。","substantial は形容詞「かなりの」。名詞 increase を正しく修飾できる。","substantiate は動詞「実証する」。ここでは動詞の位置ではない。","substantially は副詞「かなり」。名詞を直接修飾できない。"]},
+
+{id:455,category:"品詞",sentence:"The architect submitted the building plans for ___ before construction could begin.",choices:["approving","approve","approved","approval"],answer:3,
+ point:"前置詞 for の後ろに置かれる語は名詞です。",
+ notes:["approving は動名詞にもなり得るが、目的語を伴わないこの文脈では名詞 approval が自然。","approve は動詞の原形「承認する」。前置詞の後ろには置けない。","approved は過去分詞/過去形。前置詞の後ろの名詞の位置には入らない。","approval は名詞「承認」。前置詞 for の目的語として正しい。"]},
+
+{id:456,category:"品詞",sentence:"The technician handled the malfunctioning equipment with great ___.",choices:["cautious","caution","cautioning","cautiously"],answer:1,
+ point:"great の後ろで文末に置かれる語は前置詞 with の目的語となる名詞です。",
+ notes:["cautious は形容詞「慎重な」。名詞の位置には入らない。","caution は名詞「慎重さ」。great に修飾される名詞として正しい。","cautioning は動名詞。ここでは名詞 caution の方が自然。","cautiously は副詞「慎重に」。前置詞の後ろの名詞の位置には入らない。"]},
+
+{id:457,category:"品詞",sentence:"The survey results were ___ different from what analysts had predicted.",choices:["noticeably","notice","notices","noticeable"],answer:0,
+ point:"形容詞 different を修飾する語は副詞です。",
+ notes:["noticeably は副詞「著しく」。形容詞 different を正しく修飾できる。","notice は名詞・動詞「気づき/気づく」。形容詞を修飾できない。","notices は動詞の三人称単数形または名詞の複数形。ここには入らない。","noticeable は形容詞「著しい」。形容詞 different を直接修飾できない。"]},
+
+{id:458,category:"品詞",sentence:"The committee's decision to relocate the office caused considerable ___ among the staff.",choices:["confusion","confuse","confusing","confused"],answer:0,
+ point:"considerable の後ろに置かれる語は名詞です。",
+ notes:["confusion は名詞「混乱」。considerable に修飾される名詞として正しい。","confuse は動詞の原形「混乱させる」。名詞の位置には入らない。","confusing は形容詞/現在分詞「混乱させるような」。ここでは名詞そのものが必要。","confused は形容詞/過去分詞「混乱した」。同様にここでは名詞が必要。"]},
+
+{id:459,category:"品詞",sentence:"The city council ___ approved the plan to build a new public library.",choices:["unanimousness","unanimity","unanimous","unanimously"],answer:3,
+ point:"動詞 approved を修飾する語は副詞です。",
+ notes:["unanimousness という語は一般的に使われない。","unanimity は名詞「満場一致」。動詞を修飾できない。","unanimous は形容詞「満場一致の」。動詞を修飾できない。","unanimously は副詞「満場一致で」。動詞 approved を正しく修飾できる。"]},
+
+{id:460,category:"品詞",sentence:"The new employee showed a genuine ___ to learn every aspect of the business.",choices:["willing","willingly","willingness","will"],answer:2,
+ point:"genuine の後ろで不定詞 to learn を伴う語は名詞です。",
+ notes:["willing は形容詞「意欲的な」。名詞の位置には入らない。","willingly は副詞「進んで」。名詞の位置には入らない。","willingness は名詞「意欲」。不定詞 to learn を伴い genuine に修飾される名詞として正しい。","will は名詞にもなるが、この意味では willingness ほど自然に不定詞を伴わない。"]},
+
+{id:461,category:"品詞",sentence:"Management is looking for a candidate who can work ___ under pressure.",choices:["calmness","calmly","calmed","calm"],answer:1,
+ point:"動詞 work を修飾する語は副詞です。",
+ notes:["calmness は名詞「落ち着き」。動詞を修飾できない。","calmly は副詞「落ち着いて」。動詞 work を正しく修飾できる。","calmed は動詞の過去形/過去分詞。ここでは副詞が必要。","calm は形容詞「落ち着いた」。動詞を修飾する副詞の位置には入らない。"]},
+
+{id:462,category:"品詞",sentence:"The company issued a formal ___ to all shareholders regarding the change in leadership.",choices:["notified","notification","notify","notifying"],answer:1,
+ point:"formal の後ろに置かれる語は名詞です。",
+ notes:["notified は動詞の過去形/過去分詞。名詞の位置には入らない。","notification は名詞「通知」。formal に修飾される名詞として正しい。","notify は動詞の原形「知らせる」。名詞の位置には入らない。","notifying は動名詞/現在分詞。ここでは名詞 notification の方が自然。"]},
+
+{id:463,category:"品詞",sentence:"The engineers worked ___ to finish the bridge repairs before the storm arrived.",choices:["tiredness","tire","tireless","tirelessly"],answer:3,
+ point:"動詞 worked を修飾する語は副詞です。",
+ notes:["tiredness は名詞「疲労」。動詞を修飾できない。","tire は動詞の原形/名詞「疲れさせる/タイヤ」。ここでは意味も形も合わない。","tireless は形容詞「疲れを知らない」。動詞を修飾する副詞の位置には入らない。","tirelessly は副詞「疲れを知らずに」。動詞 worked を正しく修飾できる。"]},
+
+{id:464,category:"前置詞",sentence:"The workshop covered various strategies for improving customer service, ___ handling difficult complaints.",choices:["including","between","besides","among"],answer:0,
+ point:"複数の項目の中から一例を挙げる際に使う前置詞は including です。",
+ notes:["including は「〜を含めて」という意味で、具体例を挙げる際に使う。ここに最も適切。","between は通常2つのものの間を表す前置詞で、複数の項目からの例示には使わない。","besides は「〜に加えて」という意味だが、例示というより追加の意味合いが強く、この文脈には合わない。","among は「〜の間で」という意味で、複数のものの中に位置することを表すが、例示の意味では使わない。"]},
+
+{id:465,category:"前置詞",sentence:"___ its high price, the new laptop model sold out within hours of its release.",choices:["As","Because of","Notwithstanding","Since"],answer:2,
+ point:"直後に名詞句が続き、「〜にもかかわらず」という意味を表す前置詞は Notwithstanding です。",
+ notes:["As は「〜として/〜なので」という意味で、この文脈の逆接の意味にはならない。","Because of は「〜が原因で」という意味で、理由を表す前置詞であり、逆接の意味にはならない。","Notwithstanding は「〜にもかかわらず」という意味のフォーマルな前置詞。名詞句の前に置いて正しく使える。","Since は「〜以来」または接続詞として「〜なので」の意味を持つが、名詞句の前で逆接を表す用法はない。"]},
+
+{id:466,category:"前置詞",sentence:"The two departments have been working closely together ___ the past six months.",choices:["since","for","from","by"],answer:1,
+ point:"現在完了進行形とともに「期間」を表す前置詞は for です。",
+ notes:["since は「〜以来」という特定の起点(時点)を表す前置詞で、期間の長さには使えません。","for は「〜の間」という期間の長さを表す前置詞。現在完了進行形とともに正しく使われる。","from は起点を表す前置詞で、通常 from A to B の形で使う。単独で期間の長さを表すには使えない。","by は「〜までに」という期限を表す前置詞で、継続期間を表す用法はない。"]},
+
+{id:467,category:"前置詞",sentence:"The new café is located ___ the library and the student union building.",choices:["between","among","alongside","besides"],answer:0,
+ point:"2つのものの「間」を表す前置詞は between です。",
+ notes:["between は2つのもの(the library と the student union building)の間を表す前置詞として正しい。","among は3つ以上のものの中にあることを表す前置詞で、2つのものの間には使いません。","alongside は「〜と並んで」という意味で、間に挟まれている位置関係とは異なります。","besides は「〜に加えて」という意味の前置詞で、位置関係を表しません。"]},
+
+{id:468,category:"前置詞",sentence:"All applicants must submit their résumés ___ Friday at 5 p.m., without exception.",choices:["since","within","until","by"],answer:3,
+ point:"「〜までに」という期限を表す前置詞は by です。",
+ notes:["since は「〜以来」という起点を表す前置詞で、期限の意味にはならない。","within は「〜以内に」という意味だが、通常は期間の長さを伴う。特定の曜日の前には by が自然。","until は「〜まで(ずっと)」という継続を表す前置詞で、動作が続く場合に使う。締め切りを表す本文には合わない。","by は「〜までに」という期限を表す前置詞として正しい。"]},
+
+{id:469,category:"前置詞",sentence:"The negotiations continued ___ midnight before both sides finally reached an agreement.",choices:["at","until","in","by"],answer:1,
+ point:"動作が続く終点を表す「〜まで(ずっと)」は until です。",
+ notes:["at は特定の時刻を表す前置詞で、継続の終点という意味は持たない。","until は動作・状態が継続してある時点まで続くことを表す前置詞。continued と結びついて正しく使われる。","in は「〜の中に/〜後に」という意味で、この文脈には合わない。","by は「〜までに」という期限を表し、動作の完了を表す動詞と結びつく。continued(継続)とは相性が悪い。"]},
+
+{id:470,category:"前置詞",sentence:"The proposal was rejected ___ the objections raised by two board members.",choices:["although","due to","despite","unless"],answer:1,
+ point:"名詞句(the objections)の前に置いて理由を表す前置詞は due to です。",
+ notes:["although は接続詞で後ろに節が必要。名詞句の前には置けない。","due to は「〜が原因で」という意味の前置詞で、名詞句の前に置いて理由を表せる。","despite は「〜にもかかわらず」という逆接の意味であり、この文脈(拒否された理由)には合わない。","unless は接続詞で「〜でない限り」という意味。名詞句の前には置けない。"]},
+
+{id:471,category:"前置詞",sentence:"The manager will be traveling ___ business for the next two weeks.",choices:["at","in","on","for"],answer:2,
+ point:"「出張中で」という意味の決まった言い方は on business です。",
+ notes:["at は特定の場所や時点を表す前置詞で、この定型表現には使わない。","in は in business「事業をしている」という意味にはなるが、「出張中」という意味にはならない。","on は on business で「出張中で、仕事で」という定型表現を作る前置詞として正しい。","for は目的や期間を表すが、「出張中」という定型表現には使わない。"]},
+
+{id:472,category:"前置詞",sentence:"___ its high production cost, the company decided to launch the premium product line.",choices:["Because of","As","Regardless of","Since"],answer:2,
+ point:"「〜にかかわらず」という意味で、逆接を表す前置詞は Regardless of です。",
+ notes:["Because of は「〜が原因で」という意味で、理由を表す前置詞であり、逆接の意味にはならない。","As は「〜として/〜なので」という意味で、この文脈の逆接の意味にはならない。","Regardless of は「〜にかかわらず」という意味の前置詞句で、高コストにもかかわらず発売したという逆接の文脈に合う。","Since は「〜以来」または接続詞として「〜なので」の意味を持つが、この文脈には合わない。"]},
+
+{id:473,category:"前置詞",sentence:"The workshop is designed ___ employees who have little experience with spreadsheet software.",choices:["to","at","with","for"],answer:3,
+ point:"「〜を対象として」という意味を表す前置詞は for です。designed for で「〜向けに設計された」という意味になります。",
+ notes:["to は方向や到達点を表す前置詞で、designed to は後ろに動詞の原形が続く不定詞の形で使われることが多く、対象を表す用法とは異なる。","at は場所や方向を表す前置詞で、対象を表す designed の後には使いません。","with は「〜と一緒に」という意味で、対象を表す用法にはならない。","for は「〜のために/〜向けに」という意味で、designed for employees で正しく使われる。"]},
+
+{id:474,category:"前置詞",sentence:"The report must be reviewed ___ the legal team before it is sent to the client.",choices:["by","of","from","with"],answer:0,
+ point:"受動態で動作主を表す前置詞は by です。",
+ notes:["by は受動態の動作主(〜によって)を表す前置詞として正しい。","of は所属や所有を表す前置詞で、動作主を表す用法にはならない。","from は起点や出所を表す前置詞で、動作主を表す用法にはならない。","with は「〜を使って/〜と一緒に」という意味で、動作主を表す by の代わりにはならない。"]},
+
+{id:475,category:"前置詞",sentence:"The new regulations apply to all vehicles manufactured ___ 2020.",choices:["until","since","after","by"],answer:2,
+ point:"ある時点より後という意味を表す前置詞は after です。",
+ notes:["until は「〜まで(ずっと)」という継続を表す前置詞で、この文脈には合わない。","since は「〜以来」という意味で、通常は現在完了形とともに使われる。manufactured という単純な過去分詞の文脈では after が自然。","after は「〜の後に」という意味の前置詞として正しく使われる。","by は「〜までに」という期限を表す前置詞で、意味が逆になる。"]},
+
+{id:476,category:"接続詞",sentence:"___ the merger is finalized, all employees will be informed of their new roles.",choices:["Despite","For","Once","During"],answer:2,
+ point:"「〜したら、〜すると」という意味で、後ろに節(主語+動詞)を伴う接続詞は Once です。",
+ notes:["Despite は前置詞で、後ろに名詞(句)が必要。節の前には置けない。","For は前置詞または等位接続詞として使われるが、この文脈で従属節を導く接続詞としては使わない。","Once は「いったん〜すると」という意味の接続詞として正しく使われる。","During は前置詞で、後ろに名詞(句)が必要。節の前には置けない。"]},
+
+{id:477,category:"接続詞",sentence:"The factory will continue operating ___ it complies with the new environmental standards.",choices:["in spite of","despite","so long as","because of"],answer:2,
+ point:"「〜する限り」という条件を表す接続詞は so long as です。",
+ notes:["in spite of は前置詞句で、後ろに名詞(句)が必要。節の前には置けない。","despite は前置詞で、後ろに名詞(句)が必要。節の前には置けない。","so long as は「〜する限りは」という条件を表す接続詞として正しく使われる。","because of は前置詞句で、後ろに名詞(句)が必要。節の前には置けない。"]},
+
+{id:478,category:"接続詞",sentence:"The manager approved the budget; ___, she asked for a detailed breakdown of each expense.",choices:["unless","if","however","although"],answer:2,
+ point:"セミコロンの後で「しかし」という意味を表す接続副詞は however です。",
+ notes:["unless は「〜でない限り」という条件を表す従属接続詞で、この文脈には合わない。","if は条件を表す従属接続詞で、この文脈には合わない。","however は「しかし」という意味の接続副詞で、セミコロンの後に置いて対比を表せる。","although は従属接続詞で、節の前に置いて使う。セミコロンの後に単独では使えない。"]},
+
+{id:479,category:"接続詞",sentence:"___ the marketing campaign was expensive, it significantly boosted brand awareness.",choices:["While","Because","So that","As soon as"],answer:0,
+ point:"「〜ではあるが」という譲歩を表す接続詞は While です。",
+ notes:["While はここでは「〜ではあるが」という譲歩の意味を表す接続詞として正しく使われる。","Because は理由を表す接続詞で、この文の意味(高額だったが効果があった)には合わない。","So that は目的を表す接続詞で、この文脈には合わない。","As soon as は「〜するとすぐに」という時を表す接続詞で、この文脈には合わない。"]},
+
+{id:480,category:"接続詞",sentence:"Please double-check all figures ___ there are no errors in the final report.",choices:["so that","for","so as to","in order to"],answer:0,
+ point:"後ろに節(主語+動詞)を伴い、目的を表す接続詞は so that です。",
+ notes:["so that は「〜するために」という目的を表す接続詞で、後ろに節を伴って正しく使われる。","for は前置詞として目的を表すことがあるが、後ろに節を続けることはできない。","so as to も同様に後ろに動詞の原形を伴う表現で、節を続けることはできない。","in order to は後ろに動詞の原形(不定詞)を伴う表現で、節(主語+動詞)を続けることはできない。"]},
+
+{id:481,category:"接続詞",sentence:"The shipment will arrive on schedule ___ there are no delays at customs.",choices:["provided that","even though","now that","as though"],answer:0,
+ point:"「〜という条件で」という意味を表す接続詞は provided that です。",
+ notes:["provided that は「〜という条件であれば」という意味の接続詞として正しく使われる。","even though は「〜であるけれども」という譲歩を表す接続詞で、条件の意味にはならない。","now that は「今や〜なので」という理由を表す接続詞で、条件の意味にはならない。","as though は「まるで〜であるかのように」という意味の接続詞で、この文脈には合わない。"]},
+
+{id:482,category:"接続詞",sentence:"___ the CEO announced her resignation, the stock price dropped sharply.",choices:["Despite","As soon as","In spite of","Because of"],answer:1,
+ point:"「〜するとすぐに」という意味を表し、後ろに節を伴う接続詞は As soon as です。",
+ notes:["Despite は前置詞で、後ろに名詞(句)が必要。節の前には置けない。","As soon as は「〜するとすぐに」という意味の接続詞として正しく使われる。","In spite of は前置詞句で、後ろに名詞(句)が必要。節の前には置けない。","Because of は前置詞句で、後ろに名詞(句)が必要。節の前には置けない。"]},
+
+{id:483,category:"接続詞",sentence:"The airline offered a full refund, ___ passengers could also choose a travel voucher instead.",choices:["so","or","unless","however"],answer:1,
+ point:"2つの選択肢を並べて「あるいは」という意味を表す等位接続詞は or です。",
+ notes:["so は結果を表す等位接続詞で、この文脈(選択肢の提示)には合わない。","or は2つの選択肢を並べる等位接続詞として正しく使われる。","unless は「〜でない限り」という条件を表す従属接続詞で、この文脈には合わない。","however は接続副詞で、通常セミコロンの後に置く。カンマの後に等位接続詞として使うのは不適切。"]},
+
+{id:484,category:"接続詞",sentence:"The report was accurate; ___, it failed to address the root cause of the problem.",choices:["nevertheless","because","unless","so that"],answer:0,
+ point:"セミコロンの後で「それにもかかわらず」という意味を表す接続副詞は nevertheless です。",
+ notes:["nevertheless は「それにもかかわらず」という意味の接続副詞で、セミコロンの後に置いて対比を表せる。","because は理由を表す従属接続詞で、この位置(セミコロンの後で単独)には使えない。","unless は条件を表す従属接続詞で、この文脈には合わない。","so that は目的を表す接続詞で、この文脈には合わない。"]},
+
+{id:485,category:"接続詞",sentence:"___ you submit the application before the deadline, it will not be considered.",choices:["Since","Although","While","Unless"],answer:3,
+ point:"「〜でない限り」という条件を表す接続詞は Unless です。",
+ notes:["Since は「〜以来/〜なので」という意味の接続詞で、条件の意味にはならない。","Although は譲歩を表す接続詞で、この文脈(条件)には合わない。","While は「〜する間に/〜ではあるが」という意味の接続詞で、条件の意味にはならない。","Unless は「〜でなければ」という条件を表す接続詞として正しく使われる。"]},
+
+{id:486,category:"接続詞",sentence:"The new intern is not only punctual ___ also remarkably organized.",choices:["and","but","so","or"],answer:1,
+ point:"not only と対になって「〜だけでなく〜も」という意味を作る語は but です。",
+ notes:["and は単純な並列を表す接続詞で、not only と対になる決まった形はない。","but は not only と対になり、not only A but also B の形を作る語として正しい。","so は結果を表す接続詞で、not only と対になる決まった形はない。","or は選択を表す接続詞で、not only と対になる決まった形はない。"]},
+
+{id:487,category:"接続詞",sentence:"___ the training session is mandatory, several employees failed to attend.",choices:["Because","Even though","So that","Provided that"],answer:1,
+ point:"「〜であるけれども」という譲歩を表す接続詞は Even though です。",
+ notes:["Because は理由を表す接続詞で、この文の意味(必須なのに参加しなかった)には合わない。","Even though は「〜であるけれども」という譲歩を表す接続詞として正しく使われる。","So that は目的を表す接続詞で、この文脈には合わない。","Provided that は条件を表す接続詞で、この文脈には合わない。"]},
+
+{id:488,category:"時制",sentence:"By the time the auditors arrive next Monday, the accounting team ___ all the necessary documents.",choices:["is organizing","organized","organizes","will have organized"],answer:3,
+ point:"未来のある時点までに完了している動作は未来完了形 will have + 過去分詞 で表します。",
+ notes:["is organizing は現在進行形で、今まさに行っている動作を表す。未来完了の意味にはならない。","organized は過去形で、過去の動作を表す。未来の一時点を基準にした完了にはならない。","organizes は現在形で、習慣的な動作を表す。未来完了の意味にはならない。","will have organized は未来完了形で、次の月曜日までに完了している動作を正しく表す。"]},
+
+{id:489,category:"時制",sentence:"The vice president ___ the quarterly results when the fire alarm interrupted the meeting.",choices:["was presenting","presents","presented","has presented"],answer:0,
+ point:"過去のある時点で進行中だった動作は過去進行形 was/were + -ing で表します。",
+ notes:["was presenting は過去進行形で、過去のある時点(火災報知器が鳴った時)に進行中だった動作を正しく表す。","presents は現在形で、この文脈には合わない。","presented は過去形で、単発の完了した動作を表す。同時進行の意味にはならない。","has presented は現在完了形で、過去の出来事を現在に結びつける表現であり、過去の一時点での進行中の動作を表せない。"]},
+
+{id:490,category:"時制",sentence:"The company ___ steadily since it adopted the new remote-work policy two years ago.",choices:["will grow","is growing","grew","has grown"],answer:3,
+ point:"過去のある時点から現在まで継続している状態は現在完了形で表します。",
+ notes:["will grow は未来形で、この文脈(過去から現在までの継続)には合わない。","is growing は現在進行形で、今まさに起きている動作を表す。since two years ago という継続の起点とは相性が悪い。","grew は過去形で、特定の過去の時点の動作を表す。since と結びつく継続の意味にはならない。","has grown は現在完了形で、過去から現在まで継続する成長を正しく表す。"]},
+
+{id:491,category:"時制",sentence:"The engineers ___ the bridge for structural weaknesses when they discovered the crack.",choices:["were inspecting","inspect","inspected","have inspected"],answer:0,
+ point:"過去のある動作(discovered)が起きた時に進行中だった動作は過去進行形で表します。",
+ notes:["were inspecting は過去進行形で、crack を発見した時点で進行中だった検査を正しく表す。","inspect は現在形で、この文脈には合わない。","inspected は過去形で、単発の完了した動作を表し、進行中だったという意味は表せない。","have inspected は現在完了形で、過去の一時点での進行中の動作を表せない。"]},
+
+{id:492,category:"時制",sentence:"The board members ___ the merger proposal for over three hours before reaching a decision.",choices:["are discussing","will discuss","discuss","had been discussing"],answer:3,
+ point:"過去のある時点(reaching a decision)より前から続いていた動作は過去完了進行形で表します。",
+ notes:["are discussing は現在進行形で、この文脈には合わない。","will discuss は未来形で、この文脈には合わない。","discuss は現在形で、この文脈には合わない。","had been discussing は過去完了進行形で、決定に至る前から3時間以上続いていた議論を正しく表す。"]},
+
+{id:493,category:"時制",sentence:"The new policy ___ effective as soon as the board signs off on it next week.",choices:["became","has become","becomes","will become"],answer:3,
+ point:"未来を表す時の副詞節(as soon as ...)を伴う主節では、未来の出来事でも will + 動詞の原形を使います。",
+ notes:["became は過去形で、この文脈(未来の出来事)には合わない。","has become は現在完了形で、この文脈には合わない。","becomes は現在形で、時・条件を表す副詞節の中では未来のことも現在形で表すが、この文の主節では will が必要。","will become は未来形で、来週の署名後に発生する未来の出来事を正しく表す。"]},
+
+{id:494,category:"時制",sentence:"Every employee ___ the updated safety manual by the end of this month, according to HR.",choices:["received","is receiving","receives","will have received"],answer:3,
+ point:"未来のある時点までに完了しているはずの動作は未来完了形で表します。",
+ notes:["received は過去形で、この文脈(未来の期限)には合わない。","is receiving は現在進行形で、この文脈には合わない。","receives は現在形で、この文脈には合わない。","will have received は未来完了形で、今月末までに完了しているはずの動作を正しく表す。"]},
+
+{id:495,category:"時制",sentence:"The technician ___ the printer twice before finally replacing it with a new model.",choices:["had repaired","repairs","is repairing","will repair"],answer:0,
+ point:"過去のある動作(replacing)より前に完了していた動作は過去完了形で表します。",
+ notes:["had repaired は過去完了形で、交換する前にすでに2回修理していたという過去のさらに前の出来事を正しく表す。","repairs は現在形で、この文脈には合わない。","is repairing は現在進行形で、この文脈には合わない。","will repair は未来形で、この文脈には合わない。"]},
+
+{id:496,category:"時制",sentence:"Ticket sales for the concert ___ rapidly ever since the venue was announced last week.",choices:["have been rising","rise","will rise","rose"],answer:0,
+ point:"過去から現在まで継続して進行している動作は現在完了進行形で表します。",
+ notes:["have been rising は現在完了進行形で、先週の発表以来ずっと上昇し続けている動作を正しく表す。","rise は現在形で、習慣的な動作を表す。継続の意味を明確には表さない。","will rise は未来形で、この文脈には合わない。","rose は過去形で、特定の過去の一時点の動作を表す。継続の意味にはならない。"]},
+
+{id:497,category:"時制",sentence:"By next April, the research team ___ on this vaccine project for a full decade.",choices:["is working","works","worked","will have been working"],answer:3,
+ point:"未来のある時点まで継続しているであろう動作は未来完了進行形 will have been + -ing で表します。",
+ notes:["is working は現在進行形で、この文脈には合わない。","works は現在形で、この文脈には合わない。","worked は過去形で、この文脈には合わない。","will have been working は未来完了進行形で、来年4月までの10年間という継続期間を正しく表す。"]},
+
+{id:498,category:"時制",sentence:"The workers ___ the scaffolding by the time the inspector arrived.",choices:["had dismantled","dismantle","dismantled","were dismantling"],answer:0,
+ point:"過去のある時点(the inspector arrived)より前に完了していた動作は過去完了形で表します。",
+ notes:["had dismantled は過去完了形で、検査官が到着する前にすでに完了していた動作を正しく表す。","dismantle は現在形で、この文脈には合わない。","dismantled は過去形で、検査官の到着と同時か後の動作にも解釈でき、「それより前に完了」という意味を明確に表せない。","were dismantling は過去進行形で、検査官が到着した時にまだ進行中だったことになり、「すでに完了」という文意に合わない。"]},
+
+{id:499,category:"関係詞",sentence:"The supplier ___ products failed the quality inspection has been removed from our approved list.",choices:["which","that","whose","who"],answer:2,
+ point:"先行詞 the supplier の所有物(products)を示す所有格の関係代名詞は whose です。",
+ notes:["which は物を先行詞にとる関係代名詞で、人である the supplier を先行詞にはできない。","that は主格・目的格として使えるが所有格の意味は持たず、この文脈には合わない。","whose は所有格の関係代名詞で、the supplier's products という所有関係を正しく表す。","who は主格の関係代名詞で、後ろに動詞が続く形になり、この文(products failed)には合わない。"]},
+
+{id:500,category:"関係詞",sentence:"The factory, ___ was built over fifty years ago, still produces some of the company's best-selling items.",choices:["what","who","which","whose"],answer:2,
+ point:"先行詞 the factory(物)を受け、カンマの後で補足説明を加える主格の関係代名詞は which です。",
+ notes:["what は先行詞を含む関係代名詞で、先行詞 the factory がすでにある文では使えない。","who は人を先行詞にとる関係代名詞で、物である the factory には使えない。","which は物を先行詞にとる主格の関係代名詞で、the factory を正しく受ける。","whose は所有格の関係代名詞で、この文(was built)には合わない。"]},
+
+{id:501,category:"関係詞",sentence:"This is the exact reason ___ the shipment was delayed for over two weeks.",choices:["who","whom","which","why"],answer:3,
+ point:"先行詞 reason を受け、理由を説明する関係副詞は why です。",
+ notes:["who は人を先行詞にとる関係代名詞で、reason には使えない。","whom は人を先行詞にとる目的格の関係代名詞で、reason には使えない。","which は関係代名詞で、後ろに主語や目的語が欠けた不完全な文が続く必要があるが、ここは完全な文なので使えない。","why は理由を表す名詞(reason など)を先行詞にとる関係副詞として正しい。"]},
+
+{id:502,category:"関係詞",sentence:"The consultant ___ we hired last month has already identified several ways to cut costs.",choices:["whom","who","which","whose"],answer:0,
+ point:"先行詞 the consultant(人)を受け、hired の目的語となる目的格の関係代名詞は whom です。",
+ notes:["whom は人を先行詞にとる目的格の関係代名詞で、we hired の目的語として正しく使われる。","who は主格の関係代名詞で、後ろに動詞が続く形が基本だが、ここでは we hired という主語+動詞が続くため目的格が適切。","which は物を先行詞にとる関係代名詞で、人である the consultant には使えない。","whose は所有格の関係代名詞で、この文脈には合わない。"]},
+
+{id:503,category:"関係詞",sentence:"The town ___ the new factory will be built has welcomed the investment enthusiastically.",choices:["who","which","that","where"],answer:3,
+ point:"先行詞 the town(場所)を受け、場所を説明する関係副詞は where です。",
+ notes:["who は人を先行詞にとる関係代名詞で、the town には使えない。","which は関係代名詞で、後ろに主語や目的語が欠けた不完全な文が続く必要があるが、ここは完全な文なので使えない。","that も関係代名詞で、which と同様に不完全な文を伴う必要があり、この文脈には合わない。","where は場所を表す名詞を先行詞にとる関係副詞として正しい。"]},
+
+{id:504,category:"関係詞",sentence:"___ surprised investors most was the sudden resignation of the chief financial officer.",choices:["Which","What","That","Who"],answer:1,
+ point:"先行詞を含み「〜すること」という意味を表す関係代名詞は What です。",
+ notes:["Which は先行詞が必要な関係代名詞で、先行詞がないこの文では使えない。","What は「〜すること・もの」という意味を持ち、先行詞を必要としない関係代名詞として文頭で正しく使われる。","That も先行詞が必要な関係代名詞で、この文脈には使えない。","Who は人を先行詞にとる関係代名詞で、この文脈には合わない。"]},
+
+{id:505,category:"関係詞",sentence:"The negotiator, ___ patience impressed everyone in the room, eventually secured a favorable deal.",choices:["whose","who","that","which"],answer:0,
+ point:"先行詞 the negotiator の所有物(patience)を示す所有格の関係代名詞は whose です。",
+ notes:["whose は所有格の関係代名詞で、the negotiator's patience という所有関係を正しく表す。","who は主格の関係代名詞で、後ろに動詞が続く形になり、この文(patience impressed)には合わない。","that はカンマの後の非制限用法では通常使われない。","which は物を先行詞にとる関係代名詞で、人である the negotiator を先行詞にはできない。"]},
+
+{id:506,category:"関係詞",sentence:"The training video, ___ the HR department produced last month, has already been viewed by every employee.",choices:["who","whom","which","whose"],answer:2,
+ point:"先行詞 the training video(物)を受け、カンマの後で補足説明を加える関係代名詞は which です。ここでは produced の目的語となる目的格として使われています。",
+ notes:["who は人を先行詞にとる関係代名詞で、物である the training video には使えない。","whom も人を先行詞にとる目的格の関係代名詞で、物には使えない。","which は物を先行詞にとる関係代名詞で、the training video を正しく受け、produced の目的語としても使われる。","whose は所有格の関係代名詞で、この文(the HR department produced)には所有関係がなく合わない。"]},
+
+{id:507,category:"関係詞",sentence:"The moment ___ the merger was officially announced, the company's stock price surged.",choices:["which","when","where","who"],answer:1,
+ point:"先行詞 the moment(時)を受け、時を説明する関係副詞は when です。",
+ notes:["which は関係代名詞で、後ろに不完全な文が続く必要があるが、ここは完全な文なので使えない。","when は時を表す名詞(moment など)を先行詞にとる関係副詞として正しい。","where は場所を表す関係副詞で、時を表す the moment には使えない。","who は人を先行詞にとる関係代名詞で、the moment には使えない。"]},
+
+{id:508,category:"関係詞",sentence:"The employees ___ performance exceeded expectations were awarded a special bonus this quarter.",choices:["which","who","whom","whose"],answer:3,
+ point:"先行詞 the employees の所有物(performance)を示す所有格の関係代名詞は whose です。",
+ notes:["which は物を先行詞にとる関係代名詞で、人である the employees を先行詞にはできない。","who は主格の関係代名詞で、後ろに動詞が続く形になり、この文(performance exceeded)には合わない。","whom は目的格の関係代名詞で、この文脈には合わない。","whose は所有格の関係代名詞で、the employees' performance という所有関係を正しく表す。"]},
+
+{id:509,category:"関係詞",sentence:"The reason ___ the client canceled the contract remains unclear to the sales team.",choices:["who","why","which","where"],answer:1,
+ point:"先行詞 reason を受け、理由を説明する関係副詞は why です。",
+ notes:["who は人を先行詞にとる関係代名詞で、reason には使えない。","why は理由を表す名詞(reason など)を先行詞にとる関係副詞として正しい。","which は関係代名詞で、後ろに不完全な文が続く必要があるが、ここは完全な文なので使えない。","where は場所を表す関係副詞で、理由を表す reason には使えない。"]},
+
+{id:510,category:"態",sentence:"All incoming packages ___ for security purposes before being delivered to employees.",choices:["are screened","have screened","screen","are screening"],answer:0,
+ point:"主語 packages が「調べられる」という受け身の意味なので受動態が適切です。",
+ notes:["are screened は受動態の現在形で、荷物が「調べられる」という受け身の意味を正しく表す。","have screened は能動態の現在完了形で、主語が「調べる」側になり意味が合わない。","screen は能動態の現在形で、主語が「調べる」側になってしまい意味が逆になる。","are screening は能動態の現在進行形で、同様に主語が「調べる」側になり意味が合わない。"]},
+
+{id:511,category:"態",sentence:"The company's annual conference ___ in Osaka this year instead of Tokyo.",choices:["will be held","will hold","holds","is holding"],answer:0,
+ point:"主語 the conference が「開催される」という受け身の意味なので受動態が適切です。",
+ notes:["will be held は受動態の未来形で、会議が「開催される」という受け身の意味を正しく表す。","will hold は能動態の未来形で、主語が「開催する」側になってしまい意味が合わない(hold には目的語が必要)。","holds は能動態の現在形で、同様に目的語が必要であり、この文には合わない。","is holding は能動態の現在進行形で、同様に目的語が必要であり、この文には合わない。"]},
+
+{id:512,category:"態",sentence:"The contract ___ by both parties before any work can officially begin.",choices:["signs","is signing","must be signed","must sign"],answer:2,
+ point:"主語 the contract が「署名される」という受け身の意味なので、助動詞の後は be + 過去分詞の形になります。",
+ notes:["signs は能動態の現在形で、助動詞 must の後には動詞の原形が必要であり、この形は使えない。","is signing は能動態の現在進行形で、助動詞の後には使えない形。","must be signed は受動態で、契約書が「署名される」という受け身の意味を正しく表す。","must sign は能動態で、主語が「署名する」側になり意味が合わない(sign には目的語が必要)。"]},
+
+{id:513,category:"態",sentence:"The new hires ___ on the company's software systems during their first week.",choices:["are trained","are training","train","have trained"],answer:0,
+ point:"主語 the new hires が「訓練される」という受け身の意味なので受動態が適切です。",
+ notes:["are trained は受動態の現在形で、新入社員が「訓練される」という受け身の意味を正しく表す。","are training は能動態の現在進行形で、同様に主語が「訓練する」側になり意味が合わない。","train は能動態の現在形で、主語が「訓練する」側になってしまい意味が合わない。","have trained は能動態の現在完了形で、同様に意味が合わない。"]},
+
+{id:514,category:"態",sentence:"The proposal ___ carefully before the board makes its final decision next week.",choices:["will examine","is examining","examines","will be examined"],answer:3,
+ point:"主語 the proposal が「検討される」という受け身の意味なので受動態が適切です。",
+ notes:["will examine は能動態の未来形で、主語が「検討する」側になり意味が合わない。","is examining は能動態の現在進行形で、同様に意味が合わない。","examines は能動態の現在形で、同様に意味が合わない。","will be examined は受動態の未来形で、提案書が「検討される」という受け身の意味を正しく表す。"]},
+
+{id:515,category:"態",sentence:"The warehouse ___ extensively last winter to accommodate the growing inventory.",choices:["has renovated","renovated","renovates","was renovated"],answer:3,
+ point:"主語 the warehouse が「改装された」という受け身の意味なので受動態が適切です。",
+ notes:["has renovated は能動態の現在完了形で、同様に意味も時制も合わない。","renovated は能動態の過去形で、主語が「改装する」側になり意味が合わない(renovate には目的語が必要)。","renovates は能動態の現在形で、last winter という過去を表す語と時制が一致しない。","was renovated は受動態の過去形で、倉庫が「改装された」という受け身の意味を正しく表す。"]},
+
+{id:516,category:"態",sentence:"Customer feedback ___ seriously by the product development team, according to the survey.",choices:["is taken","is taking","takes","has taken"],answer:0,
+ point:"主語 feedback が「受け止められる」という受け身の意味なので受動態が適切です。",
+ notes:["is taken は受動態の現在形で、feedback が「(真剣に)受け止められる」という受け身の意味を正しく表す。","is taking は能動態の現在進行形で、同様に意味が合わない。","takes は能動態の現在形で、主語が「受け止める」側になり意味が合わない。","has taken は能動態の現在完了形で、同様に意味が合わない。"]},
+
+{id:517,category:"態",sentence:"The old filing system ___ with a cloud-based database by the end of this quarter.",choices:["is replacing","will be replaced","replaces","will replace"],answer:1,
+ point:"主語 the old filing system が「置き換えられる」という受け身の意味なので受動態が適切です。",
+ notes:["is replacing は能動態の現在進行形で、同様に意味が合わない。","will be replaced は受動態の未来形で、古いシステムが「置き換えられる」という受け身の意味を正しく表す。","replaces は能動態の現在形で、同様に意味が合わない。","will replace は能動態の未来形で、主語が「置き換える」側になり意味が合わない。"]},
+
+{id:518,category:"態",sentence:"The keynote speech ___ enthusiastically by everyone in the audience.",choices:["receives","was received","is receiving","received"],answer:1,
+ point:"主語 the keynote speech が「受け止められた」という受け身の意味なので受動態が適切です。",
+ notes:["receives は能動態の現在形で、時制も意味も合わない。","was received は受動態の過去形で、基調講演が「(好意的に)受け止められた」という受け身の意味を正しく表す。","is receiving は能動態の現在進行形で、同様に意味が合わない。","received は能動態の過去形で、主語が「受け取る」側になり意味が合わない。"]},
+
+{id:519,category:"態",sentence:"The malfunctioning elevator ___ by a certified technician before the building reopens to tenants.",choices:["must inspect","inspects","must be inspected","is inspecting"],answer:2,
+ point:"主語 the elevator が「点検される」という受け身の意味なので、助動詞の後は be + 過去分詞の形になります。",
+ notes:["must inspect は能動態で、主語が「点検する」側になり意味が合わない。","inspects は能動態の現在形で、助動詞の後には動詞の原形が必要であり、この形は使えない。","must be inspected は受動態で、エレベーターが「点検される」という受け身の意味を正しく表す。","is inspecting は能動態の現在進行形で、助動詞の後には使えない形。"]},
+
+{id:520,category:"比較",sentence:"Of all the candidates interviewed, Ms. Tanaka had ___ experience in international sales.",choices:["most","the more","more","the most"],answer:3,
+ point:"3つ以上のものの中で最も〜という意味を表すには最上級 the most を使います。",
+ notes:["most は最上級の形だが、名詞 experience を修飾する最上級には通常 the を伴う。","the more は比較級に定冠詞をつけた形で、通常2つを比較する場合や the more...the more の構文で使われ、ここでは不適切。","more は比較級で、3つ以上を比較する最上級の文脈には合わない。","the most は最上級で、3人以上の候補者の中で最も経験が豊富だという意味を正しく表す。"]},
+
+{id:521,category:"比較",sentence:"This year's marketing budget is ___ than last year's, even after accounting for inflation.",choices:["the largest","significant larger","significantly larger","large"],answer:2,
+ point:"2つのものを比較して「はるかに〜」という意味を強調するには比較級を副詞 significantly で強めます。",
+ notes:["the largest は最上級で、2つのものを比較する than の文には使えない。","significant larger は形容詞 significant で比較級を修飾しており、比較級を修飾するには副詞形が必要なため誤り。","significantly larger は比較級 larger を副詞 significantly で修飾した正しい形で、than と結びつく。","large は原級で、than と結びつく比較級の形になっていない。"]},
+
+{id:522,category:"比較",sentence:"The renovated office is far ___ than the old one, according to employee surveys.",choices:["comfortable","most comfortable","more comfortable","comfortabler"],answer:2,
+ point:"2音節以上の形容詞の比較級は more + 原級 の形を使います。",
+ notes:["comfortable は原級で、比較級の意味を表せない。","most comfortable は最上級で、2つを比較する than の文には使えない。","more comfortable は多音節の形容詞 comfortable の正しい比較級で、than と結びつく。","comfortabler という形は存在しない(多音節形容詞は -er ではなく more を使う)。"]},
+
+{id:523,category:"比較",sentence:"The sooner the defective units are recalled, ___ the risk to consumers.",choices:["the lowest","lower","the lower","low"],answer:2,
+ point:"the + 比較級 ..., the + 比較級 ... で「〜すればするほど、ますます〜」という構文になります。",
+ notes:["the lowest は最上級で、この構文には合わない。","lower は比較級だが the が抜けており、この構文には the が必要。","the lower は the 比較級 の形で、the sooner ... , the lower ... という構文を正しく完成させる。","low は原級で、比較の意味を表せない。"]},
+
+{id:524,category:"比較",sentence:"Employee turnover this year was ___ as high as the industry average.",choices:["second","twofold","twice","double"],answer:2,
+ point:"「〜の2倍…」という倍数表現は twice as + 原級 + as の形を使います。",
+ notes:["second は「2番目の」という意味の序数詞で、倍数を表す表現にはならない。","twofold は「2倍の」という意味の形容詞で、通常名詞を直接修飾し、as ... as の構文の前には使わない。","twice は twice as high as の形で「〜の2倍高い」という倍数表現を正しく作る。","double は動詞・形容詞・名詞として使われるが、as high as の前に置いて倍数を表す標準的な形ではない。"]},
+
+{id:525,category:"比較",sentence:"Among the three suppliers, Global Parts offers ___ delivery times.",choices:["shorter","the shorter","the shortest","short"],answer:2,
+ point:"3つ以上のものを比較して最も〜という意味を表すには最上級を使います。",
+ notes:["shorter は比較級で、通常2つのものを比較する場合に使い、3つ以上を比較する文脈には合わない。","the shorter は the をつけた比較級だが、2者間の比較に使う形であり、3社を比較するこの文脈には合わない。","the shortest は最上級で、3社の中で最も短い納期であることを正しく表す。","short は原級で、比較の意味を表せない。"]},
+
+{id:526,category:"比較",sentence:"The new engine burns far ___ fuel than the previous model, thanks to improved combustion technology.",choices:["few","little","fewer","less"],answer:3,
+ point:"不可算名詞 fuel の量を比較して「より少ない」という意味を表す比較級は less です。",
+ notes:["few は可算名詞に対して使う原級の語で、不可算名詞 fuel には使えず、比較の意味も表せない。","little は原級で、比較の意味を表せない。","fewer は many の比較級で、可算名詞に対して使う語。不可算名詞の fuel には使えない。","less は little の比較級で、不可算名詞 fuel の量が「より少ない」という意味を正しく表す。"]},
+
+{id:527,category:"比較",sentence:"This laptop model is ___ any other in its price range, according to independent reviews.",choices:["reliable than","most reliable than","more reliable as","more reliable than"],answer:3,
+ point:"比較級は than と結びついて「〜よりも」という意味を表します。",
+ notes:["reliable than は比較級になっておらず、than と結びつけて使うことはできない。","most reliable than は最上級に than を続けており、文法的に誤り。","more reliable as は比較級に as を続けており誤り。比較級は than と結びつく。","more reliable than は比較級 + than の正しい組み合わせで、他のどのモデルよりも信頼性が高いという意味を表す。"]},
+
+{id:528,category:"比較",sentence:"Customer satisfaction scores this quarter were nearly ___ high as they were a year ago.",choices:["as","very","too","so"],answer:0,
+ point:"「〜と同じくらい…」という意味を表す as ... as の構文の前半部分は as です。",
+ notes:["as は as ... as の構文を作る語で、nearly as high as で「ほぼ同じくらい高い」という意味を正しく表す。","very は形容詞・副詞の原級を強調する語で、as ... as の構文の一部にはならない。","too は too ... to の構文などで使われるが、この構文には合わない。","so は so ... that の構文などで使われるが、as ... as の構文には使わない。"]},
+
+{id:529,category:"比較",sentence:"The committee's ___ concern was the project's environmental impact, not its cost.",choices:["most primary","primarily","more primary","primary"],answer:3,
+ point:"名詞 concern を修飾する形容詞の原級として最も自然な語は primary です。",
+ notes:["most primary という最上級の形も一般的に使われない。","primarily は副詞「主に」で、名詞を直接修飾できない。","more primary という比較級の形は一般的に使われない。","primary は「主要な」という意味の形容詞の原級で、名詞 concern を自然に修飾する(primary は通常、比較級・最上級の形をとらない絶対的な意味の形容詞)。"]},
+
+{id:530,category:"仮定法",sentence:"If the company ___ its prices last year, it would have lost even more customers to competitors.",choices:["had raised","raises","would raise","raised"],answer:0,
+ point:"過去の事実と反対の仮定を表す仮定法過去完了では If + 主語 + had + 過去分詞 の形を使います。",
+ notes:["had raised は仮定法過去完了で、過去の事実(実際は値上げしなかった)と反対の仮定を正しく表す。","raises は現在形で、過去の仮定を表せない。","would raise は帰結節で使う形で、if 節の中には使わない。","raised は直説法の過去形で、事実として起きたことを表すため、仮定法の意味にはならない。"]},
+
+{id:531,category:"仮定法",sentence:"If I ___ you, I would negotiate for a higher salary before accepting the offer.",choices:["had been","were","am","was"],answer:1,
+ point:"現在の事実と反対の仮定を表す仮定法過去では、be動詞は主語に関わらず were を使うのが標準的です。",
+ notes:["had been は仮定法過去完了の形で、過去の事実と反対の仮定を表すが、この文は現在についての仮定なので合わない。","were は仮定法過去で使う were で、If I were you という定型表現として正しい。","am は現在形の直説法で、仮定法の意味を表せない。","was は直説法で使う形で、仮定法過去では主語が I や 3人称単数でも were を使うのが標準的。"]},
+
+{id:532,category:"仮定法",sentence:"The board recommended that the CEO ___ the expansion plan until market conditions improve.",choices:["postpones","will postpone","postpone","postponed"],answer:2,
+ point:"recommend that の後の節では、動詞は主語に関わらず原形(仮定法現在)を使います。",
+ notes:["postpones は三人称単数現在形で、仮定法現在の節では使わない。","will postpone は未来形で、仮定法現在の節では使わない。","postpone は仮定法現在の動詞の原形で、recommend that の後で主語に関わらず使われる正しい形。","postponed は過去形で、仮定法現在の節では使わない。"]},
+
+{id:533,category:"仮定法",sentence:"Had the shipment arrived on time, the store ___ the products before the holiday rush.",choices:["would have restocked","restocked","would restock","restocks"],answer:0,
+ point:"仮定法過去完了の帰結節は would have + 過去分詞 の形を使います。",
+ notes:["would have restocked は仮定法過去完了の帰結節として正しい形で、過去の事実と反対の結果を表す。","restocked は直説法の過去形で、仮定法の帰結節としては使わない。","would restock は仮定法過去の帰結節の形で、過去の事実についての仮定にはならない。","restocks は現在形で、この文脈には合わない。"]},
+
+{id:534,category:"仮定法",sentence:"If the new software ___ compatible with our existing systems, we would switch immediately.",choices:["had been","were","will be","is"],answer:1,
+ point:"現在の事実と反対の仮定を表す仮定法過去では、be動詞は were を使います。",
+ notes:["had been は仮定法過去完了の形で、過去についての仮定になり、この文(現在の仮定)には合わない。","were は仮定法過去で使う be動詞の形として正しい。","will be は未来形で、仮定法の if 節には使わない。","is は直説法の現在形で、仮定法の意味を表せない。"]},
+
+{id:535,category:"仮定法",sentence:"I wish the meeting ___ scheduled for a more convenient time; Friday afternoon is difficult for everyone.",choices:["is","were","had been","will be"],answer:1,
+ point:"現在の事実と異なることを望む I wish の後には仮定法過去(過去形)を使います。",
+ notes:["is は直説法の現在形で、I wish の後の仮定法には使わない。","were は仮定法過去の be動詞の形で、I wish の後で現在の事実と異なる願望を正しく表す(be動詞は主語に関わらず were)。","had been は仮定法過去完了の形で、過去の事実と異なる願望を表す際に使うが、この文はスケジュールという現在の状態についての願望なので were が適切。","will be は未来形で、I wish の後の仮定法には使わない。"]},
+
+{id:536,category:"仮定法",sentence:"If the merger ___ approved by regulators, the two companies would have combined their operations by now.",choices:["is","were","will be","had been"],answer:3,
+ point:"過去の事実と反対の仮定を表す仮定法過去完了では If + 主語 + had + 過去分詞 の形を使います。",
+ notes:["is は直説法の現在形で、仮定法の意味を表せない。","were は仮定法過去の形で、現在の事実と反対の仮定を表すが、この文は帰結節が would have combined という過去完了の形なので if節も過去完了が適切。","will be は未来形で、仮定法の if 節には使わない。","had been は仮定法過去完了の受動態の形で、過去の事実(実際は承認されなかった)と反対の仮定を正しく表す。"]},
+
+{id:537,category:"仮定法",sentence:"Company policy requires that every visitor ___ a badge at all times while inside the facility.",choices:["wears","wear","will wear","wore"],answer:1,
+ point:"require that の後の節では、動詞は主語に関わらず原形(仮定法現在)を使います。",
+ notes:["wears は三人称単数現在形で、仮定法現在の節では使わない。","wear は仮定法現在の動詞の原形で、require that の後で主語に関わらず使われる正しい形。","will wear は未来形で、仮定法現在の節では使わない。","wore は過去形で、仮定法現在の節では使わない。"]},
+
+{id:538,category:"仮定法",sentence:"If the factory had installed the new machinery sooner, production costs ___ significantly lower this year.",choices:["would have been","were","would be","are"],answer:2,
+ point:"過去の条件が現在の結果に影響する「混合仮定法」では、帰結節に would + 動詞の原形を使います。",
+ notes:["would have been は仮定法過去完了の帰結節で、過去の結果を表す際に使うが、this year という現在を表す語句とは合わない。","were は仮定法過去の形で、帰結節としては would の後に動詞の原形が必要であり、この形は使えない。","would be は現在の結果を表す帰結節の形で、過去の条件(had installed)が現在(this year)に与える影響を表す混合仮定法として正しい。","are は直説法の現在形で、仮定法の帰結節には使わない。"]},
+
+{id:539,category:"仮定法",sentence:"If the airline ___ additional flights, thousands of passengers would not have been stranded.",choices:["had scheduled","would schedule","scheduled","schedules"],answer:0,
+ point:"過去の事実と反対の仮定を表す仮定法過去完了では If + 主語 + had + 過去分詞 の形を使います。",
+ notes:["had scheduled は仮定法過去完了で、過去の事実(実際は増便しなかった)と反対の仮定を正しく表す。","would schedule は帰結節で使う形で、if 節の中には使わない。","scheduled は直説法の過去形で、事実として起きたことを表すため、仮定法の意味にはならない。","schedules は現在形で、過去の仮定を表せない。"]},
+
+{id:540,category:"代名詞",sentence:"The two managers reviewed ___ presentations before the joint meeting with the client.",choices:["one another","each other's","themselves","each other"],answer:1,
+ point:"2人が互いの所有物を確認し合うという意味を表す所有格の相互代名詞は each other's です。",
+ notes:["one another は3人以上の間で使うのが一般的とされる相互代名詞で、two managers という2人の文脈にはやや不自然。","each other's は「お互いの」という意味の所有格の相互代名詞で、two managers という2人の間で正しく使われる。","themselves は再帰代名詞で「自分自身」という意味になり、互いの関係を表す文脈には合わない。","each other は所有格になっておらず、名詞 presentations の前には置けない。"]},
+
+{id:541,category:"代名詞",sentence:"The CEO decided to handle the press conference ___ rather than delegate it to a spokesperson.",choices:["she","hers","her","herself"],answer:3,
+ point:"主語を強調して「自分自身で」という意味を加える再帰代名詞は herself です。",
+ notes:["she は主格代名詞で、すでに主語があるこの文脈では重複して使えない。","hers は所有代名詞で、この文脈には合わない。","her は目的格・所有格の代名詞で、この文脈(主語の強調)には合わない。","herself は再帰代名詞で、主語 The CEO を強調し「自分自身で」という意味を正しく加える。"]},
+
+{id:542,category:"代名詞",sentence:"The two departments finally agreed to share resources with ___ to reduce overall costs.",choices:["one another","themselves","it","each other's"],answer:0,
+ point:"複数の当事者(ここでは2つの部署)が互いに、という意味を表す相互代名詞は one another(または each other)です。",
+ notes:["one another は「お互いに」という意味の相互代名詞で、前置詞 with の目的語として正しく使われる。","themselves は再帰代名詞で「自分たち自身」という意味になり、互いの関係を表す文脈には合わない。","it は単数の代名詞で、two departments という複数の主語を受けるには不適切。","each other's は所有格の形で、名詞を伴わずに前置詞の目的語としては使えない。"]},
+
+{id:543,category:"代名詞",sentence:"The printer stopped working because ___ paper tray was jammed.",choices:["its","it's","it","their"],answer:0,
+ point:"「それの」という所有を表す代名詞は its(アポストロフィなし)です。",
+ notes:["its は「それの」という意味の所有格代名詞で、アポストロフィをつけない形が正しい。","it's は it is の短縮形であり、所有格の意味にはならない。","it は主格・目的格の代名詞で、後ろに名詞 paper tray が続く所有格の位置には使えない。","their は複数の所有格代名詞で、単数の printer を受けるには不適切。"]},
+
+{id:544,category:"代名詞",sentence:"The board members congratulated ___ on successfully completing the acquisition.",choices:["them","theirs","themselves","each other's"],answer:2,
+ point:"主語 the board members 自身を指し、動詞 congratulated の目的語となる代名詞は再帰代名詞 themselves です。",
+ notes:["them は人称代名詞の目的格だが、主語と同じ人々を指す再帰的な意味では themselves を使う必要がある。","theirs は所有代名詞で、この文脈(動詞の目的語)には合わない。","themselves は再帰代名詞で、主語 the board members 自身を目的語として正しく指す。","each other's は所有格の相互代名詞で、後ろに名詞が必要であり、単独では使えない。"]},
+
+{id:545,category:"代名詞",sentence:"Neither of the two proposals fully addressed ___ concerns about the budget.",choices:["we","ours","our","us"],answer:2,
+ point:"名詞 concerns の前に置かれ、所有を表す代名詞は所有格の our です。",
+ notes:["we は主格代名詞で、名詞の前には置けない。","ours は所有代名詞で、後ろに名詞を伴わない独立した形であり、concerns の前には置けない。","our は所有格代名詞で、名詞 concerns の前に置いて所有を表す形として正しい。","us は目的格代名詞で、名詞の前には置けない。"]},
+
+{id:546,category:"代名詞",sentence:"The consultants reviewed each department's workflow and compared ___ findings at the end of the day.",choices:["their","theirs","they","them"],answer:0,
+ point:"名詞 findings の前に置かれ、所有を表す代名詞は所有格の their です。",
+ notes:["their は所有格代名詞で、名詞 findings の前に置いて the consultants の所有を表す形として正しい。","theirs は所有代名詞で、後ろに名詞を伴わない独立した形であり、findings の前には置けない。","they は主格代名詞で、名詞の前には置けない。","them は目的格代名詞で、名詞の前には置けない。"]},
+
+{id:547,category:"代名詞",sentence:"The new regulations affect small businesses more than ___ affect large corporations.",choices:["they","theirs","them","their"],answer:0,
+ point:"動詞 affect の主語となる代名詞は主格の they です。",
+ notes:["they は主格代名詞で、後ろに続く動詞 affect の主語として正しく使われる。","theirs は所有代名詞で、動詞の主語としては使えない。","them は目的格代名詞で、動詞の主語の位置には使えない。","their は所有格代名詞で、後ろに名詞が必要であり、動詞の主語の位置には使えない。"]},
+
+{id:548,category:"代名詞",sentence:"The startup positioned ___ as a leader in sustainable packaging within just two years.",choices:["it","itself","its","itself's"],answer:1,
+ point:"主語 the startup 自身を指し、動詞 positioned の目的語となる代名詞は再帰代名詞 itself です。",
+ notes:["it は目的格代名詞だが、主語と同じものを指す再帰的な意味では itself を使う必要がある。","itself は再帰代名詞で、主語 the startup 自身を目的語として正しく指す。","its は所有格代名詞で、後ろに名詞が必要であり、動詞の目的語の位置には使えない。","itself's という形は存在しない。"]},
+
+{id:549,category:"代名詞",sentence:"The manual explains the installation process in detail, so employees can complete it ___.",choices:["by theirs","by them","by their","by themselves"],answer:3,
+ point:"「自分たちだけで、独力で」という意味を表す決まった言い方は by + 再帰代名詞 です。",
+ notes:["by theirs は所有代名詞で、この定型表現には合わない。","by them は再帰代名詞になっておらず、「自分たちだけで」という意味を表せない。","by their は所有格代名詞で、後ろに名詞が必要であり、単独では使えない。","by themselves は「自分たちだけで」という意味の定型表現で、再帰代名詞を使った正しい形。"]},
+
+{id:550,category:"代名詞",sentence:"The two co-founders built the company from nothing, relying only on ___ savings in the early years.",choices:["theirs own","them own","their own","they own"],answer:2,
+ point:"「自分たち自身の」という意味を強調する所有格の表現は所有格 + own の形です。",
+ notes:["theirs own は所有代名詞に own をつけた誤った形(所有代名詞は後ろに名詞を伴わない)。","them own は目的格代名詞に own をつけた誤った形。","their own は所有格代名詞 + own の形で、「自分たち自身の」という意味を正しく表す。","they own は主格代名詞に own をつけた誤った形。"]},
 ];
 
 /* ---------------- 単語帳データ (50語、随時追加予定) ---------------- */
