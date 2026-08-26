@@ -368,29 +368,7 @@
     border-bottom: 1px solid var(--border);
     font-size: 0.88rem;
   }
-  .vocab-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 14px 0;
-  }
-  .vocab-card {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 16px;
-    background: #fafbff;
-  }
-  .vocab-head {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .vocab-word {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--primary);
-  }
+  /* ---- 単語帳: 暗記カードシステム ---- */
   .vocab-pos {
     font-size: 0.72rem;
     color: var(--primary);
@@ -399,28 +377,200 @@
     border-radius: 999px;
     font-weight: 700;
   }
-  .vocab-meaning {
-    font-size: 0.98rem;
-    font-weight: 600;
-    margin-top: 4px;
+  .vocab-meter {
+    margin: 12px 0 16px;
   }
-  .vocab-example {
-    margin-top: 8px;
+  .vocab-meter-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .vocab-meter-bar {
+    display: flex;
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #e5e7eb;
+  }
+  .vocab-meter-seg { height: 100%; }
+  .vocab-meter-seg.new { background: #cbd5e1; }
+  .vocab-meter-seg.learning { background: var(--primary); }
+  .vocab-meter-seg.mastered { background: var(--correct); }
+  .vocab-meter-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .vocab-meter-legend .item { display: inline-flex; align-items: center; gap: 4px; }
+  .vocab-meter-legend .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .vocab-meter-legend .dot.new { background: #cbd5e1; }
+  .vocab-meter-legend .dot.learning { background: var(--primary); }
+  .vocab-meter-legend .dot.mastered { background: var(--correct); }
+  .vocab-toolbar {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0 4px;
+    flex-wrap: wrap;
+  }
+  .vocab-search-input {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.88rem;
+  }
+  .vocab-search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+  .vocab-filter-btn {
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    font-size: 0.82rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .vocab-filter-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+  .vocab-deck-indicator {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 10px 0 6px;
+  }
+  .vocab-empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 10px;
     font-size: 0.9rem;
-    line-height: 1.6;
   }
-  .vocab-example-ja {
-    margin-top: 3px;
+  .flashcard-scene {
+    perspective: 1200px;
+    margin: 10px 0;
+  }
+  .flashcard {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    cursor: pointer;
+  }
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+  }
+  .flashcard-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 20px;
+    background: #fafbff;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .flashcard-front {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+  }
+  .flashcard-back {
+    transform: rotateY(180deg);
+    text-align: left;
+  }
+  .flashcard-word {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .flashcard-speak-btn {
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 999px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  .flashcard-tap-hint {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .flashcard-back h5 {
+    margin: 14px 0 4px;
+    font-size: 0.78rem;
+    color: var(--primary);
+  }
+  .flashcard-back h5:first-child { margin-top: 0; }
+  .flashcard-back-meaning {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .flashcard-back-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .flashcard-colloc-list, .flashcard-deriv-list {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+  .flashcard-example-ja {
     font-size: 0.85rem;
     color: var(--muted);
     line-height: 1.6;
+    margin-top: 4px;
   }
-  .vocab-nav {
+  .vocab-eval-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .vocab-eval-btn {
+    flex: 1;
+    padding: 12px 6px;
+    border-radius: 12px;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: #fff;
+    line-height: 1.4;
+  }
+  .vocab-eval-btn.hard { background: var(--wrong); }
+  .vocab-eval-btn.normal { background: #d97706; }
+  .vocab-eval-btn.mastered { background: var(--correct); }
+  .vocab-deck-nav {
     display: flex;
     gap: 10px;
-    margin-top: 8px;
+    margin-top: 12px;
   }
-  .vocab-nav button { margin-top: 0; }
+  .vocab-deck-nav button { margin-top: 0; }
   .cal-nav {
     display: flex;
     align-items: center;
@@ -633,17 +783,80 @@
   <div id="screen-vocab" class="card hidden">
     <button class="link" id="btn-vocab-to-mode" style="padding-left:0;">← モード選択に戻る</button>
     <div class="qmeta">
-      <span class="badge">単語帳</span>
-      <span id="vocab-page-indicator">1 / 1</span>
+      <span class="badge">TOEIC暗記カード</span>
     </div>
-    <div class="progress-bar-outer"><div class="progress-bar-inner" id="vocab-progress-bar" style="width:0%"></div></div>
 
-    <div id="vocab-list"></div>
-
-    <div class="vocab-nav">
-      <button class="secondary" id="btn-vocab-prev">← 前の10語</button>
-      <button class="primary" id="btn-vocab-next">次の10語 →</button>
+    <div class="vocab-meter">
+      <div class="vocab-meter-label"><span>暗記進捗</span><span id="vocab-meter-count">0 / 0</span></div>
+      <div class="vocab-meter-bar">
+        <div class="vocab-meter-seg new" id="vocab-meter-new" style="width:100%"></div>
+        <div class="vocab-meter-seg learning" id="vocab-meter-learning" style="width:0%"></div>
+        <div class="vocab-meter-seg mastered" id="vocab-meter-mastered" style="width:0%"></div>
+      </div>
+      <div class="vocab-meter-legend">
+        <span class="item"><span class="dot new"></span>未学習 <b id="vocab-count-new">0</b></span>
+        <span class="item"><span class="dot learning"></span>学習中 <b id="vocab-count-learning">0</b></span>
+        <span class="item"><span class="dot mastered"></span>マスター <b id="vocab-count-mastered">0</b></span>
+      </div>
     </div>
+
+    <div class="vocab-toolbar">
+      <input type="text" id="vocab-search-input" class="vocab-search-input" placeholder="単語・意味で検索">
+      <button class="vocab-filter-btn" id="btn-vocab-filter-due">要復習単語のみ</button>
+    </div>
+
+    <div class="vocab-deck-indicator" id="vocab-deck-indicator">0 / 0</div>
+
+    <div id="vocab-deck-area">
+      <div class="flashcard-scene">
+        <div class="flashcard" id="vocab-flashcard">
+          <div class="flashcard-inner">
+            <div class="flashcard-face flashcard-front">
+              <span class="vocab-pos" id="vocab-front-pos"></span>
+              <div class="flashcard-word" id="vocab-front-word"></div>
+              <button class="flashcard-speak-btn" id="btn-speak-word" title="発音を再生">🔊</button>
+              <div class="flashcard-tap-hint">タップして裏面（意味・例文）を見る</div>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <h5>日本語訳</h5>
+              <div class="flashcard-back-meaning" id="vocab-back-meaning"></div>
+
+              <h5>コロケーション</h5>
+              <ul class="flashcard-colloc-list" id="vocab-back-colloc"></ul>
+
+              <h5>例文（S/V/O/C構文アナライザー）</h5>
+              <div class="svoc-legend">
+                <span class="item"><span class="dot" style="background:var(--svoc-s)"></span>S</span>
+                <span class="item"><span class="dot" style="background:var(--svoc-v)"></span>V</span>
+                <span class="item"><span class="dot" style="background:var(--svoc-o)"></span>O/C</span>
+                <span class="item"><span class="dot" style="background:var(--svoc-m)"></span>M</span>
+              </div>
+              <div class="flashcard-back-row">
+                <div class="svoc-sentence" id="vocab-back-svoc" style="flex:1;"></div>
+                <button class="flashcard-speak-btn" id="btn-speak-example" title="例文を再生">🔊</button>
+              </div>
+              <div class="flashcard-example-ja" id="vocab-back-example-ja"></div>
+
+              <h5>派生語</h5>
+              <ul class="flashcard-deriv-list" id="vocab-back-deriv"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vocab-eval-row">
+        <button class="vocab-eval-btn hard" id="btn-eval-hard">むずかしい<br>（今日再出題）</button>
+        <button class="vocab-eval-btn normal" id="btn-eval-normal">ふつう<br>（3日後）</button>
+        <button class="vocab-eval-btn mastered" id="btn-eval-mastered">覚えた<br>（マスター）</button>
+      </div>
+
+      <div class="vocab-deck-nav">
+        <button class="secondary" id="btn-vocab-prev">← 前へ</button>
+        <button class="primary" id="btn-vocab-next">次へ →</button>
+      </div>
+    </div>
+
+    <div class="vocab-empty hidden" id="vocab-empty-msg">該当する単語がありません。</div>
   </div>
 
   <!-- CALENDAR SCREEN -->
@@ -3289,208 +3502,207 @@ const QUESTIONS = [
 
 /* ---------------- 単語帳データ (200語) ---------------- */
 const VOCAB = [
-{id:1,word:"feasible",pos:"形",meaning:"実行可能な",example:"The manager questioned whether the new schedule was feasible given the current staffing levels.",exampleJa:"新しいスケジュールが現在の人員配置で実行可能かどうか、マネージャーは疑問視した。"},
-{id:2,word:"allocate",pos:"動",meaning:"割り当てる",example:"The finance team will allocate additional funds to the marketing department next quarter.",exampleJa:"経理チームは来四半期にマーケティング部門へ追加の資金を割り当てる予定だ。"},
-{id:3,word:"comply",pos:"動",meaning:"（規則などに）従う",example:"All employees must comply with the updated safety regulations.",exampleJa:"すべての従業員は更新された安全規則に従わなければならない。"},
-{id:4,word:"negotiate",pos:"動",meaning:"交渉する",example:"The two companies spent weeks negotiating the terms of the merger.",exampleJa:"両社は合併の条件を交渉するのに数週間を費やした。"},
-{id:5,word:"revenue",pos:"名",meaning:"収益",example:"The company's revenue increased by 12 percent compared to last year.",exampleJa:"その会社の収益は前年に比べて12パーセント増加した。"},
-{id:6,word:"subsidiary",pos:"名",meaning:"子会社",example:"The parent company decided to sell one of its overseas subsidiaries.",exampleJa:"親会社は海外子会社の一つを売却することを決定した。"},
-{id:7,word:"endorse",pos:"動",meaning:"支持する・推薦する",example:"Several well-known athletes have agreed to endorse the new sports brand.",exampleJa:"何人かの著名なアスリートがその新しいスポーツブランドを支持することに同意した。"},
-{id:8,word:"procurement",pos:"名",meaning:"調達",example:"The procurement department is responsible for sourcing raw materials at the best price.",exampleJa:"調達部門は最良の価格で原材料を調達する責任を負っている。"},
-{id:9,word:"forecast",pos:"動",meaning:"予測する",example:"Analysts forecast steady growth in the tech sector over the next five years.",exampleJa:"アナリストは今後5年間、テクノロジー分野で着実な成長を予測している。"},
-{id:10,word:"itinerary",pos:"名",meaning:"旅程",example:"Please review the attached itinerary before your business trip to Chicago.",exampleJa:"シカゴへの出張前に、添付の旅程をご確認ください。"},
-{id:11,word:"reimburse",pos:"動",meaning:"払い戻す",example:"The company will reimburse employees for approved travel expenses.",exampleJa:"会社は承認された出張費用を従業員に払い戻す。"},
-{id:12,word:"discrepancy",pos:"名",meaning:"食い違い",example:"The accountant noticed a discrepancy between the invoice and the purchase order.",exampleJa:"会計士は請求書と発注書の間に食い違いがあることに気づいた。"},
-{id:13,word:"streamline",pos:"動",meaning:"効率化する",example:"The new software helped streamline the entire ordering process.",exampleJa:"新しいソフトウェアは注文プロセス全体を効率化するのに役立った。"},
-{id:14,word:"comprehensive",pos:"形",meaning:"包括的な",example:"The consultant provided a comprehensive report on the company's financial health.",exampleJa:"コンサルタントはその会社の財務状況について包括的な報告書を提供した。"},
-{id:15,word:"versatile",pos:"形",meaning:"多才な・多用途な",example:"Her versatile skill set makes her a valuable asset to any team.",exampleJa:"彼女の多才なスキルセットは、どんなチームにとっても貴重な財産となる。"},
-{id:16,word:"meticulous",pos:"形",meaning:"細心の注意を払う",example:"The auditor was meticulous in checking every line of the financial statements.",exampleJa:"その監査人は財務諸表のあらゆる項目を確認する際、細心の注意を払った。"},
-{id:17,word:"redundant",pos:"形",meaning:"余剰の・不要な",example:"Several positions were made redundant after the two departments merged.",exampleJa:"二つの部署が統合された後、いくつかの職が余剰となった。"},
-{id:18,word:"viable",pos:"形",meaning:"実行可能な・存続可能な",example:"The startup needs more funding to remain a viable business.",exampleJa:"そのスタートアップは存続可能な事業であり続けるために、さらなる資金が必要だ。"},
-{id:19,word:"tenant",pos:"名",meaning:"賃借人",example:"The building owner is looking for a new tenant for the vacant office space.",exampleJa:"ビルのオーナーは空いているオフィススペースの新しい賃借人を探している。"},
-{id:20,word:"warranty",pos:"名",meaning:"保証",example:"The printer comes with a two-year warranty against manufacturing defects.",exampleJa:"そのプリンターには製造上の欠陥に対する2年間の保証が付いている。"},
-{id:21,word:"invoice",pos:"名",meaning:"請求書",example:"Please send the invoice to the accounting department by the end of the week.",exampleJa:"今週末までに請求書を経理部門へ送付してください。"},
-{id:22,word:"merger",pos:"名",meaning:"合併",example:"The merger between the two airlines was approved by regulators last month.",exampleJa:"両航空会社の合併は先月、規制当局によって承認された。"},
-{id:23,word:"acquisition",pos:"名",meaning:"買収",example:"The acquisition of the smaller firm allowed the company to expand into new markets.",exampleJa:"その小規模な会社の買収により、当社は新しい市場へ進出することができた。"},
-{id:24,word:"workforce",pos:"名",meaning:"労働力",example:"The company plans to expand its workforce by hiring 200 new employees this year.",exampleJa:"その会社は今年、200人の新入社員を雇用して労働力を拡大する予定だ。"},
-{id:25,word:"incentive",pos:"名",meaning:"誘因・奨励金",example:"The sales team was offered a bonus incentive to exceed their quarterly targets.",exampleJa:"営業チームは四半期目標を上回るためのボーナス報奨を提示された。"},
-{id:26,word:"liability",pos:"名",meaning:"負債・責任",example:"The company recorded the unpaid loan as a liability on its balance sheet.",exampleJa:"会社は未払いの融資を貸借対照表上の負債として計上した。"},
-{id:27,word:"benchmark",pos:"名",meaning:"基準",example:"The firm used industry benchmarks to evaluate its own performance.",exampleJa:"その会社は業界の基準を使って自社の業績を評価した。"},
-{id:28,word:"outsource",pos:"動",meaning:"外部委託する",example:"The company decided to outsource its customer service operations to reduce costs.",exampleJa:"その会社はコスト削減のため、顧客サービス業務を外部委託することを決定した。"},
-{id:29,word:"proficient",pos:"形",meaning:"熟練した",example:"Applicants must be proficient in at least two foreign languages.",exampleJa:"応募者は少なくとも2つの外国語に熟練していなければならない。"},
-{id:30,word:"autonomous",pos:"形",meaning:"自律的な",example:"Each regional office operates as an autonomous unit within the larger organization.",exampleJa:"各地域オフィスは、より大きな組織の中で自律的な単位として運営されている。"},
-{id:31,word:"jeopardize",pos:"動",meaning:"危うくする",example:"Missing the deadline could jeopardize the entire project's funding.",exampleJa:"締め切りに間に合わないと、プロジェクト全体の資金提供が危うくなる可能性がある。"},
-{id:32,word:"mandate",pos:"名",meaning:"命令・権限",example:"The new policy was implemented under a government mandate.",exampleJa:"その新しい方針は政府の命令の下で実施された。"},
-{id:33,word:"stipulate",pos:"動",meaning:"規定する",example:"The contract stipulates that payment must be made within 30 days.",exampleJa:"契約書には支払いを30日以内に行うことが規定されている。"},
-{id:34,word:"surplus",pos:"名",meaning:"余剰",example:"The warehouse reported a surplus of inventory at the end of the fiscal year.",exampleJa:"倉庫は会計年度末に在庫の余剰を報告した。"},
-{id:35,word:"deficit",pos:"名",meaning:"赤字・不足",example:"The company reported a budget deficit for the second consecutive year.",exampleJa:"その会社は2年連続で予算赤字を報告した。"},
-{id:36,word:"consensus",pos:"名",meaning:"合意",example:"After a long discussion, the board finally reached a consensus on the budget.",exampleJa:"長い議論の後、取締役会はついに予算について合意に達した。"},
-{id:37,word:"ambiguous",pos:"形",meaning:"曖昧な",example:"The instructions in the manual were too ambiguous for new employees to follow.",exampleJa:"マニュアルの指示は新入社員が従うにはあまりにも曖昧だった。"},
-{id:38,word:"credential",pos:"名",meaning:"資格・信任状",example:"The candidate's credentials impressed the entire hiring committee.",exampleJa:"その候補者の資格は採用委員会全体に感銘を与えた。"},
-{id:39,word:"expedite",pos:"動",meaning:"促進する・早める",example:"The manager asked the courier to expedite the delivery of the urgent package.",exampleJa:"マネージャーは配送業者に緊急の荷物の配達を早めるよう依頼した。"},
-{id:40,word:"facilitate",pos:"動",meaning:"促進する・円滑にする",example:"The new software was designed to facilitate communication between departments.",exampleJa:"その新しいソフトウェアは部門間のコミュニケーションを円滑にするために設計された。"},
-{id:41,word:"inventory",pos:"名",meaning:"在庫",example:"The store conducts a full inventory check at the end of every month.",exampleJa:"その店は毎月末に在庫の完全なチェックを行う。"},
-{id:42,word:"leverage",pos:"動",meaning:"活用する",example:"The company plans to leverage its existing customer base to launch the new product.",exampleJa:"その会社は新製品を発売するために既存の顧客基盤を活用する予定だ。"},
-{id:43,word:"mitigate",pos:"動",meaning:"緩和する",example:"The new policy is intended to mitigate the risks associated with remote work.",exampleJa:"その新しい方針はリモートワークに伴うリスクを緩和することを目的としている。"},
-{id:44,word:"notify",pos:"動",meaning:"通知する",example:"Employees must notify their supervisor at least two weeks before taking leave.",exampleJa:"従業員は休暇を取る少なくとも2週間前に上司に通知しなければならない。"},
-{id:45,word:"obsolete",pos:"形",meaning:"時代遅れの",example:"The company replaced its obsolete equipment with state-of-the-art machinery.",exampleJa:"その会社は時代遅れの設備を最新鋭の機械に置き換えた。"},
-{id:46,word:"pending",pos:"形",meaning:"保留中の",example:"The contract remains pending until both parties sign the final agreement.",exampleJa:"その契約は両当事者が最終合意書に署名するまで保留のままである。"},
-{id:47,word:"quota",pos:"名",meaning:"割当量・ノルマ",example:"Each sales representative is expected to meet a monthly quota.",exampleJa:"各営業担当者は月間ノルマを達成することが期待されている。"},
-{id:48,word:"refund",pos:"名",meaning:"払い戻し",example:"Customers who are not satisfied with the product can request a full refund.",exampleJa:"製品に満足しない顧客は全額払い戻しを請求できる。"},
-{id:49,word:"sustain",pos:"動",meaning:"維持する",example:"The company has managed to sustain steady growth despite the economic downturn.",exampleJa:"その会社は経済の低迷にもかかわらず、着実な成長を維持することに成功している。"},
-{id:50,word:"undermine",pos:"動",meaning:"弱める・損なう",example:"Constant delays in production could undermine the client's confidence in the company.",exampleJa:"生産の絶え間ない遅れは、その会社に対する顧客の信頼を損なう可能性がある。"},
-{id:51,word:"entrepreneur",pos:"名",meaning:"起業家",example:"The workshop was designed to help entrepreneurs develop viable business plans.",exampleJa:"そのワークショップは起業家が実行可能な事業計画を作成するのを助けるために企画された。"},
-{id:52,word:"stakeholder",pos:"名",meaning:"利害関係者",example:"Before finalizing the merger, management consulted with all major stakeholders.",exampleJa:"合併を最終決定する前に、経営陣はすべての主要な利害関係者と協議した。"},
-{id:53,word:"logistics",pos:"名",meaning:"物流",example:"The logistics team coordinates the shipment of products to over thirty countries.",exampleJa:"物流チームは30カ国以上への製品の出荷を調整している。"},
-{id:54,word:"overhead",pos:"名",meaning:"諸経費",example:"Switching to a smaller office reduced the company's monthly overhead significantly.",exampleJa:"より小さなオフィスに移転したことで、会社の月々の諸経費は大幅に削減された。"},
-{id:55,word:"turnover",pos:"名",meaning:"離職率・総売上高",example:"The retail chain reported a sharp increase in staff turnover last quarter.",exampleJa:"その小売チェーンは前四半期に従業員の離職率が急増したと報告した。"},
-{id:56,word:"layoff",pos:"名",meaning:"解雇・レイオフ",example:"The company announced a round of layoffs to cut costs amid declining sales.",exampleJa:"その会社は売上減少の中、コスト削減のため一連の解雇を発表した。"},
-{id:57,word:"severance",pos:"名",meaning:"退職金",example:"Employees who are laid off will receive two months of severance pay.",exampleJa:"解雇された従業員は2カ月分の退職金を受け取る。"},
-{id:58,word:"appraisal",pos:"名",meaning:"評価・査定",example:"Each employee undergoes a formal performance appraisal once a year.",exampleJa:"各従業員は年に一度、正式な業績評価を受ける。"},
-{id:59,word:"clientele",pos:"名",meaning:"顧客層",example:"The boutique has built a loyal clientele over the past decade.",exampleJa:"そのブティックは過去10年間で忠実な顧客層を築いてきた。"},
-{id:60,word:"franchise",pos:"名",meaning:"フランチャイズ",example:"The restaurant chain plans to sell franchises in several overseas markets.",exampleJa:"そのレストランチェーンはいくつかの海外市場でフランチャイズを販売する計画だ。"},
-{id:61,word:"patent",pos:"名",meaning:"特許",example:"The engineer filed a patent for her new manufacturing process.",exampleJa:"その技術者は新しい製造プロセスの特許を出願した。"},
-{id:62,word:"royalty",pos:"名",meaning:"使用料",example:"The author receives a royalty for every copy of the book sold.",exampleJa:"その著者は書籍が1冊売れるごとに使用料を受け取る。"},
-{id:63,word:"tariff",pos:"名",meaning:"関税",example:"The new tariff on imported steel raised production costs for local manufacturers.",exampleJa:"輸入鋼材への新しい関税は、地元の製造業者の生産コストを引き上げた。"},
-{id:64,word:"premises",pos:"名",meaning:"構内・店舗",example:"Visitors must sign in at reception before entering the company premises.",exampleJa:"来訪者は会社の構内に入る前に受付でサインインしなければならない。"},
-{id:65,word:"amenity",pos:"名",meaning:"設備・アメニティ",example:"The new office building offers amenities such as a gym and a rooftop café.",exampleJa:"新しいオフィスビルにはジムや屋上カフェといった設備が備わっている。"},
-{id:66,word:"voucher",pos:"名",meaning:"引換券",example:"Customers who complete the survey will receive a discount voucher.",exampleJa:"アンケートに回答した顧客は割引券を受け取る。"},
-{id:67,word:"ledger",pos:"名",meaning:"元帳",example:"The bookkeeper updates the general ledger at the end of each business day.",exampleJa:"経理担当者は営業日の終わりに総勘定元帳を更新する。"},
-{id:68,word:"compliance",pos:"名",meaning:"コンプライアンス・遵守",example:"The audit confirmed the factory's compliance with international safety standards.",exampleJa:"監査により、その工場が国際安全基準を遵守していることが確認された。"},
-{id:69,word:"disclosure",pos:"名",meaning:"開示",example:"Full disclosure of financial risks is required before investors sign the agreement.",exampleJa:"投資家が契約書に署名する前に、財務リスクの完全な開示が求められる。"},
-{id:70,word:"infrastructure",pos:"名",meaning:"インフラ",example:"The city invested heavily in infrastructure to attract new businesses.",exampleJa:"その市は新しい企業を誘致するためインフラに多額の投資を行った。"},
-{id:71,word:"outlet",pos:"名",meaning:"直売店",example:"The manufacturer opened a factory outlet to sell discontinued items at reduced prices.",exampleJa:"そのメーカーは廃盤商品を割引価格で販売するアウトレット店を開いた。"},
-{id:72,word:"perk",pos:"名",meaning:"役得・特典",example:"Free gym membership is one of the perks offered to full-time employees.",exampleJa:"無料のジム会員資格は正社員に提供される特典の一つだ。"},
-{id:73,word:"portfolio",pos:"名",meaning:"ポートフォリオ",example:"The designer submitted an impressive portfolio during the job interview.",exampleJa:"そのデザイナーは就職面接で見事なポートフォリオを提出した。"},
-{id:74,word:"referral",pos:"名",meaning:"紹介",example:"Most of the firm's new clients come through referrals from existing customers.",exampleJa:"その会社の新規顧客の大半は既存顧客からの紹介による。"},
-{id:75,word:"subsidy",pos:"名",meaning:"補助金",example:"The government offers a subsidy to companies that invest in renewable energy.",exampleJa:"政府は再生可能エネルギーに投資する企業に補助金を提供している。"},
-{id:76,word:"tenure",pos:"名",meaning:"在職期間",example:"During her ten-year tenure as CEO, the company's revenue tripled.",exampleJa:"CEOとしての10年間の在職期間中、その会社の収益は3倍になった。"},
-{id:77,word:"threshold",pos:"名",meaning:"基準値",example:"Orders that exceed a certain threshold qualify for free shipping.",exampleJa:"一定の基準値を超える注文は送料無料の対象となる。"},
-{id:78,word:"venture",pos:"名",meaning:"事業・ベンチャー",example:"The two firms formed a joint venture to develop the new technology.",exampleJa:"両社はその新技術を開発するために合弁事業を設立した。"},
-{id:79,word:"yield",pos:"名",meaning:"利回り・産出量",example:"Investors were attracted by the fund's consistently high yield.",exampleJa:"投資家たちはそのファンドの一貫して高い利回りに魅力を感じた。"},
-{id:80,word:"affiliate",pos:"名",meaning:"系列会社",example:"The publishing house operates several affiliates across Asia.",exampleJa:"その出版社はアジア各地でいくつかの系列会社を運営している。"},
-{id:81,word:"agenda",pos:"名",meaning:"議題",example:"The chairperson circulated the agenda for tomorrow's board meeting.",exampleJa:"議長は明日の取締役会の議題を配布した。"},
-{id:82,word:"brochure",pos:"名",meaning:"パンフレット",example:"The travel agency updated its brochure to include the new tour packages.",exampleJa:"その旅行代理店は新しいツアーパッケージを掲載するためパンフレットを更新した。"},
-{id:83,word:"clause",pos:"名",meaning:"条項",example:"The lease includes a clause allowing early termination with 60 days' notice.",exampleJa:"その賃貸契約には60日前の通知で早期解約を認める条項が含まれている。"},
-{id:84,word:"commission",pos:"名",meaning:"手数料",example:"Sales representatives earn a commission on every unit they sell.",exampleJa:"営業担当者は販売した製品1台ごとに手数料を得る。"},
-{id:85,word:"correspondence",pos:"名",meaning:"通信・書簡",example:"All business correspondence should be archived for at least five years.",exampleJa:"すべての業務上の通信は少なくとも5年間保管されるべきである。"},
-{id:86,word:"delegate",pos:"名",meaning:"代表者",example:"Each department sent a delegate to the annual industry conference.",exampleJa:"各部門は年次業界会議に代表者を1名派遣した。"},
-{id:87,word:"draft",pos:"名",meaning:"草案",example:"The legal team is reviewing the first draft of the partnership agreement.",exampleJa:"法務チームは提携契約書の第一草案を確認している。"},
-{id:88,word:"enrollment",pos:"名",meaning:"入会・登録",example:"Enrollment in the training program is limited to fifty participants.",exampleJa:"その研修プログラムへの登録は50人に限定されている。"},
-{id:89,word:"entity",pos:"名",meaning:"事業体・法人",example:"The subsidiary operates as a separate legal entity from the parent company.",exampleJa:"その子会社は親会社とは別の独立した法人として運営されている。"},
-{id:90,word:"equity",pos:"名",meaning:"株式・公平性",example:"The founders retained a majority equity stake in the company.",exampleJa:"創業者たちはその会社の過半数の株式を保持し続けた。"},
-{id:91,word:"estimate",pos:"名",meaning:"見積もり",example:"The contractor provided a detailed estimate for the office renovation.",exampleJa:"その業者はオフィス改装の詳細な見積もりを提出した。"},
-{id:92,word:"exemption",pos:"名",meaning:"免除",example:"Nonprofit organizations may qualify for a tax exemption.",exampleJa:"非営利団体は税の免除を受けられる場合がある。"},
-{id:93,word:"expenditure",pos:"名",meaning:"支出",example:"The finance department tracks every expenditure over one thousand dollars.",exampleJa:"経理部門は1000ドルを超えるすべての支出を記録している。"},
-{id:94,word:"grant",pos:"名",meaning:"助成金",example:"The research team received a grant to study renewable energy storage.",exampleJa:"その研究チームは再生可能エネルギーの貯蔵に関する研究のため助成金を受け取った。"},
-{id:95,word:"guideline",pos:"名",meaning:"指針",example:"Employees are expected to follow the company's ethical guidelines at all times.",exampleJa:"従業員は常に会社の倫理指針に従うことが求められている。"},
-{id:96,word:"headquarters",pos:"名",meaning:"本社",example:"The company relocated its headquarters to a larger building downtown.",exampleJa:"その会社は本社を市中心部のより大きな建物へ移転した。"},
-{id:97,word:"hierarchy",pos:"名",meaning:"階層",example:"The new organizational chart simplified the management hierarchy.",exampleJa:"新しい組織図は管理階層を簡素化した。"},
-{id:98,word:"installment",pos:"名",meaning:"分割払い",example:"Customers can pay for the equipment in monthly installments.",exampleJa:"顧客はその機器の代金を月々の分割払いで支払うことができる。"},
-{id:99,word:"intern",pos:"名",meaning:"インターン",example:"The marketing department hired three interns for the summer.",exampleJa:"マーケティング部門は夏の間、3人のインターンを採用した。"},
-{id:100,word:"layout",pos:"名",meaning:"レイアウト・配置",example:"The store redesigned its layout to improve customer flow.",exampleJa:"その店舗は顧客の動線を改善するためレイアウトを再設計した。"},
-{id:101,word:"lease",pos:"名",meaning:"賃貸借契約",example:"The company signed a five-year lease for the new warehouse.",exampleJa:"その会社は新しい倉庫について5年間の賃貸借契約を結んだ。"},
-{id:102,word:"margin",pos:"名",meaning:"利ざや",example:"Rising raw material costs have squeezed the company's profit margin.",exampleJa:"原材料費の上昇が会社の利ざやを圧迫している。"},
-{id:103,word:"milestone",pos:"名",meaning:"節目",example:"Reaching one million users was a major milestone for the app.",exampleJa:"ユーザー数100万人到達は、そのアプリにとって大きな節目だった。"},
-{id:104,word:"nominee",pos:"名",meaning:"候補者",example:"The board will vote on the nominee for the vacant director position.",exampleJa:"取締役会は空席となっている取締役職の候補者について投票する。"},
-{id:105,word:"outlook",pos:"名",meaning:"見通し",example:"Analysts remain cautious about the company's outlook for next year.",exampleJa:"アナリストたちは来年の同社の見通しについて依然として慎重な姿勢を崩していない。"},
-{id:106,word:"overhaul",pos:"名",meaning:"抜本的見直し",example:"The IT department is planning a complete overhaul of the outdated system.",exampleJa:"IT部門はその旧式のシステムの完全な抜本的見直しを計画している。"},
-{id:107,word:"payroll",pos:"名",meaning:"給与支払い名簿",example:"The new software automated the entire payroll process.",exampleJa:"その新しいソフトウェアは給与支払いのプロセス全体を自動化した。"},
-{id:108,word:"pension",pos:"名",meaning:"年金",example:"Employees become eligible for the company pension after ten years of service.",exampleJa:"従業員は10年間の勤続後、会社の年金の受給資格を得る。"},
-{id:109,word:"petition",pos:"名",meaning:"嘆願書",example:"Several residents signed a petition opposing the construction of the new factory.",exampleJa:"何人かの住民が新工場の建設に反対する嘆願書に署名した。"},
-{id:110,word:"premium",pos:"名",meaning:"割増料金・保険料",example:"Customers who choose overnight delivery must pay a premium.",exampleJa:"翌日配送を選ぶ顧客は割増料金を支払わなければならない。"},
-{id:111,word:"prerequisite",pos:"名",meaning:"前提条件",example:"Basic accounting knowledge is a prerequisite for this position.",exampleJa:"基本的な会計知識はこの職務の前提条件である。"},
-{id:112,word:"proceeds",pos:"名",meaning:"収益",example:"The proceeds from the charity auction will fund local schools.",exampleJa:"その慈善オークションの収益は地元の学校の資金となる。"},
-{id:113,word:"prospect",pos:"名",meaning:"見込み客・可能性",example:"The sales team identified several promising prospects at the trade show.",exampleJa:"営業チームはその展示会でいくつかの有望な見込み客を見つけた。"},
-{id:114,word:"quotation",pos:"名",meaning:"見積もり",example:"Please request a quotation from at least three suppliers before ordering.",exampleJa:"発注する前に、少なくとも3社の仕入れ先から見積もりを取ってください。"},
-{id:115,word:"rebate",pos:"名",meaning:"割戻金",example:"Customers who purchase before the end of the month are eligible for a rebate.",exampleJa:"月末までに購入した顧客は割戻金の対象となる。"},
-{id:116,word:"accommodate",pos:"動",meaning:"対応する・収容する",example:"The hotel was able to accommodate the last-minute change in the group's schedule.",exampleJa:"そのホテルはグループのスケジュールの直前の変更に対応することができた。"},
-{id:117,word:"anticipate",pos:"動",meaning:"予想する",example:"The company anticipates a rise in demand during the holiday season.",exampleJa:"その会社は休暇シーズン中に需要が高まると予想している。"},
-{id:118,word:"appoint",pos:"動",meaning:"任命する",example:"The board voted to appoint a new chief financial officer.",exampleJa:"取締役会は新しい最高財務責任者を任命することを可決した。"},
-{id:119,word:"audit",pos:"動",meaning:"監査する",example:"An independent firm will audit the company's accounts this year.",exampleJa:"独立した会社が今年、その会社の会計を監査する。"},
-{id:120,word:"authorize",pos:"動",meaning:"権限を与える",example:"Only the department manager is authorized to approve expenses over $500.",exampleJa:"部門マネージャーのみが500ドルを超える経費を承認する権限を与えられている。"},
-{id:121,word:"commence",pos:"動",meaning:"開始する",example:"Construction on the new bridge will commence next spring.",exampleJa:"新しい橋の建設は来春に開始される。"},
-{id:122,word:"compensate",pos:"動",meaning:"補償する",example:"The airline agreed to compensate passengers for the canceled flight.",exampleJa:"その航空会社は欠航便について乗客に補償することに同意した。"},
-{id:123,word:"consolidate",pos:"動",meaning:"統合する",example:"The two departments were consolidated to reduce administrative costs.",exampleJa:"管理コストを削減するため、2つの部門が統合された。"},
-{id:124,word:"curb",pos:"動",meaning:"抑制する",example:"The new policy is intended to curb excessive overtime among employees.",exampleJa:"その新しい方針は従業員の過度な残業を抑制することを目的としている。"},
-{id:125,word:"deploy",pos:"動",meaning:"配備する",example:"The IT team will deploy the updated software across all branch offices.",exampleJa:"ITチームは更新されたソフトウェアをすべての支店に配備する。"},
-{id:126,word:"designate",pos:"動",meaning:"指定する",example:"The top floor has been designated as a quiet workspace for focused tasks.",exampleJa:"最上階は集中作業のための静かなワークスペースとして指定されている。"},
-{id:127,word:"disclose",pos:"動",meaning:"開示する",example:"The company was required to disclose the results of the safety inspection.",exampleJa:"その会社は安全検査の結果を開示することを求められた。"},
-{id:128,word:"dispatch",pos:"動",meaning:"発送する",example:"The warehouse dispatches orders within 24 hours of receipt.",exampleJa:"倉庫は注文を受けてから24時間以内に発送する。"},
-{id:129,word:"diversify",pos:"動",meaning:"多角化する",example:"The manufacturer decided to diversify its product line to reduce risk.",exampleJa:"そのメーカーはリスクを減らすため製品ラインを多角化することを決定した。"},
-{id:130,word:"downsize",pos:"動",meaning:"人員削減する",example:"The company had to downsize its workforce after losing its biggest client.",exampleJa:"その会社は最大の顧客を失った後、人員を削減しなければならなかった。"},
-{id:131,word:"enact",pos:"動",meaning:"制定する",example:"Lawmakers enacted new regulations governing data privacy.",exampleJa:"議員たちはデータプライバシーを規定する新しい法律を制定した。"},
-{id:132,word:"enforce",pos:"動",meaning:"施行する",example:"Security staff strictly enforce the building's visitor policy.",exampleJa:"警備員はそのビルの訪問者規則を厳格に施行している。"},
-{id:133,word:"enhance",pos:"動",meaning:"高める",example:"The redesigned website was created to enhance the user experience.",exampleJa:"再設計されたウェブサイトはユーザー体験を高めるために作られた。"},
-{id:134,word:"envision",pos:"動",meaning:"構想する",example:"The founders envision expanding the business into international markets.",exampleJa:"創業者たちはその事業を国際市場へ拡大することを構想している。"},
-{id:135,word:"exempt",pos:"動",meaning:"免除する",example:"Small businesses with fewer than ten employees are exempt from the new rule.",exampleJa:"従業員10人未満の中小企業はその新しい規則を免除される。"},
-{id:136,word:"finalize",pos:"動",meaning:"最終決定する",example:"The two parties hope to finalize the contract by the end of the week.",exampleJa:"両当事者は今週末までに契約を最終決定することを望んでいる。"},
-{id:137,word:"hinder",pos:"動",meaning:"妨げる",example:"Outdated equipment continued to hinder the factory's productivity.",exampleJa:"旧式の設備がその工場の生産性を妨げ続けた。"},
-{id:138,word:"implement",pos:"動",meaning:"実施する",example:"The HR department will implement the new attendance policy next month.",exampleJa:"人事部門は来月、新しい出勤方針を実施する。"},
-{id:139,word:"incur",pos:"動",meaning:"(負債などを)負う",example:"Late payments will incur an additional fee of five percent.",exampleJa:"支払いの遅延は5パーセントの追加料金を負うことになる。"},
-{id:140,word:"institute",pos:"動",meaning:"制定する",example:"Management decided to institute a stricter dress code for client meetings.",exampleJa:"経営陣は顧客との会議のためより厳格な服装規定を制定することを決定した。"},
-{id:141,word:"integrate",pos:"動",meaning:"統合する",example:"The company plans to integrate the two customer databases by next quarter.",exampleJa:"その会社は来四半期までに2つの顧客データベースを統合する計画だ。"},
-{id:142,word:"intervene",pos:"動",meaning:"介入する",example:"The mediator intervened to help both sides reach a compromise.",exampleJa:"その調停者は双方が妥協に至るのを助けるため介入した。"},
-{id:143,word:"liquidate",pos:"動",meaning:"清算する",example:"The struggling retailer decided to liquidate its remaining inventory.",exampleJa:"経営難に陥っていた小売業者は残りの在庫を清算することを決定した。"},
-{id:144,word:"optimize",pos:"動",meaning:"最適化する",example:"The engineers worked to optimize the factory's production line.",exampleJa:"技術者たちはその工場の生産ラインを最適化するために取り組んだ。"},
-{id:145,word:"outperform",pos:"動",meaning:"上回る",example:"The new smartphone model is expected to outperform its predecessor in sales.",exampleJa:"その新しいスマートフォンのモデルは売上で前モデルを上回ると予想されている。"},
-{id:146,word:"overlook",pos:"動",meaning:"見落とす",example:"The reviewer overlooked a critical error in the final draft.",exampleJa:"その校閲者は最終稿にある重大な誤りを見落とした。"},
-{id:147,word:"oversee",pos:"動",meaning:"監督する",example:"A senior engineer was assigned to oversee the construction project.",exampleJa:"ベテランの技術者がその建設プロジェクトを監督するために任命された。"},
-{id:148,word:"prevail",pos:"動",meaning:"普及する・勝る",example:"Despite the setbacks, the original marketing strategy eventually prevailed.",exampleJa:"数々の困難にもかかわらず、当初のマーケティング戦略が最終的には採用された。"},
-{id:149,word:"prioritize",pos:"動",meaning:"優先する",example:"Managers were asked to prioritize projects that generate immediate revenue.",exampleJa:"マネージャーたちは即座に収益を生むプロジェクトを優先するよう求められた。"},
-{id:150,word:"prohibit",pos:"動",meaning:"禁止する",example:"Company policy strictly prohibits the use of personal devices during meetings.",exampleJa:"会社の方針は会議中の私用デバイスの使用を厳しく禁止している。"},
-{id:151,word:"rectify",pos:"動",meaning:"修正する",example:"The technician was called in to rectify the billing error immediately.",exampleJa:"その技術者は請求書の誤りを直ちに修正するために呼ばれた。"},
-{id:152,word:"refrain",pos:"動",meaning:"控える",example:"Visitors are asked to refrain from taking photographs inside the factory.",exampleJa:"来訪者は工場内での写真撮影を控えるよう求められている。"},
-{id:153,word:"reinforce",pos:"動",meaning:"強化する",example:"The training session was designed to reinforce the company's core values.",exampleJa:"その研修は会社の中核的な価値観を強化するために企画された。"},
-{id:154,word:"reinstate",pos:"動",meaning:"復職させる",example:"After the investigation concluded, the employee was reinstated to her position.",exampleJa:"調査が終了した後、その従業員は元の職に復職した。"},
-{id:155,word:"relocate",pos:"動",meaning:"移転する",example:"The manufacturing plant will relocate to a larger facility next year.",exampleJa:"その製造工場は来年、より大きな施設へ移転する。"},
-{id:156,word:"reschedule",pos:"動",meaning:"予定を変更する",example:"The meeting was rescheduled due to a conflict with the client's travel plans.",exampleJa:"その会議は顧客の出張予定との重複のため予定変更となった。"},
-{id:157,word:"resolve",pos:"動",meaning:"解決する",example:"The customer service team resolved the complaint within a single business day.",exampleJa:"カスタマーサービスチームはその苦情を1営業日以内に解決した。"},
-{id:158,word:"restructure",pos:"動",meaning:"再編する",example:"The company decided to restructure its debt to avoid bankruptcy.",exampleJa:"その会社は倒産を避けるため負債を再編することを決定した。"},
-{id:159,word:"retain",pos:"動",meaning:"保持する",example:"The firm offered a bonus to retain its top-performing employees.",exampleJa:"その会社は優秀な従業員を保持するためボーナスを提供した。"},
-{id:160,word:"revoke",pos:"動",meaning:"取り消す",example:"The city revoked the restaurant's license after multiple health violations.",exampleJa:"市は複数の衛生違反の後、そのレストランの営業許可を取り消した。"},
-{id:161,word:"solicit",pos:"動",meaning:"勧誘する",example:"The nonprofit organization solicits donations from local businesses every year.",exampleJa:"その非営利団体は毎年、地元企業から寄付を募っている。"},
-{id:162,word:"sponsor",pos:"動",meaning:"後援する",example:"The bank agreed to sponsor the annual marathon in the city.",exampleJa:"その銀行は市の年次マラソン大会を後援することに同意した。"},
-{id:163,word:"subsidize",pos:"動",meaning:"補助金を出す",example:"The local government subsidizes public transportation to reduce traffic congestion.",exampleJa:"地方自治体は交通渋滞を減らすため公共交通機関に補助金を出している。"},
-{id:164,word:"contingent",pos:"形",meaning:"条件付きの",example:"The job offer is contingent on the candidate passing a background check.",exampleJa:"その内定は候補者が身元調査に合格することを条件としている。"},
-{id:165,word:"adverse",pos:"形",meaning:"不利な",example:"The drought had an adverse effect on the region's agricultural output.",exampleJa:"その干ばつはその地域の農業生産に不利な影響を及ぼした。"},
-{id:166,word:"arbitrary",pos:"形",meaning:"恣意的な",example:"Employees complained that the new scheduling system seemed arbitrary.",exampleJa:"従業員たちはその新しいスケジュール管理システムが恣意的に見えると不満を述べた。"},
-{id:167,word:"concise",pos:"形",meaning:"簡潔な",example:"The manager asked for a concise summary of the quarterly results.",exampleJa:"マネージャーは四半期業績の簡潔な要約を求めた。"},
-{id:168,word:"conducive",pos:"形",meaning:"資する・つながる",example:"A quiet office environment is conducive to focused work.",exampleJa:"静かなオフィス環境は集中した作業に資する。"},
-{id:169,word:"discretionary",pos:"形",meaning:"裁量による",example:"Managers are given a discretionary budget for team-building activities.",exampleJa:"マネージャーにはチームビルディング活動のための裁量予算が与えられている。"},
-{id:170,word:"exorbitant",pos:"形",meaning:"法外な",example:"Some customers complained about the exorbitant shipping fees.",exampleJa:"一部の顧客は法外な送料について不満を述べた。"},
-{id:171,word:"formidable",pos:"形",meaning:"手強い",example:"The startup quickly became a formidable competitor in the industry.",exampleJa:"そのスタートアップはたちまち業界で手強い競合相手となった。"},
-{id:172,word:"incumbent",pos:"形",meaning:"現職の",example:"The incumbent CEO announced plans to retire next year.",exampleJa:"現職のCEOは来年退任する計画を発表した。"},
-{id:173,word:"indispensable",pos:"形",meaning:"不可欠な",example:"Reliable internet access has become indispensable for remote workers.",exampleJa:"信頼できるインターネット接続はリモートワーカーにとって不可欠なものとなった。"},
-{id:174,word:"lucrative",pos:"形",meaning:"儲かる",example:"Exporting to overseas markets proved to be a lucrative decision for the firm.",exampleJa:"海外市場への輸出はその会社にとって儲かる決断であることが判明した。"},
-{id:175,word:"mandatory",pos:"形",meaning:"義務的な",example:"Safety training is mandatory for all new factory employees.",exampleJa:"安全研修はすべての新しい工場従業員にとって義務である。"},
-{id:176,word:"plausible",pos:"形",meaning:"もっともらしい",example:"The consultant offered a plausible explanation for the sudden drop in sales.",exampleJa:"そのコンサルタントは売上の急落についてもっともらしい説明を提示した。"},
-{id:177,word:"precarious",pos:"形",meaning:"不安定な",example:"The startup's finances remained precarious throughout its first year.",exampleJa:"そのスタートアップの財務状況は設立初年度を通して不安定なままだった。"},
-{id:178,word:"preliminary",pos:"形",meaning:"予備の",example:"The preliminary findings suggest the new marketing campaign is working.",exampleJa:"予備的な調査結果は新しいマーケティングキャンペーンがうまくいっていることを示唆している。"},
-{id:179,word:"prevalent",pos:"形",meaning:"普及した",example:"Remote work has become increasingly prevalent since the pandemic.",exampleJa:"パンデミック以降、リモートワークはますます普及してきている。"},
-{id:180,word:"proprietary",pos:"形",meaning:"専有の",example:"The company uses proprietary software to manage its supply chain.",exampleJa:"その会社はサプライチェーンを管理するために自社専有のソフトウェアを使用している。"},
-{id:181,word:"prudent",pos:"形",meaning:"慎重な",example:"Given the uncertain market, the board took a prudent approach to spending.",exampleJa:"不透明な市場を踏まえ、取締役会は支出に対して慎重なアプローチを取った。"},
-{id:182,word:"rigorous",pos:"形",meaning:"厳格な",example:"All new products undergo rigorous testing before they are released.",exampleJa:"すべての新製品は発売前に厳格な検査を受ける。"},
-{id:183,word:"robust",pos:"形",meaning:"堅牢な",example:"The company reported robust growth in its overseas divisions.",exampleJa:"その会社は海外部門で堅調な成長を報告した。"},
-{id:184,word:"skeptical",pos:"形",meaning:"懐疑的な",example:"Some investors remain skeptical about the startup's long-term profitability.",exampleJa:"一部の投資家はそのスタートアップの長期的な収益性について依然として懐疑的だ。"},
-{id:185,word:"stringent",pos:"形",meaning:"厳しい",example:"The factory adopted stringent quality control measures after the recall.",exampleJa:"その工場はリコールの後、厳しい品質管理策を導入した。"},
-{id:186,word:"subsequent",pos:"形",meaning:"その後の",example:"Subsequent inspections revealed no further defects in the product.",exampleJa:"その後の検査では製品にさらなる欠陥は見つからなかった。"},
-{id:187,word:"substantive",pos:"形",meaning:"実質的な",example:"The two sides made substantive progress during the negotiation.",exampleJa:"両者はその交渉で実質的な進展を遂げた。"},
-{id:188,word:"tentative",pos:"形",meaning:"暫定的な",example:"A tentative agreement was reached, pending final approval from both boards.",exampleJa:"両社の取締役会による最終承認を待つ形で、暫定的な合意に達した。"},
-{id:189,word:"underlying",pos:"形",meaning:"根底にある",example:"The consultant identified the underlying cause of the production delays.",exampleJa:"そのコンサルタントは生産の遅れの根底にある原因を特定した。"},
-{id:190,word:"volatile",pos:"形",meaning:"不安定な",example:"The company's stock price has been highly volatile since the announcement.",exampleJa:"その会社の株価はその発表以来、非常に不安定になっている。"},
-{id:191,word:"considerably",pos:"副",meaning:"かなり",example:"Shipping costs have increased considerably over the past year.",exampleJa:"送料は過去1年でかなり上昇した。"},
-{id:192,word:"inadvertently",pos:"副",meaning:"不注意に",example:"The clerk inadvertently sent the confidential report to the wrong department.",exampleJa:"その事務員は不注意にも機密報告書を誤った部署に送ってしまった。"},
-{id:193,word:"presumably",pos:"副",meaning:"おそらく",example:"The delay was presumably caused by the recent system upgrade.",exampleJa:"その遅延はおそらく最近のシステムアップグレードが原因だった。"},
-{id:194,word:"simultaneously",pos:"副",meaning:"同時に",example:"The company launched the product in three countries simultaneously.",exampleJa:"その会社は3カ国で同時にその製品を発売した。"},
-{id:195,word:"subsequently",pos:"副",meaning:"その後",example:"The proposal was rejected and subsequently revised for resubmission.",exampleJa:"その提案は却下され、その後再提出のために修正された。"},
-{id:196,word:"tentatively",pos:"副",meaning:"暫定的に",example:"The launch date has been tentatively set for early March.",exampleJa:"発売日は3月上旬に暫定的に設定されている。"},
-{id:197,word:"inevitably",pos:"副",meaning:"必然的に",example:"Rapid growth inevitably brought new challenges for the small firm.",exampleJa:"急速な成長はその小さな会社に必然的に新たな課題をもたらした。"},
-{id:198,word:"accordingly",pos:"副",meaning:"それに応じて",example:"Sales targets were adjusted accordingly after the market downturn.",exampleJa:"市場の低迷後、売上目標はそれに応じて調整された。"},
-{id:199,word:"consequently",pos:"副",meaning:"その結果",example:"The factory experienced a power outage and consequently missed its shipping deadline.",exampleJa:"その工場は停電に見舞われ、その結果出荷期限に間に合わなかった。"},
-{id:200,word:"predominantly",pos:"副",meaning:"主に",example:"The company's customer base is predominantly made up of small businesses.",exampleJa:"その会社の顧客基盤は主に中小企業で構成されている。"}
+{id:1,word:"feasible",pos:"形",meaning:"実行可能な",example:"The manager questioned whether the new schedule was feasible given the current staffing levels.",exampleJa:"新しいスケジュールが現在の人員配置で実行可能かどうか、マネージャーは疑問視した。",collocations:["a feasible solution（実行可能な解決策）","economically feasible（経済的に実行可能な）"],derivatives:[{word:"feasibility",pos:"名",meaning:"実行可能性"},{word:"feasibly",pos:"副",meaning:"実行可能な形で"}],svoc:"[The manager] (questioned) <whether the new schedule was feasible> {given the current staffing levels}."},
+{id:2,word:"allocate",pos:"動",meaning:"割り当てる",example:"The finance team will allocate additional funds to the marketing department next quarter.",exampleJa:"経理チームは来四半期にマーケティング部門へ追加の資金を割り当てる予定だ。",collocations:["allocate funds（資金を割り当てる）","allocate resources（資源を配分する）"],derivatives:[{word:"allocation",pos:"名",meaning:"割り当て"},{word:"allocable",pos:"形",meaning:"割り当て可能な"}],svoc:"[The finance team] (will allocate) <additional funds> {to the marketing department} {next quarter}."},
+{id:3,word:"comply",pos:"動",meaning:"（規則などに）従う",example:"All employees must comply with the updated safety regulations.",exampleJa:"すべての従業員は更新された安全規則に従わなければならない。",collocations:["comply with regulations（規則に従う）","comply with the law（法律を遵守する）"],derivatives:[{word:"compliance",pos:"名",meaning:"遵守"},{word:"compliant",pos:"形",meaning:"従う・準拠した"}],svoc:"[All employees] (must comply) {with the updated safety regulations}."},
+{id:4,word:"negotiate",pos:"動",meaning:"交渉する",example:"The two companies spent weeks negotiating the terms of the merger.",exampleJa:"両社は合併の条件を交渉するのに数週間を費やした。",collocations:["negotiate a contract（契約交渉をする）","negotiate terms（条件を交渉する）"],derivatives:[{word:"negotiation",pos:"名",meaning:"交渉"},{word:"negotiable",pos:"形",meaning:"交渉の余地がある"},{word:"negotiator",pos:"名",meaning:"交渉人"}],svoc:"[The two companies] (spent) <weeks> {negotiating the terms of the merger}."},
+{id:5,word:"revenue",pos:"名",meaning:"収益",example:"The company's revenue increased by 12 percent compared to last year.",exampleJa:"その会社の収益は前年に比べて12パーセント増加した。",collocations:["annual revenue（年間収益）","generate revenue（収益を生み出す）"],derivatives:[{word:"revenue-generating",pos:"形",meaning:"収益を生む"}],svoc:"[The company's revenue] (increased) {by 12 percent} {compared to last year}."},
+{id:6,word:"subsidiary",pos:"名",meaning:"子会社",example:"The parent company decided to sell one of its overseas subsidiaries.",exampleJa:"親会社は海外子会社の一つを売却することを決定した。",collocations:["a wholly owned subsidiary（完全子会社）","overseas subsidiary（海外子会社）"],derivatives:[{word:"subsidiary",pos:"形",meaning:"付随的な・二次的な"}],svoc:"[The parent company] (decided) <to sell one of its overseas subsidiaries>."},
+{id:7,word:"endorse",pos:"動",meaning:"支持する・推薦する",example:"Several well-known athletes have agreed to endorse the new sports brand.",exampleJa:"何人かの著名なアスリートがその新しいスポーツブランドを支持することに同意した。",collocations:["endorse a product（製品を推薦する）","publicly endorse（公に支持する）"],derivatives:[{word:"endorsement",pos:"名",meaning:"推薦・支持"}],svoc:"[Several well-known athletes] (have agreed) <to endorse the new sports brand>."},
+{id:8,word:"procurement",pos:"名",meaning:"調達",example:"The procurement department is responsible for sourcing raw materials at the best price.",exampleJa:"調達部門は最良の価格で原材料を調達する責任を負っている。",collocations:["procurement process（調達プロセス）","procurement department（調達部門）"],derivatives:[{word:"procure",pos:"動",meaning:"調達する"}],svoc:"[The procurement department] (is) <responsible for sourcing raw materials at the best price>."},
+{id:9,word:"forecast",pos:"動",meaning:"予測する",example:"Analysts forecast steady growth in the tech sector over the next five years.",exampleJa:"アナリストは今後5年間、テクノロジー分野で着実な成長を予測している。",collocations:["forecast growth（成長を予測する）","weather forecast（天気予報）"],derivatives:[{word:"forecast",pos:"名",meaning:"予測・予報"},{word:"forecaster",pos:"名",meaning:"予測をする人"}],svoc:"[Analysts] (forecast) <steady growth in the tech sector> {over the next five years}."},
+{id:10,word:"itinerary",pos:"名",meaning:"旅程",example:"Please review the attached itinerary before your business trip to Chicago.",exampleJa:"シカゴへの出張前に、添付の旅程をご確認ください。",collocations:["travel itinerary（旅程表）","attached itinerary（添付の旅程表）"],derivatives:[{word:"itinerant",pos:"形",meaning:"巡回する・旅回りの"}],svoc:"(Please review) <the attached itinerary> {before your business trip to Chicago}."},
+{id:11,word:"reimburse",pos:"動",meaning:"払い戻す",example:"The company will reimburse employees for approved travel expenses.",exampleJa:"会社は承認された出張費用を従業員に払い戻す。",collocations:["reimburse expenses（経費を払い戻す）","reimburse employees（従業員に払い戻す）"],derivatives:[{word:"reimbursement",pos:"名",meaning:"払い戻し"}],svoc:"[The company] (will reimburse) <employees> {for approved travel expenses}."},
+{id:12,word:"discrepancy",pos:"名",meaning:"食い違い",example:"The accountant noticed a discrepancy between the invoice and the purchase order.",exampleJa:"会計士は請求書と発注書の間に食い違いがあることに気づいた。",collocations:["a discrepancy between A and B（AとBの間の食い違い）","resolve a discrepancy（食い違いを解消する）"],derivatives:[{word:"discrepant",pos:"形",meaning:"食い違った"}],svoc:"[The accountant] (noticed) <a discrepancy between the invoice and the purchase order>."},
+{id:13,word:"streamline",pos:"動",meaning:"効率化する",example:"The new software helped streamline the entire ordering process.",exampleJa:"新しいソフトウェアは注文プロセス全体を効率化するのに役立った。",collocations:["streamline a process（プロセスを効率化する）","streamline operations（業務を効率化する）"],derivatives:[{word:"streamlined",pos:"形",meaning:"効率化された"}],svoc:"[The new software] (helped streamline) <the entire ordering process>."},
+{id:14,word:"comprehensive",pos:"形",meaning:"包括的な",example:"The consultant provided a comprehensive report on the company's financial health.",exampleJa:"コンサルタントはその会社の財務状況について包括的な報告書を提供した。",collocations:["a comprehensive report（包括的な報告書）","comprehensive coverage（包括的な補償・網羅）"],derivatives:[{word:"comprehensively",pos:"副",meaning:"包括的に"},{word:"comprehension",pos:"名",meaning:"理解"}],svoc:"[The consultant] (provided) <a comprehensive report on the company's financial health>."},
+{id:15,word:"versatile",pos:"形",meaning:"多才な・多用途な",example:"Her versatile skill set makes her a valuable asset to any team.",exampleJa:"彼女の多才なスキルセットは、どんなチームにとっても貴重な財産となる。",collocations:["a versatile skill set（多才なスキルセット）","versatile employee（多才な従業員）"],derivatives:[{word:"versatility",pos:"名",meaning:"多才さ・汎用性"}],svoc:"[Her versatile skill set] (makes) <her> <a valuable asset to any team>."},
+{id:16,word:"meticulous",pos:"形",meaning:"細心の注意を払う",example:"The auditor was meticulous in checking every line of the financial statements.",exampleJa:"その監査人は財務諸表のあらゆる項目を確認する際、細心の注意を払った。",collocations:["meticulous attention to detail（細部への細心の注意）","meticulous record-keeping（几帳面な記録管理）"],derivatives:[{word:"meticulously",pos:"副",meaning:"細心の注意を払って"}],svoc:"[The auditor] (was) <meticulous> {in checking every line of the financial statements}."},
+{id:17,word:"redundant",pos:"形",meaning:"余剰の・不要な",example:"Several positions were made redundant after the two departments merged.",exampleJa:"二つの部署が統合された後、いくつかの職が余剰となった。",collocations:["make a position redundant（職を余剰にする＝解雇する）","redundant staff（余剰人員）"],derivatives:[{word:"redundancy",pos:"名",meaning:"余剰・人員整理"}],svoc:"[Several positions] (were made) <redundant> {after the two departments merged}."},
+{id:18,word:"viable",pos:"形",meaning:"実行可能な・存続可能な",example:"The startup needs more funding to remain a viable business.",exampleJa:"そのスタートアップは存続可能な事業であり続けるために、さらなる資金が必要だ。",collocations:["a viable option（実行可能な選択肢）","economically viable（経済的に成り立つ）"],derivatives:[{word:"viability",pos:"名",meaning:"実現可能性"}],svoc:"[The startup] (needs) <more funding> {to remain a viable business}."},
+{id:19,word:"tenant",pos:"名",meaning:"賃借人",example:"The building owner is looking for a new tenant for the vacant office space.",exampleJa:"ビルのオーナーは空いているオフィススペースの新しい賃借人を探している。",collocations:["find a tenant（借主を見つける）","tenant satisfaction（入居者満足度）"],derivatives:[{word:"tenancy",pos:"名",meaning:"賃借（期間）"}],svoc:"[The building owner] (is looking) {for a new tenant} {for the vacant office space}."},
+{id:20,word:"warranty",pos:"名",meaning:"保証",example:"The printer comes with a two-year warranty against manufacturing defects.",exampleJa:"そのプリンターには製造上の欠陥に対する2年間の保証が付いている。",collocations:["a two-year warranty（2年間の保証）","under warranty（保証期間中で）"],derivatives:[{word:"warrant",pos:"動",meaning:"保証する・正当化する"}],svoc:"[The printer] (comes) {with a two-year warranty} {against manufacturing defects}."},
+{id:21,word:"invoice",pos:"名",meaning:"請求書",example:"Please send the invoice to the accounting department by the end of the week.",exampleJa:"今週末までに請求書を経理部門へ送付してください。",collocations:["issue an invoice（請求書を発行する）","send an invoice（請求書を送る）"],derivatives:[{word:"invoice",pos:"動",meaning:"請求書を送付する"}],svoc:"(Please send) <the invoice> {to the accounting department} {by the end of the week}."},
+{id:22,word:"merger",pos:"名",meaning:"合併",example:"The merger between the two airlines was approved by regulators last month.",exampleJa:"両航空会社の合併は先月、規制当局によって承認された。",collocations:["merger and acquisition（合併と買収）","approve a merger（合併を承認する）"],derivatives:[{word:"merge",pos:"動",meaning:"合併する"}],svoc:"[The merger between the two airlines] (was approved) {by regulators} {last month}."},
+{id:23,word:"acquisition",pos:"名",meaning:"買収",example:"The acquisition of the smaller firm allowed the company to expand into new markets.",exampleJa:"その小規模な会社の買収により、当社は新しい市場へ進出することができた。",collocations:["a corporate acquisition（企業買収）","mergers and acquisitions（合併・買収）"],derivatives:[{word:"acquire",pos:"動",meaning:"取得する・買収する"}],svoc:"[The acquisition of the smaller firm] (allowed) <the company> <to expand into new markets>."},
+{id:24,word:"workforce",pos:"名",meaning:"労働力",example:"The company plans to expand its workforce by hiring 200 new employees this year.",exampleJa:"その会社は今年、200人の新入社員を雇用して労働力を拡大する予定だ。",collocations:["expand the workforce（労働力を拡大する）","a skilled workforce（熟練した労働力）"],derivatives:[{word:"workforce reduction",pos:"名",meaning:"人員削減"}],svoc:"[The company] (plans) <to expand its workforce by hiring 200 new employees this year>."},
+{id:25,word:"incentive",pos:"名",meaning:"誘因・奨励金",example:"The sales team was offered a bonus incentive to exceed their quarterly targets.",exampleJa:"営業チームは四半期目標を上回るためのボーナス報奨を提示された。",collocations:["a financial incentive（金銭的インセンティブ）","offer an incentive（奨励金を提供する）"],derivatives:[{word:"incentivize",pos:"動",meaning:"奨励する"}],svoc:"[The sales team] (was offered) <a bonus incentive> {to exceed their quarterly targets}."},
+{id:26,word:"liability",pos:"名",meaning:"負債・責任",example:"The company recorded the unpaid loan as a liability on its balance sheet.",exampleJa:"会社は未払いの融資を貸借対照表上の負債として計上した。",collocations:["a legal liability（法的責任）","limit liability（責任を制限する）"],derivatives:[{word:"liable",pos:"形",meaning:"責任がある・〜しがちな"}],svoc:"[The company] (recorded) <the unpaid loan> {as a liability} {on its balance sheet}."},
+{id:27,word:"benchmark",pos:"名",meaning:"基準",example:"The firm used industry benchmarks to evaluate its own performance.",exampleJa:"その会社は業界の基準を使って自社の業績を評価した。",collocations:["set a benchmark（基準を設定する）","benchmark performance（業績を基準と比較する）"],derivatives:[{word:"benchmark",pos:"動",meaning:"基準と比較する"}],svoc:"[The firm] (used) <industry benchmarks> {to evaluate its own performance}."},
+{id:28,word:"outsource",pos:"動",meaning:"外部委託する",example:"The company decided to outsource its customer service operations to reduce costs.",exampleJa:"その会社はコスト削減のため、顧客サービス業務を外部委託することを決定した。",collocations:["outsource operations（業務を外部委託する）","outsource production（生産を委託する）"],derivatives:[{word:"outsourcing",pos:"名",meaning:"外部委託"}],svoc:"[The company] (decided) <to outsource its customer service operations> {to reduce costs}."},
+{id:29,word:"proficient",pos:"形",meaning:"熟練した",example:"Applicants must be proficient in at least two foreign languages.",exampleJa:"応募者は少なくとも2つの外国語に熟練していなければならない。",collocations:["proficient in a language（言語に堪能な）","a proficient speaker（堪能な話者）"],derivatives:[{word:"proficiency",pos:"名",meaning:"習熟度・堪能さ"}],svoc:"[Applicants] (must be) <proficient> {in at least two foreign languages}."},
+{id:30,word:"autonomous",pos:"形",meaning:"自律的な",example:"Each regional office operates as an autonomous unit within the larger organization.",exampleJa:"各地域オフィスは、より大きな組織の中で自律的な単位として運営されている。",collocations:["an autonomous unit（自律的な単位）","operate autonomously（自律的に運営する）"],derivatives:[{word:"autonomy",pos:"名",meaning:"自律性"},{word:"autonomously",pos:"副",meaning:"自律的に"}],svoc:"[Each regional office] (operates) {as an autonomous unit} {within the larger organization}."},
+{id:31,word:"jeopardize",pos:"動",meaning:"危うくする",example:"Missing the deadline could jeopardize the entire project's funding.",exampleJa:"締め切りに間に合わないと、プロジェクト全体の資金提供が危うくなる可能性がある。",collocations:["jeopardize a deal（取引を危うくする）","jeopardize funding（資金提供を危うくする）"],derivatives:[{word:"jeopardy",pos:"名",meaning:"危険"}],svoc:"[Missing the deadline] (could jeopardize) <the entire project's funding>."},
+{id:32,word:"mandate",pos:"名",meaning:"命令・権限",example:"The new policy was implemented under a government mandate.",exampleJa:"その新しい方針は政府の命令の下で実施された。",collocations:["under a government mandate（政府の命令の下で）","a legal mandate（法的権限）"],derivatives:[{word:"mandatory",pos:"形",meaning:"義務的な"},{word:"mandate",pos:"動",meaning:"命じる・義務付ける"}],svoc:"[The new policy] (was implemented) {under a government mandate}."},
+{id:33,word:"stipulate",pos:"動",meaning:"規定する",example:"The contract stipulates that payment must be made within 30 days.",exampleJa:"契約書には支払いを30日以内に行うことが規定されている。",collocations:["the contract stipulates（契約が規定する）","stipulate a condition（条件を規定する）"],derivatives:[{word:"stipulation",pos:"名",meaning:"規定・条項"}],svoc:"[The contract] (stipulates) <that payment must be made within 30 days>."},
+{id:34,word:"surplus",pos:"名",meaning:"余剰",example:"The warehouse reported a surplus of inventory at the end of the fiscal year.",exampleJa:"倉庫は会計年度末に在庫の余剰を報告した。",collocations:["a budget surplus（予算の黒字）","a surplus of inventory（在庫の余剰）"],derivatives:[{word:"surplus",pos:"形",meaning:"余剰の"}],svoc:"[The warehouse] (reported) <a surplus of inventory> {at the end of the fiscal year}."},
+{id:35,word:"deficit",pos:"名",meaning:"赤字・不足",example:"The company reported a budget deficit for the second consecutive year.",exampleJa:"その会社は2年連続で予算赤字を報告した。",collocations:["a budget deficit（予算の赤字）","run a deficit（赤字を出す）"],derivatives:[{word:"deficient",pos:"形",meaning:"不足した"}],svoc:"[The company] (reported) <a budget deficit> {for the second consecutive year}."},
+{id:36,word:"consensus",pos:"名",meaning:"合意",example:"After a long discussion, the board finally reached a consensus on the budget.",exampleJa:"長い議論の後、取締役会はついに予算について合意に達した。",collocations:["reach a consensus（合意に達する）","a general consensus（大方の合意）"],derivatives:[{word:"consent",pos:"名",meaning:"同意"}],svoc:"{After a long discussion,} [the board] (finally reached) <a consensus on the budget>."},
+{id:37,word:"ambiguous",pos:"形",meaning:"曖昧な",example:"The instructions in the manual were too ambiguous for new employees to follow.",exampleJa:"マニュアルの指示は新入社員が従うにはあまりにも曖昧だった。",collocations:["an ambiguous statement（曖昧な発言）","remain ambiguous（曖昧なままである）"],derivatives:[{word:"ambiguity",pos:"名",meaning:"曖昧さ"},{word:"ambiguously",pos:"副",meaning:"曖昧に"}],svoc:"[The instructions in the manual] (were) <too ambiguous for new employees to follow>."},
+{id:38,word:"credential",pos:"名",meaning:"資格・信任状",example:"The candidate's credentials impressed the entire hiring committee.",exampleJa:"その候補者の資格は採用委員会全体に感銘を与えた。",collocations:["strong credentials（優れた資格・経歴）","academic credentials（学歴・資格）"],derivatives:[{word:"credentialed",pos:"形",meaning:"資格を持った"}],svoc:"[The candidate's credentials] (impressed) <the entire hiring committee>."},
+{id:39,word:"expedite",pos:"動",meaning:"促進する・早める",example:"The manager asked the courier to expedite the delivery of the urgent package.",exampleJa:"マネージャーは配送業者に緊急の荷物の配達を早めるよう依頼した。",collocations:["expedite delivery（配達を早める）","expedite the process（プロセスを早める）"],derivatives:[{word:"expedited",pos:"形",meaning:"迅速な・急送の"}],svoc:"[The manager] (asked) <the courier> <to expedite the delivery of the urgent package>."},
+{id:40,word:"facilitate",pos:"動",meaning:"促進する・円滑にする",example:"The new software was designed to facilitate communication between departments.",exampleJa:"その新しいソフトウェアは部門間のコミュニケーションを円滑にするために設計された。",collocations:["facilitate communication（コミュニケーションを円滑にする）","facilitate a meeting（会議を円滑に進める）"],derivatives:[{word:"facilitator",pos:"名",meaning:"進行役"},{word:"facilitation",pos:"名",meaning:"促進"}],svoc:"[The new software] (was designed) <to facilitate communication between departments>."},
+{id:41,word:"inventory",pos:"名",meaning:"在庫",example:"The store conducts a full inventory check at the end of every month.",exampleJa:"その店は毎月末に在庫の完全なチェックを行う。",collocations:["conduct an inventory check（棚卸しを行う）","inventory management（在庫管理）"],derivatives:[{word:"inventory",pos:"動",meaning:"目録を作る・棚卸しする"}],svoc:"[The store] (conducts) <a full inventory check> {at the end of every month}."},
+{id:42,word:"leverage",pos:"動",meaning:"活用する",example:"The company plans to leverage its existing customer base to launch the new product.",exampleJa:"その会社は新製品を発売するために既存の顧客基盤を活用する予定だ。",collocations:["leverage a resource（資源を活用する）","leverage technology（テクノロジーを活用する）"],derivatives:[{word:"leverage",pos:"名",meaning:"影響力・てこの作用"}],svoc:"[The company] (plans) <to leverage its existing customer base> {to launch the new product}."},
+{id:43,word:"mitigate",pos:"動",meaning:"緩和する",example:"The new policy is intended to mitigate the risks associated with remote work.",exampleJa:"その新しい方針はリモートワークに伴うリスクを緩和することを目的としている。",collocations:["mitigate risk（リスクを緩和する）","mitigate the impact（影響を緩和する）"],derivatives:[{word:"mitigation",pos:"名",meaning:"緩和"}],svoc:"[The new policy] (is intended) <to mitigate the risks associated with remote work>."},
+{id:44,word:"notify",pos:"動",meaning:"通知する",example:"Employees must notify their supervisor at least two weeks before taking leave.",exampleJa:"従業員は休暇を取る少なくとも2週間前に上司に通知しなければならない。",collocations:["notify someone of something（人に何かを通知する）","notify in advance（事前に通知する）"],derivatives:[{word:"notification",pos:"名",meaning:"通知"}],svoc:"[Employees] (must notify) <their supervisor> {at least two weeks} {before taking leave}."},
+{id:45,word:"obsolete",pos:"形",meaning:"時代遅れの",example:"The company replaced its obsolete equipment with state-of-the-art machinery.",exampleJa:"その会社は時代遅れの設備を最新鋭の機械に置き換えた。",collocations:["obsolete equipment（旧式の設備）","become obsolete（時代遅れになる）"],derivatives:[{word:"obsolescence",pos:"名",meaning:"陳腐化"}],svoc:"[The company] (replaced) <its obsolete equipment> {with state-of-the-art machinery}."},
+{id:46,word:"pending",pos:"形",meaning:"保留中の",example:"The contract remains pending until both parties sign the final agreement.",exampleJa:"その契約は両当事者が最終合意書に署名するまで保留のままである。",collocations:["a pending decision（保留中の決定）","remain pending（保留のままである）"],derivatives:[{word:"impending",pos:"形",meaning:"差し迫った"}],svoc:"[The contract] (remains) <pending> {until both parties sign the final agreement}."},
+{id:47,word:"quota",pos:"名",meaning:"割当量・ノルマ",example:"Each sales representative is expected to meet a monthly quota.",exampleJa:"各営業担当者は月間ノルマを達成することが期待されている。",collocations:["meet a quota（ノルマを達成する）","a monthly quota（月間ノルマ）"],derivatives:[{word:"quota system",pos:"名",meaning:"割当制度"}],svoc:"[Each sales representative] (is expected) <to meet a monthly quota>."},
+{id:48,word:"refund",pos:"名",meaning:"払い戻し",example:"Customers who are not satisfied with the product can request a full refund.",exampleJa:"製品に満足しない顧客は全額払い戻しを請求できる。",collocations:["request a refund（返金を求める）","a full refund（全額返金）"],derivatives:[{word:"refund",pos:"動",meaning:"払い戻す"},{word:"refundable",pos:"形",meaning:"返金可能な"}],svoc:"[Customers who are not satisfied with the product] (can request) <a full refund>."},
+{id:49,word:"sustain",pos:"動",meaning:"維持する",example:"The company has managed to sustain steady growth despite the economic downturn.",exampleJa:"その会社は経済の低迷にもかかわらず、着実な成長を維持することに成功している。",collocations:["sustain growth（成長を維持する）","sustain damage（損害を被る）"],derivatives:[{word:"sustainable",pos:"形",meaning:"持続可能な"},{word:"sustainability",pos:"名",meaning:"持続可能性"}],svoc:"[The company] (has managed) <to sustain steady growth> {despite the economic downturn}."},
+{id:50,word:"undermine",pos:"動",meaning:"弱める・損なう",example:"Constant delays in production could undermine the client's confidence in the company.",exampleJa:"生産の絶え間ない遅れは、その会社に対する顧客の信頼を損なう可能性がある。",collocations:["undermine confidence（信頼を損なう）","undermine credibility（信用を損なう）"],derivatives:[{word:"undermining",pos:"形",meaning:"弱体化させるような"}],svoc:"[Constant delays in production] (could undermine) <the client's confidence in the company>."},
+{id:51,word:"entrepreneur",pos:"名",meaning:"起業家",example:"The workshop was designed to help entrepreneurs develop viable business plans.",exampleJa:"そのワークショップは起業家が実行可能な事業計画を作成するのを助けるために企画された。",collocations:["a successful entrepreneur（成功した起業家）","aspiring entrepreneur（起業を志す人）"],derivatives:[{word:"entrepreneurship",pos:"名",meaning:"起業家精神"},{word:"entrepreneurial",pos:"形",meaning:"起業家の"}],svoc:"[The workshop] (was designed) <to help entrepreneurs develop viable business plans>."},
+{id:52,word:"stakeholder",pos:"名",meaning:"利害関係者",example:"Before finalizing the merger, management consulted with all major stakeholders.",exampleJa:"合併を最終決定する前に、経営陣はすべての主要な利害関係者と協議した。",collocations:["key stakeholders（主要な利害関係者）","consult stakeholders（利害関係者に相談する）"],derivatives:[{word:"stake",pos:"名",meaning:"利害関係・出資"}],svoc:"{Before finalizing the merger,} [management] (consulted) {with all major stakeholders}."},
+{id:53,word:"logistics",pos:"名",meaning:"物流",example:"The logistics team coordinates the shipment of products to over thirty countries.",exampleJa:"物流チームは30カ国以上への製品の出荷を調整している。",collocations:["logistics team（物流チーム）","logistics management（物流管理）"],derivatives:[{word:"logistical",pos:"形",meaning:"物流上の"}],svoc:"[The logistics team] (coordinates) <the shipment of products> {to over thirty countries}."},
+{id:54,word:"overhead",pos:"名",meaning:"諸経費",example:"Switching to a smaller office reduced the company's monthly overhead significantly.",exampleJa:"より小さなオフィスに移転したことで、会社の月々の諸経費は大幅に削減された。",collocations:["reduce overhead（諸経費を削減する）","overhead costs（諸経費）"],derivatives:[{word:"overhead",pos:"形",meaning:"頭上の・諸経費の"}],svoc:"[Switching to a smaller office] (reduced) <the company's monthly overhead> {significantly}."},
+{id:55,word:"turnover",pos:"名",meaning:"離職率・総売上高",example:"The retail chain reported a sharp increase in staff turnover last quarter.",exampleJa:"その小売チェーンは前四半期に従業員の離職率が急増したと報告した。",collocations:["staff turnover（従業員の離職率）","annual turnover（年間総売上高）"],derivatives:[{word:"turn over",pos:"動",meaning:"転換する・売り上げる"}],svoc:"[The retail chain] (reported) <a sharp increase in staff turnover> {last quarter}."},
+{id:56,word:"layoff",pos:"名",meaning:"解雇・レイオフ",example:"The company announced a round of layoffs to cut costs amid declining sales.",exampleJa:"その会社は売上減少の中、コスト削減のため一連の解雇を発表した。",collocations:["announce layoffs（解雇を発表する）","a round of layoffs（一連の解雇）"],derivatives:[{word:"lay off",pos:"動",meaning:"一時解雇する"}],svoc:"[The company] (announced) <a round of layoffs> {to cut costs} {amid declining sales}."},
+{id:57,word:"severance",pos:"名",meaning:"退職金",example:"Employees who are laid off will receive two months of severance pay.",exampleJa:"解雇された従業員は2カ月分の退職金を受け取る。",collocations:["severance pay（退職金）","a severance package（退職金パッケージ）"],derivatives:[{word:"sever",pos:"動",meaning:"断つ・切り離す"}],svoc:"[Employees who are laid off] (will receive) <two months of severance pay>."},
+{id:58,word:"appraisal",pos:"名",meaning:"評価・査定",example:"Each employee undergoes a formal performance appraisal once a year.",exampleJa:"各従業員は年に一度、正式な業績評価を受ける。",collocations:["a performance appraisal（人事考課）","conduct an appraisal（査定を行う）"],derivatives:[{word:"appraise",pos:"動",meaning:"評価する・査定する"}],svoc:"[Each employee] (undergoes) <a formal performance appraisal> {once a year}."},
+{id:59,word:"clientele",pos:"名",meaning:"顧客層",example:"The boutique has built a loyal clientele over the past decade.",exampleJa:"そのブティックは過去10年間で忠実な顧客層を築いてきた。",collocations:["a loyal clientele（忠実な顧客層）","attract clientele（顧客層を引き付ける）"],derivatives:[{word:"client",pos:"名",meaning:"顧客"}],svoc:"[The boutique] (has built) <a loyal clientele> {over the past decade}."},
+{id:60,word:"franchise",pos:"名",meaning:"フランチャイズ",example:"The restaurant chain plans to sell franchises in several overseas markets.",exampleJa:"そのレストランチェーンはいくつかの海外市場でフランチャイズを販売する計画だ。",collocations:["sell a franchise（フランチャイズ権を売る）","franchise owner（フランチャイズ経営者）"],derivatives:[{word:"franchisee",pos:"名",meaning:"フランチャイズ加盟店"},{word:"franchisor",pos:"名",meaning:"フランチャイズ本部"}],svoc:"[The restaurant chain] (plans) <to sell franchises> {in several overseas markets}."},
+{id:61,word:"patent",pos:"名",meaning:"特許",example:"The engineer filed a patent for her new manufacturing process.",exampleJa:"その技術者は新しい製造プロセスの特許を出願した。",collocations:["file a patent（特許を出願する）","patent infringement（特許侵害）"],derivatives:[{word:"patent",pos:"動",meaning:"特許を取得する"},{word:"patented",pos:"形",meaning:"特許を取得した"}],svoc:"[The engineer] (filed) <a patent> {for her new manufacturing process}."},
+{id:62,word:"royalty",pos:"名",meaning:"使用料",example:"The author receives a royalty for every copy of the book sold.",exampleJa:"その著者は書籍が1冊売れるごとに使用料を受け取る。",collocations:["pay a royalty（使用料を支払う）","royalty payment（ロイヤルティの支払い）"],derivatives:[],svoc:"[The author] (receives) <a royalty> {for every copy of the book sold}."},
+{id:63,word:"tariff",pos:"名",meaning:"関税",example:"The new tariff on imported steel raised production costs for local manufacturers.",exampleJa:"輸入鋼材への新しい関税は、地元の製造業者の生産コストを引き上げた。",collocations:["impose a tariff（関税を課す）","tariff on imports（輸入関税）"],derivatives:[],svoc:"[The new tariff on imported steel] (raised) <production costs> {for local manufacturers}."},
+{id:64,word:"premises",pos:"名",meaning:"構内・店舗",example:"Visitors must sign in at reception before entering the company premises.",exampleJa:"来訪者は会社の構内に入る前に受付でサインインしなければならない。",collocations:["company premises（会社の構内）","on the premises（構内で）"],derivatives:[],svoc:"[Visitors] (must sign in) {at reception} {before entering the company premises}."},
+{id:65,word:"amenity",pos:"名",meaning:"設備・アメニティ",example:"The new office building offers amenities such as a gym and a rooftop café.",exampleJa:"新しいオフィスビルにはジムや屋上カフェといった設備が備わっている。",collocations:["offer amenities（設備を提供する）","modern amenities（現代的な設備）"],derivatives:[],svoc:"[The new office building] (offers) <amenities such as a gym and a rooftop café>."},
+{id:66,word:"voucher",pos:"名",meaning:"引換券",example:"Customers who complete the survey will receive a discount voucher.",exampleJa:"アンケートに回答した顧客は割引券を受け取る。",collocations:["a discount voucher（割引券）","redeem a voucher（引換券を使う）"],derivatives:[],svoc:"[Customers who complete the survey] (will receive) <a discount voucher>."},
+{id:67,word:"ledger",pos:"名",meaning:"元帳",example:"The bookkeeper updates the general ledger at the end of each business day.",exampleJa:"経理担当者は営業日の終わりに総勘定元帳を更新する。",collocations:["the general ledger（総勘定元帳）","update a ledger（元帳を更新する）"],derivatives:[],svoc:"[The bookkeeper] (updates) <the general ledger> {at the end of each business day}."},
+{id:68,word:"compliance",pos:"名",meaning:"コンプライアンス・遵守",example:"The audit confirmed the factory's compliance with international safety standards.",exampleJa:"監査により、その工場が国際安全基準を遵守していることが確認された。",collocations:["compliance with regulations（規則の遵守）","ensure compliance（遵守を確保する）"],derivatives:[{word:"comply",pos:"動",meaning:"従う"},{word:"compliant",pos:"形",meaning:"準拠した"}],svoc:"[The audit] (confirmed) <the factory's compliance with international safety standards>."},
+{id:69,word:"disclosure",pos:"名",meaning:"開示",example:"Full disclosure of financial risks is required before investors sign the agreement.",exampleJa:"投資家が契約書に署名する前に、財務リスクの完全な開示が求められる。",collocations:["full disclosure（完全な開示）","require disclosure（開示を求める）"],derivatives:[{word:"disclose",pos:"動",meaning:"開示する"}],svoc:"[Full disclosure of financial risks] (is required) {before investors sign the agreement}."},
+{id:70,word:"infrastructure",pos:"名",meaning:"インフラ",example:"The city invested heavily in infrastructure to attract new businesses.",exampleJa:"その市は新しい企業を誘致するためインフラに多額の投資を行った。",collocations:["invest in infrastructure（インフラに投資する）","infrastructure development（インフラ整備）"],derivatives:[],svoc:"[The city] (invested) {heavily} {in infrastructure} {to attract new businesses}."},
+{id:71,word:"outlet",pos:"名",meaning:"直売店",example:"The manufacturer opened a factory outlet to sell discontinued items at reduced prices.",exampleJa:"そのメーカーは廃盤商品を割引価格で販売するアウトレット店を開いた。",collocations:["a factory outlet（工場直売店）","retail outlet（小売店）"],derivatives:[],svoc:"[The manufacturer] (opened) <a factory outlet> {to sell discontinued items at reduced prices}."},
+{id:72,word:"perk",pos:"名",meaning:"役得・特典",example:"Free gym membership is one of the perks offered to full-time employees.",exampleJa:"無料のジム会員資格は正社員に提供される特典の一つだ。",collocations:["employee perks（従業員特典）","offer perks（特典を提供する）"],derivatives:[],svoc:"[Free gym membership] (is) <one of the perks offered to full-time employees>."},
+{id:73,word:"portfolio",pos:"名",meaning:"ポートフォリオ",example:"The designer submitted an impressive portfolio during the job interview.",exampleJa:"そのデザイナーは就職面接で見事なポートフォリオを提出した。",collocations:["submit a portfolio（ポートフォリオを提出する）","an investment portfolio（投資ポートフォリオ）"],derivatives:[],svoc:"[The designer] (submitted) <an impressive portfolio> {during the job interview}."},
+{id:74,word:"referral",pos:"名",meaning:"紹介",example:"Most of the firm's new clients come through referrals from existing customers.",exampleJa:"その会社の新規顧客の大半は既存顧客からの紹介による。",collocations:["a client referral（顧客紹介）","referral program（紹介プログラム）"],derivatives:[{word:"refer",pos:"動",meaning:"紹介する・言及する"}],svoc:"[Most of the firm's new clients] (come) {through referrals} {from existing customers}."},
+{id:75,word:"subsidy",pos:"名",meaning:"補助金",example:"The government offers a subsidy to companies that invest in renewable energy.",exampleJa:"政府は再生可能エネルギーに投資する企業に補助金を提供している。",collocations:["a government subsidy（政府の補助金）","offer a subsidy（補助金を提供する）"],derivatives:[{word:"subsidize",pos:"動",meaning:"補助金を出す"}],svoc:"[The government] (offers) <a subsidy> {to companies that invest in renewable energy}."},
+{id:76,word:"tenure",pos:"名",meaning:"在職期間",example:"During her ten-year tenure as CEO, the company's revenue tripled.",exampleJa:"CEOとしての10年間の在職期間中、その会社の収益は3倍になった。",collocations:["during someone's tenure（在任期間中に）","tenure as CEO（CEOとしての在職期間）"],derivatives:[],svoc:"{During her ten-year tenure as CEO,} [the company's revenue] (tripled)."},
+{id:77,word:"threshold",pos:"名",meaning:"基準値",example:"Orders that exceed a certain threshold qualify for free shipping.",exampleJa:"一定の基準値を超える注文は送料無料の対象となる。",collocations:["exceed a threshold（基準値を超える）","a minimum threshold（最低基準）"],derivatives:[],svoc:"[Orders that exceed a certain threshold] (qualify) {for free shipping}."},
+{id:78,word:"venture",pos:"名",meaning:"事業・ベンチャー",example:"The two firms formed a joint venture to develop the new technology.",exampleJa:"両社はその新技術を開発するために合弁事業を設立した。",collocations:["a joint venture（合弁事業）","a business venture（事業）"],derivatives:[{word:"venture",pos:"動",meaning:"思い切って行う"},{word:"venturesome",pos:"形",meaning:"冒険的な"}],svoc:"[The two firms] (formed) <a joint venture> {to develop the new technology}."},
+{id:79,word:"yield",pos:"名",meaning:"利回り・産出量",example:"Investors were attracted by the fund's consistently high yield.",exampleJa:"投資家たちはそのファンドの一貫して高い利回りに魅力を感じた。",collocations:["a high yield（高い利回り）","annual yield（年間利回り）"],derivatives:[{word:"yield",pos:"動",meaning:"産出する・譲る"}],svoc:"[Investors] (were attracted) {by the fund's consistently high yield}."},
+{id:80,word:"affiliate",pos:"名",meaning:"系列会社",example:"The publishing house operates several affiliates across Asia.",exampleJa:"その出版社はアジア各地でいくつかの系列会社を運営している。",collocations:["an affiliate company（系列会社）","affiliate marketing（アフィリエイトマーケティング）"],derivatives:[{word:"affiliate",pos:"動",meaning:"提携させる"},{word:"affiliation",pos:"名",meaning:"提携・加盟"}],svoc:"[The publishing house] (operates) <several affiliates> {across Asia}."},
+{id:81,word:"agenda",pos:"名",meaning:"議題",example:"The chairperson circulated the agenda for tomorrow's board meeting.",exampleJa:"議長は明日の取締役会の議題を配布した。",collocations:["set the agenda（議題を決める）","a meeting agenda（会議の議題）"],derivatives:[],svoc:"[The chairperson] (circulated) <the agenda> {for tomorrow's board meeting}."},
+{id:82,word:"brochure",pos:"名",meaning:"パンフレット",example:"The travel agency updated its brochure to include the new tour packages.",exampleJa:"その旅行代理店は新しいツアーパッケージを掲載するためパンフレットを更新した。",collocations:["an updated brochure（更新されたパンフレット）","a travel brochure（旅行パンフレット）"],derivatives:[],svoc:"[The travel agency] (updated) <its brochure> {to include the new tour packages}."},
+{id:83,word:"clause",pos:"名",meaning:"条項",example:"The lease includes a clause allowing early termination with 60 days' notice.",exampleJa:"その賃貸契約には60日前の通知で早期解約を認める条項が含まれている。",collocations:["a termination clause（解約条項）","include a clause（条項を含む）"],derivatives:[],svoc:"[The lease] (includes) <a clause allowing early termination with 60 days' notice>."},
+{id:84,word:"commission",pos:"名",meaning:"手数料",example:"Sales representatives earn a commission on every unit they sell.",exampleJa:"営業担当者は販売した製品1台ごとに手数料を得る。",collocations:["earn a commission（歩合を得る）","a sales commission（販売手数料）"],derivatives:[{word:"commission",pos:"動",meaning:"委託する・依頼する"},{word:"commissioner",pos:"名",meaning:"委員"}],svoc:"[Sales representatives] (earn) <a commission> {on every unit they sell}."},
+{id:85,word:"correspondence",pos:"名",meaning:"通信・書簡",example:"All business correspondence should be archived for at least five years.",exampleJa:"すべての業務上の通信は少なくとも5年間保管されるべきである。",collocations:["business correspondence（業務上の書簡）","archive correspondence（書簡を保管する）"],derivatives:[{word:"correspond",pos:"動",meaning:"通信する・一致する"},{word:"correspondent",pos:"名",meaning:"通信員"}],svoc:"[All business correspondence] (should be archived) {for at least five years}."},
+{id:86,word:"delegate",pos:"名",meaning:"代表者",example:"Each department sent a delegate to the annual industry conference.",exampleJa:"各部門は年次業界会議に代表者を1名派遣した。",collocations:["send a delegate（代表者を派遣する）","a conference delegate（会議の代表者）"],derivatives:[{word:"delegate",pos:"動",meaning:"委任する"},{word:"delegation",pos:"名",meaning:"代表団・委任"}],svoc:"[Each department] (sent) <a delegate> {to the annual industry conference}."},
+{id:87,word:"draft",pos:"名",meaning:"草案",example:"The legal team is reviewing the first draft of the partnership agreement.",exampleJa:"法務チームは提携契約書の第一草案を確認している。",collocations:["a first draft（初稿）","draft a proposal（提案書の草案を作る）"],derivatives:[{word:"draft",pos:"動",meaning:"草案を作る"},{word:"drafter",pos:"名",meaning:"起草者"}],svoc:"[The legal team] (is reviewing) <the first draft of the partnership agreement>."},
+{id:88,word:"enrollment",pos:"名",meaning:"入会・登録",example:"Enrollment in the training program is limited to fifty participants.",exampleJa:"その研修プログラムへの登録は50人に限定されている。",collocations:["enrollment in a program（プログラムへの登録）","limit enrollment（登録を制限する）"],derivatives:[{word:"enroll",pos:"動",meaning:"登録する・入会する"}],svoc:"[Enrollment in the training program] (is limited) {to fifty participants}."},
+{id:89,word:"entity",pos:"名",meaning:"事業体・法人",example:"The subsidiary operates as a separate legal entity from the parent company.",exampleJa:"その子会社は親会社とは別の独立した法人として運営されている。",collocations:["a legal entity（法人）","a separate entity（別個の組織体）"],derivatives:[],svoc:"[The subsidiary] (operates) {as a separate legal entity} {from the parent company}."},
+{id:90,word:"equity",pos:"名",meaning:"株式・公平性",example:"The founders retained a majority equity stake in the company.",exampleJa:"創業者たちはその会社の過半数の株式を保持し続けた。",collocations:["an equity stake（株式持分）","private equity（未公開株式）"],derivatives:[{word:"equitable",pos:"形",meaning:"公平な"}],svoc:"[The founders] (retained) <a majority equity stake in the company>."},
+{id:91,word:"estimate",pos:"名",meaning:"見積もり",example:"The contractor provided a detailed estimate for the office renovation.",exampleJa:"その業者はオフィス改装の詳細な見積もりを提出した。",collocations:["provide an estimate（見積もりを提出する）","a cost estimate（コスト見積もり）"],derivatives:[{word:"estimate",pos:"動",meaning:"見積もる・推定する"},{word:"estimation",pos:"名",meaning:"推定"}],svoc:"[The contractor] (provided) <a detailed estimate> {for the office renovation}."},
+{id:92,word:"exemption",pos:"名",meaning:"免除",example:"Nonprofit organizations may qualify for a tax exemption.",exampleJa:"非営利団体は税の免除を受けられる場合がある。",collocations:["a tax exemption（税の免除）","qualify for an exemption（免除の対象となる）"],derivatives:[{word:"exempt",pos:"形",meaning:"免除された"}],svoc:"[Nonprofit organizations] (may qualify) {for a tax exemption}."},
+{id:93,word:"expenditure",pos:"名",meaning:"支出",example:"The finance department tracks every expenditure over one thousand dollars.",exampleJa:"経理部門は1000ドルを超えるすべての支出を記録している。",collocations:["track expenditure（支出を記録する）","public expenditure（公共支出）"],derivatives:[{word:"expend",pos:"動",meaning:"費やす"}],svoc:"[The finance department] (tracks) <every expenditure over one thousand dollars>."},
+{id:94,word:"grant",pos:"名",meaning:"助成金",example:"The research team received a grant to study renewable energy storage.",exampleJa:"その研究チームは再生可能エネルギーの貯蔵に関する研究のため助成金を受け取った。",collocations:["receive a grant（助成金を受け取る）","apply for a grant（助成金を申請する）"],derivatives:[{word:"grant",pos:"動",meaning:"与える・許可する"}],svoc:"[The research team] (received) <a grant> {to study renewable energy storage}."},
+{id:95,word:"guideline",pos:"名",meaning:"指針",example:"Employees are expected to follow the company's ethical guidelines at all times.",exampleJa:"従業員は常に会社の倫理指針に従うことが求められている。",collocations:["follow guidelines（指針に従う）","ethical guidelines（倫理指針）"],derivatives:[],svoc:"[Employees] (are expected) <to follow the company's ethical guidelines> {at all times}."},
+{id:96,word:"headquarters",pos:"名",meaning:"本社",example:"The company relocated its headquarters to a larger building downtown.",exampleJa:"その会社は本社を市中心部のより大きな建物へ移転した。",collocations:["corporate headquarters（本社）","relocate headquarters（本社を移転する）"],derivatives:[],svoc:"[The company] (relocated) <its headquarters> {to a larger building downtown}."},
+{id:97,word:"hierarchy",pos:"名",meaning:"階層",example:"The new organizational chart simplified the management hierarchy.",exampleJa:"新しい組織図は管理階層を簡素化した。",collocations:["a management hierarchy（管理階層）","corporate hierarchy（組織階層）"],derivatives:[{word:"hierarchical",pos:"形",meaning:"階層的な"}],svoc:"[The new organizational chart] (simplified) <the management hierarchy>."},
+{id:98,word:"installment",pos:"名",meaning:"分割払い",example:"Customers can pay for the equipment in monthly installments.",exampleJa:"顧客はその機器の代金を月々の分割払いで支払うことができる。",collocations:["pay in installments（分割払いする）","monthly installments（月々の分割払い）"],derivatives:[],svoc:"[Customers] (can pay) {for the equipment} {in monthly installments}."},
+{id:99,word:"intern",pos:"名",meaning:"インターン",example:"The marketing department hired three interns for the summer.",exampleJa:"マーケティング部門は夏の間、3人のインターンを採用した。",collocations:["hire an intern（インターンを採用する）","a summer intern（夏季インターン）"],derivatives:[{word:"internship",pos:"名",meaning:"インターンシップ"}],svoc:"[The marketing department] (hired) <three interns> {for the summer}."},
+{id:100,word:"layout",pos:"名",meaning:"レイアウト・配置",example:"The store redesigned its layout to improve customer flow.",exampleJa:"その店舗は顧客の動線を改善するためレイアウトを再設計した。",collocations:["redesign the layout（レイアウトを再設計する）","store layout（店舗レイアウト）"],derivatives:[{word:"lay out",pos:"動",meaning:"配置する・設計する"}],svoc:"[The store] (redesigned) <its layout> {to improve customer flow}."},
+{id:101,word:"lease",pos:"名",meaning:"賃貸借契約",example:"The company signed a five-year lease for the new warehouse.",exampleJa:"その会社は新しい倉庫について5年間の賃貸借契約を結んだ。",collocations:["sign a lease（賃貸借契約を結ぶ）","a five-year lease（5年間の賃貸借契約）"],derivatives:[{word:"lease",pos:"動",meaning:"賃貸する・賃借する"},{word:"leasehold",pos:"名",meaning:"賃借権"}],svoc:"[The company] (signed) <a five-year lease> {for the new warehouse}."},
+{id:102,word:"margin",pos:"名",meaning:"利ざや",example:"Rising raw material costs have squeezed the company's profit margin.",exampleJa:"原材料費の上昇が会社の利ざやを圧迫している。",collocations:["a profit margin（利益率）","squeeze margins（利ざやを圧迫する）"],derivatives:[{word:"marginal",pos:"形",meaning:"わずかな・限界の"}],svoc:"[Rising raw material costs] (have squeezed) <the company's profit margin>."},
+{id:103,word:"milestone",pos:"名",meaning:"節目",example:"Reaching one million users was a major milestone for the app.",exampleJa:"ユーザー数100万人到達は、そのアプリにとって大きな節目だった。",collocations:["reach a milestone（節目に到達する）","a major milestone（大きな節目）"],derivatives:[],svoc:"[Reaching one million users] (was) <a major milestone> {for the app}."},
+{id:104,word:"nominee",pos:"名",meaning:"候補者",example:"The board will vote on the nominee for the vacant director position.",exampleJa:"取締役会は空席となっている取締役職の候補者について投票する。",collocations:["a nominee for a position（役職の候補者）","vote on a nominee（候補者について投票する）"],derivatives:[{word:"nominate",pos:"動",meaning:"指名する"},{word:"nomination",pos:"名",meaning:"指名"}],svoc:"[The board] (will vote) {on the nominee} {for the vacant director position}."},
+{id:105,word:"outlook",pos:"名",meaning:"見通し",example:"Analysts remain cautious about the company's outlook for next year.",exampleJa:"アナリストたちは来年の同社の見通しについて依然として慎重な姿勢を崩していない。",collocations:["a cautious outlook（慎重な見通し）","a positive outlook（明るい見通し）"],derivatives:[],svoc:"[Analysts] (remain) <cautious> {about the company's outlook for next year}."},
+{id:106,word:"overhaul",pos:"名",meaning:"抜本的見直し",example:"The IT department is planning a complete overhaul of the outdated system.",exampleJa:"IT部門はその旧式のシステムの完全な抜本的見直しを計画している。",collocations:["a complete overhaul（抜本的な見直し）","undergo an overhaul（見直しを受ける）"],derivatives:[{word:"overhaul",pos:"動",meaning:"抜本的に見直す"}],svoc:"[The IT department] (is planning) <a complete overhaul of the outdated system>."},
+{id:107,word:"payroll",pos:"名",meaning:"給与支払い名簿",example:"The new software automated the entire payroll process.",exampleJa:"その新しいソフトウェアは給与支払いのプロセス全体を自動化した。",collocations:["payroll process（給与計算プロセス）","payroll system（給与システム）"],derivatives:[],svoc:"[The new software] (automated) <the entire payroll process>."},
+{id:108,word:"pension",pos:"名",meaning:"年金",example:"Employees become eligible for the company pension after ten years of service.",exampleJa:"従業員は10年間の勤続後、会社の年金の受給資格を得る。",collocations:["a company pension（企業年金）","eligible for a pension（年金の受給資格がある）"],derivatives:[],svoc:"[Employees] (become) <eligible for the company pension> {after ten years of service}."},
+{id:109,word:"petition",pos:"名",meaning:"嘆願書",example:"Several residents signed a petition opposing the construction of the new factory.",exampleJa:"何人かの住民が新工場の建設に反対する嘆願書に署名した。",collocations:["sign a petition（嘆願書に署名する）","file a petition（請願を提出する）"],derivatives:[{word:"petition",pos:"動",meaning:"嘆願する"}],svoc:"[Several residents] (signed) <a petition opposing the construction of the new factory>."},
+{id:110,word:"premium",pos:"名",meaning:"割増料金・保険料",example:"Customers who choose overnight delivery must pay a premium.",exampleJa:"翌日配送を選ぶ顧客は割増料金を支払わなければならない。",collocations:["pay a premium（割増料金を払う）","an insurance premium（保険料）"],derivatives:[{word:"premium",pos:"形",meaning:"高級な・割増の"}],svoc:"[Customers who choose overnight delivery] (must pay) <a premium>."},
+{id:111,word:"prerequisite",pos:"名",meaning:"前提条件",example:"Basic accounting knowledge is a prerequisite for this position.",exampleJa:"基本的な会計知識はこの職務の前提条件である。",collocations:["a prerequisite for X（Xの前提条件）","meet a prerequisite（前提条件を満たす）"],derivatives:[],svoc:"[Basic accounting knowledge] (is) <a prerequisite> {for this position}."},
+{id:112,word:"proceeds",pos:"名",meaning:"収益",example:"The proceeds from the charity auction will fund local schools.",exampleJa:"その慈善オークションの収益は地元の学校の資金となる。",collocations:["proceeds from a sale（売却益）","donate proceeds（収益を寄付する）"],derivatives:[],svoc:"[The proceeds from the charity auction] (will fund) <local schools>."},
+{id:113,word:"prospect",pos:"名",meaning:"見込み客・可能性",example:"The sales team identified several promising prospects at the trade show.",exampleJa:"営業チームはその展示会でいくつかの有望な見込み客を見つけた。",collocations:["a promising prospect（有望な見込み客）","future prospects（将来性）"],derivatives:[{word:"prospective",pos:"形",meaning:"将来の・見込みのある"}],svoc:"[The sales team] (identified) <several promising prospects> {at the trade show}."},
+{id:114,word:"quotation",pos:"名",meaning:"見積もり",example:"Please request a quotation from at least three suppliers before ordering.",exampleJa:"発注する前に、少なくとも3社の仕入れ先から見積もりを取ってください。",collocations:["request a quotation（見積もりを依頼する）","a price quotation（価格見積もり）"],derivatives:[{word:"quote",pos:"動",meaning:"見積もる・引用する"}],svoc:"(Please request) <a quotation> {from at least three suppliers} {before ordering}."},
+{id:115,word:"rebate",pos:"名",meaning:"割戻金",example:"Customers who purchase before the end of the month are eligible for a rebate.",exampleJa:"月末までに購入した顧客は割戻金の対象となる。",collocations:["eligible for a rebate（割戻金の対象となる）","a cash rebate（キャッシュバック）"],derivatives:[],svoc:"[Customers who purchase before the end of the month] (are) <eligible for a rebate>."},
+{id:116,word:"accommodate",pos:"動",meaning:"対応する・収容する",example:"The hotel was able to accommodate the last-minute change in the group's schedule.",exampleJa:"そのホテルはグループのスケジュールの直前の変更に対応することができた。",collocations:["accommodate a request（要望に応じる）","accommodate a change（変更に対応する）"],derivatives:[{word:"accommodation",pos:"名",meaning:"宿泊施設・便宜"},{word:"accommodating",pos:"形",meaning:"融通の利く"}],svoc:"[The hotel] (was able to accommodate) <the last-minute change in the group's schedule>."},
+{id:117,word:"anticipate",pos:"動",meaning:"予想する",example:"The company anticipates a rise in demand during the holiday season.",exampleJa:"その会社は休暇シーズン中に需要が高まると予想している。",collocations:["anticipate demand（需要を予想する）","anticipate a rise（上昇を予想する）"],derivatives:[{word:"anticipation",pos:"名",meaning:"予想・期待"}],svoc:"[The company] (anticipates) <a rise in demand> {during the holiday season}."},
+{id:118,word:"appoint",pos:"動",meaning:"任命する",example:"The board voted to appoint a new chief financial officer.",exampleJa:"取締役会は新しい最高財務責任者を任命することを可決した。",collocations:["appoint a new CEO（新CEOを任命する）","vote to appoint（任命を可決する）"],derivatives:[{word:"appointment",pos:"名",meaning:"任命・予約"}],svoc:"[The board] (voted) <to appoint a new chief financial officer>."},
+{id:119,word:"audit",pos:"動",meaning:"監査する",example:"An independent firm will audit the company's accounts this year.",exampleJa:"独立した会社が今年、その会社の会計を監査する。",collocations:["audit the accounts（会計を監査する）","conduct an audit（監査を行う）"],derivatives:[{word:"audit",pos:"名",meaning:"監査"},{word:"auditor",pos:"名",meaning:"監査人"}],svoc:"[An independent firm] (will audit) <the company's accounts> {this year}."},
+{id:120,word:"authorize",pos:"動",meaning:"権限を与える",example:"Only the department manager is authorized to approve expenses over $500.",exampleJa:"部門マネージャーのみが500ドルを超える経費を承認する権限を与えられている。",collocations:["be authorized to do（〜する権限を与えられている）","authorize payment（支払いを承認する）"],derivatives:[{word:"authorization",pos:"名",meaning:"認可"},{word:"authority",pos:"名",meaning:"権限"}],svoc:"[Only the department manager] (is authorized) <to approve expenses over $500>."},
+{id:121,word:"commence",pos:"動",meaning:"開始する",example:"Construction on the new bridge will commence next spring.",exampleJa:"新しい橋の建設は来春に開始される。",collocations:["commence construction（建設を開始する）","commence operations（業務を開始する）"],derivatives:[{word:"commencement",pos:"名",meaning:"開始"}],svoc:"[Construction on the new bridge] (will commence) {next spring}."},
+{id:122,word:"compensate",pos:"動",meaning:"補償する",example:"The airline agreed to compensate passengers for the canceled flight.",exampleJa:"その航空会社は欠航便について乗客に補償することに同意した。",collocations:["compensate for a loss（損失を補償する）","compensate passengers（乗客に補償する）"],derivatives:[{word:"compensation",pos:"名",meaning:"補償"}],svoc:"[The airline] (agreed) <to compensate passengers> {for the canceled flight}."},
+{id:123,word:"consolidate",pos:"動",meaning:"統合する",example:"The two departments were consolidated to reduce administrative costs.",exampleJa:"管理コストを削減するため、2つの部門が統合された。",collocations:["consolidate departments（部門を統合する）","consolidate debt（負債を一本化する）"],derivatives:[{word:"consolidation",pos:"名",meaning:"統合"}],svoc:"[The two departments] (were consolidated) {to reduce administrative costs}."},
+{id:124,word:"curb",pos:"動",meaning:"抑制する",example:"The new policy is intended to curb excessive overtime among employees.",exampleJa:"その新しい方針は従業員の過度な残業を抑制することを目的としている。",collocations:["curb spending（支出を抑制する）","curb overtime（残業を抑制する）"],derivatives:[],svoc:"[The new policy] (is intended) <to curb excessive overtime among employees>."},
+{id:125,word:"deploy",pos:"動",meaning:"配備する",example:"The IT team will deploy the updated software across all branch offices.",exampleJa:"ITチームは更新されたソフトウェアをすべての支店に配備する。",collocations:["deploy software（ソフトウェアを配備する）","deploy resources（資源を配備する）"],derivatives:[{word:"deployment",pos:"名",meaning:"配備"}],svoc:"[The IT team] (will deploy) <the updated software> {across all branch offices}."},
+{id:126,word:"designate",pos:"動",meaning:"指定する",example:"The top floor has been designated as a quiet workspace for focused tasks.",exampleJa:"最上階は集中作業のための静かなワークスペースとして指定されている。",collocations:["designate as X（Xとして指定する）","a designated area（指定区域）"],derivatives:[{word:"designation",pos:"名",meaning:"指定"}],svoc:"[The top floor] (has been designated) {as a quiet workspace for focused tasks}."},
+{id:127,word:"disclose",pos:"動",meaning:"開示する",example:"The company was required to disclose the results of the safety inspection.",exampleJa:"その会社は安全検査の結果を開示することを求められた。",collocations:["disclose information（情報を開示する）","fail to disclose（開示を怠る）"],derivatives:[{word:"disclosure",pos:"名",meaning:"開示"}],svoc:"[The company] (was required) <to disclose the results of the safety inspection>."},
+{id:128,word:"dispatch",pos:"動",meaning:"発送する",example:"The warehouse dispatches orders within 24 hours of receipt.",exampleJa:"倉庫は注文を受けてから24時間以内に発送する。",collocations:["dispatch an order（注文を発送する）","dispatch a team（チームを派遣する）"],derivatives:[],svoc:"[The warehouse] (dispatches) <orders> {within 24 hours of receipt}."},
+{id:129,word:"diversify",pos:"動",meaning:"多角化する",example:"The manufacturer decided to diversify its product line to reduce risk.",exampleJa:"そのメーカーはリスクを減らすため製品ラインを多角化することを決定した。",collocations:["diversify a portfolio（ポートフォリオを分散する）","diversify a product line（製品ラインを多角化する）"],derivatives:[{word:"diversification",pos:"名",meaning:"多角化"},{word:"diverse",pos:"形",meaning:"多様な"}],svoc:"[The manufacturer] (decided) <to diversify its product line> {to reduce risk}."},
+{id:130,word:"downsize",pos:"動",meaning:"人員削減する",example:"The company had to downsize its workforce after losing its biggest client.",exampleJa:"その会社は最大の顧客を失った後、人員を削減しなければならなかった。",collocations:["downsize the workforce（人員を削減する）","downsize operations（事業を縮小する）"],derivatives:[],svoc:"[The company] (had to downsize) <its workforce> {after losing its biggest client}."},
+{id:131,word:"enact",pos:"動",meaning:"制定する",example:"Lawmakers enacted new regulations governing data privacy.",exampleJa:"議員たちはデータプライバシーを規定する新しい法律を制定した。",collocations:["enact a law（法律を制定する）","enact regulations（規則を制定する）"],derivatives:[{word:"enactment",pos:"名",meaning:"制定"}],svoc:"[Lawmakers] (enacted) <new regulations governing data privacy>."},
+{id:132,word:"enforce",pos:"動",meaning:"施行する",example:"Security staff strictly enforce the building's visitor policy.",exampleJa:"警備員はそのビルの訪問者規則を厳格に施行している。",collocations:["enforce a policy（方針を施行する）","strictly enforce（厳格に施行する）"],derivatives:[{word:"enforcement",pos:"名",meaning:"施行"}],svoc:"[Security staff] (strictly enforce) <the building's visitor policy>."},
+{id:133,word:"enhance",pos:"動",meaning:"高める",example:"The redesigned website was created to enhance the user experience.",exampleJa:"再設計されたウェブサイトはユーザー体験を高めるために作られた。",collocations:["enhance performance（性能を高める）","enhance the user experience（ユーザー体験を高める）"],derivatives:[{word:"enhancement",pos:"名",meaning:"強化・向上"}],svoc:"[The redesigned website] (was created) <to enhance the user experience>."},
+{id:134,word:"envision",pos:"動",meaning:"構想する",example:"The founders envision expanding the business into international markets.",exampleJa:"創業者たちはその事業を国際市場へ拡大することを構想している。",collocations:["envision expanding（拡大を構想する）","envision a future（未来を思い描く）"],derivatives:[],svoc:"[The founders] (envision) <expanding the business into international markets>."},
+{id:135,word:"exempt",pos:"動",meaning:"免除する",example:"Small businesses with fewer than ten employees are exempt from the new rule.",exampleJa:"従業員10人未満の中小企業はその新しい規則を免除される。",collocations:["exempt from a rule（規則を免除される）","tax-exempt（免税の）"],derivatives:[{word:"exemption",pos:"名",meaning:"免除"}],svoc:"[Small businesses with fewer than ten employees] (are) <exempt> {from the new rule}."},
+{id:136,word:"finalize",pos:"動",meaning:"最終決定する",example:"The two parties hope to finalize the contract by the end of the week.",exampleJa:"両当事者は今週末までに契約を最終決定することを望んでいる。",collocations:["finalize a contract（契約を最終決定する）","finalize details（詳細を確定する）"],derivatives:[],svoc:"[The two parties] (hope) <to finalize the contract> {by the end of the week}."},
+{id:137,word:"hinder",pos:"動",meaning:"妨げる",example:"Outdated equipment continued to hinder the factory's productivity.",exampleJa:"旧式の設備がその工場の生産性を妨げ続けた。",collocations:["hinder progress（進展を妨げる）","hinder productivity（生産性を妨げる）"],derivatives:[{word:"hindrance",pos:"名",meaning:"妨げ"}],svoc:"[Outdated equipment] (continued) <to hinder the factory's productivity>."},
+{id:138,word:"implement",pos:"動",meaning:"実施する",example:"The HR department will implement the new attendance policy next month.",exampleJa:"人事部門は来月、新しい出勤方針を実施する。",collocations:["implement a policy（方針を実施する）","implement a plan（計画を実行する）"],derivatives:[{word:"implementation",pos:"名",meaning:"実施"}],svoc:"[The HR department] (will implement) <the new attendance policy> {next month}."},
+{id:139,word:"incur",pos:"動",meaning:"(負債などを)負う",example:"Late payments will incur an additional fee of five percent.",exampleJa:"支払いの遅延は5パーセントの追加料金を負うことになる。",collocations:["incur a fee（料金を負う）","incur a loss（損失を被る）"],derivatives:[],svoc:"[Late payments] (will incur) <an additional fee of five percent>."},
+{id:140,word:"institute",pos:"動",meaning:"制定する",example:"Management decided to institute a stricter dress code for client meetings.",exampleJa:"経営陣は顧客との会議のためより厳格な服装規定を制定することを決定した。",collocations:["institute a policy（方針を制定する）","institute reforms（改革を実施する）"],derivatives:[{word:"institution",pos:"名",meaning:"制度・機関"}],svoc:"[Management] (decided) <to institute a stricter dress code> {for client meetings}."},
+{id:141,word:"integrate",pos:"動",meaning:"統合する",example:"The company plans to integrate the two customer databases by next quarter.",exampleJa:"その会社は来四半期までに2つの顧客データベースを統合する計画だ。",collocations:["integrate systems（システムを統合する）","fully integrate（完全に統合する）"],derivatives:[{word:"integration",pos:"名",meaning:"統合"}],svoc:"[The company] (plans) <to integrate the two customer databases> {by next quarter}."},
+{id:142,word:"intervene",pos:"動",meaning:"介入する",example:"The mediator intervened to help both sides reach a compromise.",exampleJa:"その調停者は双方が妥協に至るのを助けるため介入した。",collocations:["intervene in a dispute（争いに介入する）","directly intervene（直接介入する）"],derivatives:[{word:"intervention",pos:"名",meaning:"介入"}],svoc:"[The mediator] (intervened) {to help both sides reach a compromise}."},
+{id:143,word:"liquidate",pos:"動",meaning:"清算する",example:"The struggling retailer decided to liquidate its remaining inventory.",exampleJa:"経営難に陥っていた小売業者は残りの在庫を清算することを決定した。",collocations:["liquidate assets（資産を清算する）","liquidate inventory（在庫を処分する）"],derivatives:[{word:"liquidation",pos:"名",meaning:"清算"}],svoc:"[The struggling retailer] (decided) <to liquidate its remaining inventory>."},
+{id:144,word:"optimize",pos:"動",meaning:"最適化する",example:"The engineers worked to optimize the factory's production line.",exampleJa:"技術者たちはその工場の生産ラインを最適化するために取り組んだ。",collocations:["optimize a process（プロセスを最適化する）","optimize performance（性能を最適化する）"],derivatives:[{word:"optimization",pos:"名",meaning:"最適化"},{word:"optimal",pos:"形",meaning:"最適な"}],svoc:"[The engineers] (worked) {to optimize the factory's production line}."},
+{id:145,word:"outperform",pos:"動",meaning:"上回る",example:"The new smartphone model is expected to outperform its predecessor in sales.",exampleJa:"その新しいスマートフォンのモデルは売上で前モデルを上回ると予想されている。",collocations:["outperform a competitor（競合他社を上回る）","outperform expectations（予想を上回る）"],derivatives:[],svoc:"[The new smartphone model] (is expected) <to outperform its predecessor> {in sales}."},
+{id:146,word:"overlook",pos:"動",meaning:"見落とす",example:"The reviewer overlooked a critical error in the final draft.",exampleJa:"その校閲者は最終稿にある重大な誤りを見落とした。",collocations:["overlook an error（誤りを見落とす）","overlook a detail（細部を見落とす）"],derivatives:[],svoc:"[The reviewer] (overlooked) <a critical error in the final draft>."},
+{id:147,word:"oversee",pos:"動",meaning:"監督する",example:"A senior engineer was assigned to oversee the construction project.",exampleJa:"ベテランの技術者がその建設プロジェクトを監督するために任命された。",collocations:["oversee a project（プロジェクトを監督する）","oversee operations（業務を監督する）"],derivatives:[{word:"overseer",pos:"名",meaning:"監督者"}],svoc:"[A senior engineer] (was assigned) <to oversee the construction project>."},
+{id:148,word:"prevail",pos:"動",meaning:"普及する・勝る",example:"Despite the setbacks, the original marketing strategy eventually prevailed.",exampleJa:"数々の困難にもかかわらず、当初のマーケティング戦略が最終的には採用された。",collocations:["prevail over（〜に勝る）","common sense prevails（常識が勝る）"],derivatives:[{word:"prevalent",pos:"形",meaning:"普及した"},{word:"prevailing",pos:"形",meaning:"優勢な・一般的な"}],svoc:"{Despite the setbacks,} [the original marketing strategy] (eventually prevailed)."},
+{id:149,word:"prioritize",pos:"動",meaning:"優先する",example:"Managers were asked to prioritize projects that generate immediate revenue.",exampleJa:"マネージャーたちは即座に収益を生むプロジェクトを優先するよう求められた。",collocations:["prioritize tasks（タスクに優先順位をつける）","prioritize a project（プロジェクトを優先する）"],derivatives:[{word:"priority",pos:"名",meaning:"優先事項"}],svoc:"[Managers] (were asked) <to prioritize projects that generate immediate revenue>."},
+{id:150,word:"prohibit",pos:"動",meaning:"禁止する",example:"Company policy strictly prohibits the use of personal devices during meetings.",exampleJa:"会社の方針は会議中の私用デバイスの使用を厳しく禁止している。",collocations:["prohibit the use of（使用を禁止する）","strictly prohibit（厳しく禁止する）"],derivatives:[{word:"prohibition",pos:"名",meaning:"禁止"}],svoc:"[Company policy] (strictly prohibits) <the use of personal devices during meetings>."},
+{id:151,word:"rectify",pos:"動",meaning:"修正する",example:"The technician was called in to rectify the billing error immediately.",exampleJa:"その技術者は請求書の誤りを直ちに修正するために呼ばれた。",collocations:["rectify an error（誤りを是正する）","rectify the situation（事態を是正する）"],derivatives:[{word:"rectification",pos:"名",meaning:"是正"}],svoc:"[The technician] (was called in) <to rectify the billing error> {immediately}."},
+{id:152,word:"refrain",pos:"動",meaning:"控える",example:"Visitors are asked to refrain from taking photographs inside the factory.",exampleJa:"来訪者は工場内での写真撮影を控えるよう求められている。",collocations:["refrain from doing（〜するのを控える）","kindly refrain（どうかお控えください）"],derivatives:[],svoc:"[Visitors] (are asked) <to refrain from taking photographs> {inside the factory}."},
+{id:153,word:"reinforce",pos:"動",meaning:"強化する",example:"The training session was designed to reinforce the company's core values.",exampleJa:"その研修は会社の中核的な価値観を強化するために企画された。",collocations:["reinforce values（価値観を強化する）","reinforce a message（メッセージを強化する）"],derivatives:[{word:"reinforcement",pos:"名",meaning:"強化"}],svoc:"[The training session] (was designed) <to reinforce the company's core values>."},
+{id:154,word:"reinstate",pos:"動",meaning:"復職させる",example:"After the investigation concluded, the employee was reinstated to her position.",exampleJa:"調査が終了した後、その従業員は元の職に復職した。",collocations:["reinstate an employee（従業員を復職させる）","reinstate a policy（方針を復活させる）"],derivatives:[{word:"reinstatement",pos:"名",meaning:"復職・復活"}],svoc:"{After the investigation concluded,} [the employee] (was reinstated) {to her position}."},
+{id:155,word:"relocate",pos:"動",meaning:"移転する",example:"The manufacturing plant will relocate to a larger facility next year.",exampleJa:"その製造工場は来年、より大きな施設へ移転する。",collocations:["relocate to a facility（施設に移転する）","relocate headquarters（本社を移転する）"],derivatives:[{word:"relocation",pos:"名",meaning:"移転"}],svoc:"[The manufacturing plant] (will relocate) {to a larger facility} {next year}."},
+{id:156,word:"reschedule",pos:"動",meaning:"予定を変更する",example:"The meeting was rescheduled due to a conflict with the client's travel plans.",exampleJa:"その会議は顧客の出張予定との重複のため予定変更となった。",collocations:["reschedule a meeting（会議の予定を変更する）","reschedule an appointment（予約を変更する）"],derivatives:[],svoc:"[The meeting] (was rescheduled) {due to a conflict with the client's travel plans}."},
+{id:157,word:"resolve",pos:"動",meaning:"解決する",example:"The customer service team resolved the complaint within a single business day.",exampleJa:"カスタマーサービスチームはその苦情を1営業日以内に解決した。",collocations:["resolve a complaint（苦情を解決する）","resolve an issue（問題を解決する）"],derivatives:[{word:"resolution",pos:"名",meaning:"解決"}],svoc:"[The customer service team] (resolved) <the complaint> {within a single business day}."},
+{id:158,word:"restructure",pos:"動",meaning:"再編する",example:"The company decided to restructure its debt to avoid bankruptcy.",exampleJa:"その会社は倒産を避けるため負債を再編することを決定した。",collocations:["restructure debt（負債を再編する）","restructure a company（企業を再編する）"],derivatives:[{word:"restructuring",pos:"名",meaning:"再編"}],svoc:"[The company] (decided) <to restructure its debt> {to avoid bankruptcy}."},
+{id:159,word:"retain",pos:"動",meaning:"保持する",example:"The firm offered a bonus to retain its top-performing employees.",exampleJa:"その会社は優秀な従業員を保持するためボーナスを提供した。",collocations:["retain employees（従業員をつなぎとめる）","retain customers（顧客を維持する）"],derivatives:[{word:"retention",pos:"名",meaning:"維持・保持"}],svoc:"[The firm] (offered) <a bonus> {to retain its top-performing employees}."},
+{id:160,word:"revoke",pos:"動",meaning:"取り消す",example:"The city revoked the restaurant's license after multiple health violations.",exampleJa:"市は複数の衛生違反の後、そのレストランの営業許可を取り消した。",collocations:["revoke a license（免許を取り消す）","revoke a contract（契約を取り消す）"],derivatives:[{word:"revocation",pos:"名",meaning:"取り消し"}],svoc:"[The city] (revoked) <the restaurant's license> {after multiple health violations}."},
+{id:161,word:"solicit",pos:"動",meaning:"勧誘する",example:"The nonprofit organization solicits donations from local businesses every year.",exampleJa:"その非営利団体は毎年、地元企業から寄付を募っている。",collocations:["solicit donations（寄付を募る）","solicit feedback（意見を求める）"],derivatives:[{word:"solicitation",pos:"名",meaning:"勧誘"}],svoc:"[The nonprofit organization] (solicits) <donations> {from local businesses} {every year}."},
+{id:162,word:"sponsor",pos:"動",meaning:"後援する",example:"The bank agreed to sponsor the annual marathon in the city.",exampleJa:"その銀行は市の年次マラソン大会を後援することに同意した。",collocations:["sponsor an event（イベントを後援する）","a corporate sponsor（企業スポンサー）"],derivatives:[{word:"sponsorship",pos:"名",meaning:"後援・スポンサー活動"}],svoc:"[The bank] (agreed) <to sponsor the annual marathon in the city>."},
+{id:163,word:"subsidize",pos:"動",meaning:"補助金を出す",example:"The local government subsidizes public transportation to reduce traffic congestion.",exampleJa:"地方自治体は交通渋滞を減らすため公共交通機関に補助金を出している。",collocations:["subsidize public transportation（公共交通に補助金を出す）","heavily subsidize（多額の補助金を出す）"],derivatives:[{word:"subsidy",pos:"名",meaning:"補助金"}],svoc:"[The local government] (subsidizes) <public transportation> {to reduce traffic congestion}."},
+{id:164,word:"contingent",pos:"形",meaning:"条件付きの",example:"The job offer is contingent on the candidate passing a background check.",exampleJa:"その内定は候補者が身元調査に合格することを条件としている。",collocations:["contingent on X（Xを条件とする）","a contingent liability（偶発債務）"],derivatives:[{word:"contingency",pos:"名",meaning:"不測の事態"}],svoc:"[The job offer] (is) <contingent> {on the candidate passing a background check}."},
+{id:165,word:"adverse",pos:"形",meaning:"不利な",example:"The drought had an adverse effect on the region's agricultural output.",exampleJa:"その干ばつはその地域の農業生産に不利な影響を及ぼした。",collocations:["an adverse effect（悪影響）","adverse conditions（不利な状況）"],derivatives:[{word:"adversely",pos:"副",meaning:"不利に"},{word:"adversity",pos:"名",meaning:"逆境"}],svoc:"[The drought] (had) <an adverse effect> {on the region's agricultural output}."},
+{id:166,word:"arbitrary",pos:"形",meaning:"恣意的な",example:"Employees complained that the new scheduling system seemed arbitrary.",exampleJa:"従業員たちはその新しいスケジュール管理システムが恣意的に見えると不満を述べた。",collocations:["an arbitrary decision（恣意的な決定）","seem arbitrary（恣意的に見える）"],derivatives:[{word:"arbitrarily",pos:"副",meaning:"恣意的に"}],svoc:"[Employees] (complained) <that the new scheduling system seemed arbitrary>."},
+{id:167,word:"concise",pos:"形",meaning:"簡潔な",example:"The manager asked for a concise summary of the quarterly results.",exampleJa:"マネージャーは四半期業績の簡潔な要約を求めた。",collocations:["a concise summary（簡潔な要約）","keep it concise（簡潔にする）"],derivatives:[{word:"concisely",pos:"副",meaning:"簡潔に"},{word:"concision",pos:"名",meaning:"簡潔さ"}],svoc:"[The manager] (asked) {for a concise summary of the quarterly results}."},
+{id:168,word:"conducive",pos:"形",meaning:"資する・つながる",example:"A quiet office environment is conducive to focused work.",exampleJa:"静かなオフィス環境は集中した作業に資する。",collocations:["conducive to X（Xに資する）","a conducive environment（好都合な環境）"],derivatives:[],svoc:"[A quiet office environment] (is) <conducive to focused work>."},
+{id:169,word:"discretionary",pos:"形",meaning:"裁量による",example:"Managers are given a discretionary budget for team-building activities.",exampleJa:"マネージャーにはチームビルディング活動のための裁量予算が与えられている。",collocations:["a discretionary budget（裁量予算）","discretionary spending（裁量支出）"],derivatives:[{word:"discretion",pos:"名",meaning:"裁量"}],svoc:"[Managers] (are given) <a discretionary budget> {for team-building activities}."},
+{id:170,word:"exorbitant",pos:"形",meaning:"法外な",example:"Some customers complained about the exorbitant shipping fees.",exampleJa:"一部の顧客は法外な送料について不満を述べた。",collocations:["exorbitant fees（法外な料金）","an exorbitant price（法外な価格）"],derivatives:[],svoc:"[Some customers] (complained) {about the exorbitant shipping fees}."},
+{id:171,word:"formidable",pos:"形",meaning:"手強い",example:"The startup quickly became a formidable competitor in the industry.",exampleJa:"そのスタートアップはたちまち業界で手強い競合相手となった。",collocations:["a formidable competitor（手強い競合相手）","a formidable challenge（手強い課題）"],derivatives:[],svoc:"[The startup] (quickly became) <a formidable competitor> {in the industry}."},
+{id:172,word:"incumbent",pos:"形",meaning:"現職の",example:"The incumbent CEO announced plans to retire next year.",exampleJa:"現職のCEOは来年退任する計画を発表した。",collocations:["the incumbent CEO（現職のCEO）","incumbent upon（〜の責務である）"],derivatives:[{word:"incumbency",pos:"名",meaning:"在職期間"}],svoc:"[The incumbent CEO] (announced) <plans to retire next year>."},
+{id:173,word:"indispensable",pos:"形",meaning:"不可欠な",example:"Reliable internet access has become indispensable for remote workers.",exampleJa:"信頼できるインターネット接続はリモートワーカーにとって不可欠なものとなった。",collocations:["an indispensable tool（不可欠なツール）","become indispensable（不可欠になる）"],derivatives:[],svoc:"[Reliable internet access] (has become) <indispensable> {for remote workers}."},
+{id:174,word:"lucrative",pos:"形",meaning:"儲かる",example:"Exporting to overseas markets proved to be a lucrative decision for the firm.",exampleJa:"海外市場への輸出はその会社にとって儲かる決断であることが判明した。",collocations:["a lucrative deal（儲かる取引）","a lucrative market（儲かる市場）"],derivatives:[],svoc:"[Exporting to overseas markets] (proved) <to be a lucrative decision for the firm>."},
+{id:175,word:"mandatory",pos:"形",meaning:"義務的な",example:"Safety training is mandatory for all new factory employees.",exampleJa:"安全研修はすべての新しい工場従業員にとって義務である。",collocations:["mandatory training（義務的な研修）","a mandatory requirement（必須要件）"],derivatives:[{word:"mandate",pos:"名",meaning:"命令・権限"}],svoc:"[Safety training] (is) <mandatory> {for all new factory employees}."},
+{id:176,word:"plausible",pos:"形",meaning:"もっともらしい",example:"The consultant offered a plausible explanation for the sudden drop in sales.",exampleJa:"そのコンサルタントは売上の急落についてもっともらしい説明を提示した。",collocations:["a plausible explanation（もっともらしい説明）","seem plausible（もっともらしく思える）"],derivatives:[{word:"plausibility",pos:"名",meaning:"もっともらしさ"}],svoc:"[The consultant] (offered) <a plausible explanation> {for the sudden drop in sales}."},
+{id:177,word:"precarious",pos:"形",meaning:"不安定な",example:"The startup's finances remained precarious throughout its first year.",exampleJa:"そのスタートアップの財務状況は設立初年度を通して不安定なままだった。",collocations:["a precarious position（不安定な立場）","precarious finances（不安定な財政）"],derivatives:[],svoc:"[The startup's finances] (remained) <precarious> {throughout its first year}."},
+{id:178,word:"preliminary",pos:"形",meaning:"予備の",example:"The preliminary findings suggest the new marketing campaign is working.",exampleJa:"予備的な調査結果は新しいマーケティングキャンペーンがうまくいっていることを示唆している。",collocations:["preliminary findings（予備調査結果）","a preliminary report（予備報告書）"],derivatives:[],svoc:"[The preliminary findings] (suggest) <the new marketing campaign is working>."},
+{id:179,word:"prevalent",pos:"形",meaning:"普及した",example:"Remote work has become increasingly prevalent since the pandemic.",exampleJa:"パンデミック以降、リモートワークはますます普及してきている。",collocations:["become prevalent（普及するようになる）","increasingly prevalent（ますます普及した）"],derivatives:[{word:"prevalence",pos:"名",meaning:"普及・蔓延"}],svoc:"[Remote work] (has become) <increasingly prevalent> {since the pandemic}."},
+{id:180,word:"proprietary",pos:"形",meaning:"専有の",example:"The company uses proprietary software to manage its supply chain.",exampleJa:"その会社はサプライチェーンを管理するために自社専有のソフトウェアを使用している。",collocations:["proprietary software（自社専有ソフトウェア）","proprietary technology（専有技術）"],derivatives:[{word:"proprietor",pos:"名",meaning:"所有者"}],svoc:"[The company] (uses) <proprietary software> {to manage its supply chain}."},
+{id:181,word:"prudent",pos:"形",meaning:"慎重な",example:"Given the uncertain market, the board took a prudent approach to spending.",exampleJa:"不透明な市場を踏まえ、取締役会は支出に対して慎重なアプローチを取った。",collocations:["a prudent approach（慎重な取り組み）","prudent management（堅実な経営）"],derivatives:[{word:"prudence",pos:"名",meaning:"慎重さ"}],svoc:"{Given the uncertain market,} [the board] (took) <a prudent approach to spending>."},
+{id:182,word:"rigorous",pos:"形",meaning:"厳格な",example:"All new products undergo rigorous testing before they are released.",exampleJa:"すべての新製品は発売前に厳格な検査を受ける。",collocations:["rigorous testing（厳格な検査）","rigorous standards（厳しい基準）"],derivatives:[{word:"rigor",pos:"名",meaning:"厳格さ"},{word:"rigorously",pos:"副",meaning:"厳格に"}],svoc:"[All new products] (undergo) <rigorous testing> {before they are released}."},
+{id:183,word:"robust",pos:"形",meaning:"堅牢な",example:"The company reported robust growth in its overseas divisions.",exampleJa:"その会社は海外部門で堅調な成長を報告した。",collocations:["robust growth（堅調な成長）","a robust economy（堅調な経済）"],derivatives:[{word:"robustly",pos:"副",meaning:"力強く"}],svoc:"[The company] (reported) <robust growth> {in its overseas divisions}."},
+{id:184,word:"skeptical",pos:"形",meaning:"懐疑的な",example:"Some investors remain skeptical about the startup's long-term profitability.",exampleJa:"一部の投資家はそのスタートアップの長期的な収益性について依然として懐疑的だ。",collocations:["remain skeptical（懐疑的なままである）","skeptical about X（Xについて懐疑的な）"],derivatives:[{word:"skepticism",pos:"名",meaning:"懐疑"}],svoc:"[Some investors] (remain) <skeptical> {about the startup's long-term profitability}."},
+{id:185,word:"stringent",pos:"形",meaning:"厳しい",example:"The factory adopted stringent quality control measures after the recall.",exampleJa:"その工場はリコールの後、厳しい品質管理策を導入した。",collocations:["stringent measures（厳しい対策）","stringent regulations（厳格な規制）"],derivatives:[],svoc:"[The factory] (adopted) <stringent quality control measures> {after the recall}."},
+{id:186,word:"subsequent",pos:"形",meaning:"その後の",example:"Subsequent inspections revealed no further defects in the product.",exampleJa:"その後の検査では製品にさらなる欠陥は見つからなかった。",collocations:["subsequent inspections（その後の検査）","in subsequent years（その後の年々に）"],derivatives:[{word:"subsequently",pos:"副",meaning:"その後"}],svoc:"[Subsequent inspections] (revealed) <no further defects> {in the product}."},
+{id:187,word:"substantive",pos:"形",meaning:"実質的な",example:"The two sides made substantive progress during the negotiation.",exampleJa:"両者はその交渉で実質的な進展を遂げた。",collocations:["substantive progress（実質的な進展）","substantive discussions（実質的な議論）"],derivatives:[],svoc:"[The two sides] (made) <substantive progress> {during the negotiation}."},
+{id:188,word:"tentative",pos:"形",meaning:"暫定的な",example:"A tentative agreement was reached, pending final approval from both boards.",exampleJa:"両社の取締役会による最終承認を待つ形で、暫定的な合意に達した。",collocations:["a tentative agreement（暫定合意）","a tentative schedule（仮の予定）"],derivatives:[{word:"tentatively",pos:"副",meaning:"暫定的に"}],svoc:"[A tentative agreement] (was reached), {pending final approval from both boards}."},
+{id:189,word:"underlying",pos:"形",meaning:"根底にある",example:"The consultant identified the underlying cause of the production delays.",exampleJa:"そのコンサルタントは生産の遅れの根底にある原因を特定した。",collocations:["the underlying cause（根本的な原因）","underlying issues（根底にある問題）"],derivatives:[{word:"underlie",pos:"動",meaning:"根底にある"}],svoc:"[The consultant] (identified) <the underlying cause of the production delays>."},
+{id:190,word:"volatile",pos:"形",meaning:"不安定な",example:"The company's stock price has been highly volatile since the announcement.",exampleJa:"その会社の株価はその発表以来、非常に不安定になっている。",collocations:["a volatile market（不安定な市場）","highly volatile（非常に不安定な）"],derivatives:[{word:"volatility",pos:"名",meaning:"不安定さ・変動性"}],svoc:"[The company's stock price] (has been) <highly volatile> {since the announcement}."},
+{id:191,word:"considerably",pos:"副",meaning:"かなり",example:"Shipping costs have increased considerably over the past year.",exampleJa:"送料は過去1年でかなり上昇した。",collocations:["increase considerably（かなり増加する）","vary considerably（かなり異なる）"],derivatives:[{word:"considerable",pos:"形",meaning:"かなりの"},{word:"consider",pos:"動",meaning:"検討する"}],svoc:"[Shipping costs] (have increased) {considerably} {over the past year}."},
+{id:192,word:"inadvertently",pos:"副",meaning:"不注意に",example:"The clerk inadvertently sent the confidential report to the wrong department.",exampleJa:"その事務員は不注意にも機密報告書を誤った部署に送ってしまった。",collocations:["inadvertently do something（不注意に〜してしまう）","an inadvertent error（不注意による誤り）"],derivatives:[{word:"inadvertent",pos:"形",meaning:"不注意の"}],svoc:"[The clerk] {inadvertently} (sent) <the confidential report> {to the wrong department}."},
+{id:193,word:"presumably",pos:"副",meaning:"おそらく",example:"The delay was presumably caused by the recent system upgrade.",exampleJa:"その遅延はおそらく最近のシステムアップグレードが原因だった。",collocations:["presumably because（おそらく〜という理由で）"],derivatives:[{word:"presume",pos:"動",meaning:"推定する"},{word:"presumption",pos:"名",meaning:"推定"}],svoc:"[The delay] (was) {presumably} <caused by the recent system upgrade>."},
+{id:194,word:"simultaneously",pos:"副",meaning:"同時に",example:"The company launched the product in three countries simultaneously.",exampleJa:"その会社は3カ国で同時にその製品を発売した。",collocations:["launch simultaneously（同時に発売する）","occur simultaneously（同時に起こる）"],derivatives:[{word:"simultaneous",pos:"形",meaning:"同時の"}],svoc:"[The company] (launched) <the product> {in three countries} {simultaneously}."},
+{id:195,word:"subsequently",pos:"副",meaning:"その後",example:"The proposal was rejected and subsequently revised for resubmission.",exampleJa:"その提案は却下され、その後再提出のために修正された。",collocations:["subsequently revised（その後修正された）"],derivatives:[{word:"subsequent",pos:"形",meaning:"その後の"}],svoc:"[The proposal] (was rejected) and {subsequently} (revised) {for resubmission}."},
+{id:196,word:"tentatively",pos:"副",meaning:"暫定的に",example:"The launch date has been tentatively set for early March.",exampleJa:"発売日は3月上旬に暫定的に設定されている。",collocations:["tentatively scheduled（仮に予定されている）","tentatively set for（〜に暫定的に設定される）"],derivatives:[{word:"tentative",pos:"形",meaning:"暫定的な"}],svoc:"[The launch date] (has been) {tentatively} <set for early March>."},
+{id:197,word:"inevitably",pos:"副",meaning:"必然的に",example:"Rapid growth inevitably brought new challenges for the small firm.",exampleJa:"急速な成長はその小さな会社に必然的に新たな課題をもたらした。",collocations:["inevitably lead to（必然的に〜につながる）"],derivatives:[{word:"inevitable",pos:"形",meaning:"必然的な"}],svoc:"[Rapid growth] {inevitably} (brought) <new challenges> {for the small firm}."},
+{id:198,word:"accordingly",pos:"副",meaning:"それに応じて",example:"Sales targets were adjusted accordingly after the market downturn.",exampleJa:"市場の低迷後、売上目標はそれに応じて調整された。",collocations:["adjust accordingly（それに応じて調整する）","act accordingly（それに応じて行動する）"],derivatives:[],svoc:"[Sales targets] (were adjusted) {accordingly} {after the market downturn}."},
+{id:199,word:"consequently",pos:"副",meaning:"その結果",example:"The factory experienced a power outage and consequently missed its shipping deadline.",exampleJa:"その工場は停電に見舞われ、その結果出荷期限に間に合わなかった。",collocations:["consequently miss（結果として逃す）"],derivatives:[{word:"consequence",pos:"名",meaning:"結果"},{word:"consequent",pos:"形",meaning:"結果として起こる"}],svoc:"[The factory] (experienced) <a power outage> and {consequently} (missed) <its shipping deadline>."},
+{id:200,word:"predominantly",pos:"副",meaning:"主に",example:"The company's customer base is predominantly made up of small businesses.",exampleJa:"その会社の顧客基盤は主に中小企業で構成されている。",collocations:["predominantly made up of（主に〜で構成される）"],derivatives:[{word:"predominant",pos:"形",meaning:"主要な・優勢な"}],svoc:"[The company's customer base] (is) {predominantly} <made up of small businesses>."}
 ];
-const VOCAB_PAGE_SIZE = 10;
 
 const CATEGORIES = [...new Set(QUESTIONS.map(q => q.category))];
 const LETTERS = ["A","B","C","D"];
@@ -3811,35 +4023,159 @@ function renderResult() {
   showScreen("result");
 }
 
-/* ---------------- 単語帳画面 ---------------- */
-let vocabPage = 0;
+/* ---------------- 単語帳画面: TOEIC暗記カードシステム ---------------- */
+const VOCAB_SRS_KEY = "toeicVocabSRS_v1";
 
-function renderVocabPage() {
-  const totalPages = Math.ceil(VOCAB.length / VOCAB_PAGE_SIZE);
-  const start = vocabPage * VOCAB_PAGE_SIZE;
-  const pageWords = VOCAB.slice(start, start + VOCAB_PAGE_SIZE);
+function loadVocabSRS() {
+  try {
+    const raw = localStorage.getItem(VOCAB_SRS_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) { return {}; }
+}
+function saveVocabSRS(srs) {
+  localStorage.setItem(VOCAB_SRS_KEY, JSON.stringify(srs));
+}
+let vocabSRS = loadVocabSRS();
 
-  document.getElementById("vocab-page-indicator").textContent = (vocabPage + 1) + " / " + totalPages;
-  document.getElementById("vocab-progress-bar").style.width = Math.round(((vocabPage + 1) / totalPages) * 100) + "%";
+function vocabStatusOf(wordId) {
+  const rec = vocabSRS[wordId];
+  return rec ? rec.status : "new";
+}
+function vocabIsDue(wordId) {
+  const rec = vocabSRS[wordId];
+  if (!rec) return true; // 未学習は復習対象
+  if (rec.status === "mastered") return false;
+  return !rec.nextReview || rec.nextReview <= todayKey();
+}
+function recordVocabEvaluation(wordId, level) {
+  const rec = vocabSRS[wordId] || { evalCount: 0 };
+  rec.evalCount = (rec.evalCount || 0) + 1;
+  rec.lastReviewed = todayKey();
+  if (level === "hard") {
+    rec.status = "learning";
+    rec.nextReview = todayKey();
+  } else if (level === "normal") {
+    rec.status = "learning";
+    const d = new Date();
+    d.setDate(d.getDate() + 3);
+    rec.nextReview = dateKey(d.getFullYear(), d.getMonth(), d.getDate());
+  } else if (level === "mastered") {
+    rec.status = "mastered";
+    rec.nextReview = null;
+  }
+  vocabSRS[wordId] = rec;
+  saveVocabSRS(vocabSRS);
+}
 
-  const listEl = document.getElementById("vocab-list");
-  listEl.innerHTML = "";
-  listEl.className = "vocab-list";
-  pageWords.forEach(w => {
-    const card = document.createElement("div");
-    card.className = "vocab-card";
-    card.innerHTML =
-      '<div class="vocab-head"><span class="vocab-word">' + w.word + '</span><span class="vocab-pos">' + w.pos + '</span></div>' +
-      '<div class="vocab-meaning">' + w.meaning + '</div>' +
-      '<div class="vocab-example">' + w.example + '</div>' +
-      '<div class="vocab-example-ja">' + w.exampleJa + '</div>';
-    listEl.appendChild(card);
+let vocabDeck = [];
+let vocabIndex = 0;
+let vocabFilterDueOnly = false;
+let vocabSearchQuery = "";
+
+function computeVocabDeck() {
+  let list = VOCAB.slice();
+  if (vocabFilterDueOnly) {
+    list = list.filter(w => vocabIsDue(w.id));
+  }
+  const q = vocabSearchQuery.trim().toLowerCase();
+  if (q) {
+    list = list.filter(w => w.word.toLowerCase().includes(q) || w.meaning.toLowerCase().includes(q));
+  }
+  return list;
+}
+
+function updateVocabMeter() {
+  let newCount = 0, learningCount = 0, masteredCount = 0;
+  VOCAB.forEach(w => {
+    const s = vocabStatusOf(w.id);
+    if (s === "mastered") masteredCount += 1;
+    else if (s === "learning") learningCount += 1;
+    else newCount += 1;
   });
+  const total = VOCAB.length;
+  document.getElementById("vocab-meter-count").textContent = (learningCount + masteredCount) + " / " + total;
+  document.getElementById("vocab-meter-new").style.width = Math.round((newCount / total) * 100) + "%";
+  document.getElementById("vocab-meter-learning").style.width = Math.round((learningCount / total) * 100) + "%";
+  document.getElementById("vocab-meter-mastered").style.width = Math.round((masteredCount / total) * 100) + "%";
+  document.getElementById("vocab-count-new").textContent = newCount;
+  document.getElementById("vocab-count-learning").textContent = learningCount;
+  document.getElementById("vocab-count-mastered").textContent = masteredCount;
+}
 
-  document.getElementById("btn-vocab-prev").disabled = vocabPage === 0;
-  document.getElementById("btn-vocab-next").disabled = vocabPage >= totalPages - 1;
+function speak(text, lang) {
+  if (!("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = lang || "en-US";
+  window.speechSynthesis.speak(utter);
+}
 
+function renderVocabCard() {
+  const flashcard = document.getElementById("vocab-flashcard");
+  const deckArea = document.getElementById("vocab-deck-area");
+  const emptyMsg = document.getElementById("vocab-empty-msg");
+
+  if (vocabDeck.length === 0) {
+    deckArea.classList.add("hidden");
+    emptyMsg.classList.remove("hidden");
+    document.getElementById("vocab-deck-indicator").textContent = "0 / 0";
+    return;
+  }
+  deckArea.classList.remove("hidden");
+  emptyMsg.classList.add("hidden");
+
+  if (vocabIndex >= vocabDeck.length) vocabIndex = 0;
+  if (vocabIndex < 0) vocabIndex = vocabDeck.length - 1;
+
+  const w = vocabDeck[vocabIndex];
+  flashcard.classList.remove("flipped");
+
+  document.getElementById("vocab-deck-indicator").textContent = (vocabIndex + 1) + " / " + vocabDeck.length;
+  document.getElementById("vocab-front-word").textContent = w.word;
+  document.getElementById("vocab-front-pos").textContent = w.pos;
+  document.getElementById("vocab-back-meaning").textContent = w.meaning;
+
+  const collocEl = document.getElementById("vocab-back-colloc");
+  collocEl.innerHTML = (w.collocations || []).map(c => "<li>" + c + "</li>").join("") || "<li>-</li>";
+
+  document.getElementById("vocab-back-svoc").innerHTML = svocToHTML(w.svoc);
+  document.getElementById("vocab-back-example-ja").textContent = w.exampleJa;
+
+  const derivEl = document.getElementById("vocab-back-deriv");
+  derivEl.innerHTML = (w.derivatives || []).map(d =>
+    "<li>" + d.word + "（" + d.pos + "）" + d.meaning + "</li>"
+  ).join("") || "<li>-</li>";
+}
+
+function initVocabScreen() {
+  vocabDeck = computeVocabDeck();
+  vocabIndex = 0;
+  updateVocabMeter();
+  renderVocabCard();
   showScreen("vocab");
+}
+
+function refreshVocabDeckKeepingPosition() {
+  const currentWordId = vocabDeck[vocabIndex] ? vocabDeck[vocabIndex].id : null;
+  vocabDeck = computeVocabDeck();
+  const foundIdx = currentWordId !== null ? vocabDeck.findIndex(w => w.id === currentWordId) : -1;
+  vocabIndex = foundIdx >= 0 ? foundIdx : 0;
+  updateVocabMeter();
+  renderVocabCard();
+}
+
+function evaluateCurrentVocabCard(level) {
+  if (vocabDeck.length === 0) return;
+  const w = vocabDeck[vocabIndex];
+  recordVocabEvaluation(w.id, level);
+  updateVocabMeter();
+  if (vocabFilterDueOnly) {
+    vocabDeck = computeVocabDeck();
+    if (vocabIndex >= vocabDeck.length) vocabIndex = 0;
+  } else {
+    vocabIndex = (vocabIndex + 1) % vocabDeck.length;
+  }
+  renderVocabCard();
 }
 
 /* ---------------- 学習カレンダー画面 ---------------- */
@@ -3981,7 +4317,7 @@ document.getElementById("lock-password-input").addEventListener("keydown", (e) =
 });
 document.getElementById("logout-btn").addEventListener("click", logout);
 document.getElementById("btn-mode-grammar").addEventListener("click", renderHome);
-document.getElementById("btn-mode-vocab").addEventListener("click", () => { vocabPage = 0; renderVocabPage(); });
+document.getElementById("btn-mode-vocab").addEventListener("click", initVocabScreen);
 document.getElementById("btn-mode-calendar").addEventListener("click", openCalendar);
 document.getElementById("btn-home-to-mode").addEventListener("click", () => showScreen("mode-select"));
 document.getElementById("btn-home-to-calendar").addEventListener("click", openCalendar);
@@ -3997,10 +4333,49 @@ document.getElementById("btn-cal-next").addEventListener("click", () => {
   if (calViewMonth > 11) { calViewMonth = 0; calViewYear += 1; }
   renderCalendar();
 });
-document.getElementById("btn-vocab-prev").addEventListener("click", () => { if (vocabPage > 0) { vocabPage -= 1; renderVocabPage(); } });
+document.getElementById("btn-vocab-prev").addEventListener("click", () => {
+  if (vocabDeck.length === 0) return;
+  vocabIndex -= 1;
+  renderVocabCard();
+});
 document.getElementById("btn-vocab-next").addEventListener("click", () => {
-  const totalPages = Math.ceil(VOCAB.length / VOCAB_PAGE_SIZE);
-  if (vocabPage < totalPages - 1) { vocabPage += 1; renderVocabPage(); }
+  if (vocabDeck.length === 0) return;
+  vocabIndex += 1;
+  renderVocabCard();
+});
+document.getElementById("vocab-flashcard").addEventListener("click", () => {
+  document.getElementById("vocab-flashcard").classList.toggle("flipped");
+});
+document.getElementById("btn-speak-word").addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (vocabDeck.length === 0) return;
+  speak(vocabDeck[vocabIndex].word, "en-US");
+});
+document.getElementById("btn-speak-example").addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (vocabDeck.length === 0) return;
+  speak(vocabDeck[vocabIndex].example, "en-US");
+});
+document.getElementById("btn-eval-hard").addEventListener("click", (e) => {
+  e.stopPropagation();
+  evaluateCurrentVocabCard("hard");
+});
+document.getElementById("btn-eval-normal").addEventListener("click", (e) => {
+  e.stopPropagation();
+  evaluateCurrentVocabCard("normal");
+});
+document.getElementById("btn-eval-mastered").addEventListener("click", (e) => {
+  e.stopPropagation();
+  evaluateCurrentVocabCard("mastered");
+});
+document.getElementById("vocab-search-input").addEventListener("input", (e) => {
+  vocabSearchQuery = e.target.value;
+  refreshVocabDeckKeepingPosition();
+});
+document.getElementById("btn-vocab-filter-due").addEventListener("click", (e) => {
+  vocabFilterDueOnly = !vocabFilterDueOnly;
+  e.target.classList.toggle("active", vocabFilterDueOnly);
+  refreshVocabDeckKeepingPosition();
 });
 document.getElementById("btn-start").addEventListener("click", startPractice);
 document.getElementById("btn-start-wrong").addEventListener("click", startWrongOnly);
