@@ -4072,7 +4072,16 @@ let vocabIndex = 0;
 let vocabFilterDueOnly = false;
 let vocabSearchQuery = "";
 
-function computeVocabDeck() {
+function shuffleAvoidingFirst(arr, avoidId) {
+  const shuffled = shuffle(arr);
+  if (shuffled.length > 1 && avoidId != null && shuffled[0].id === avoidId) {
+    const swapIdx = 1 + Math.floor(Math.random() * (shuffled.length - 1));
+    [shuffled[0], shuffled[swapIdx]] = [shuffled[swapIdx], shuffled[0]];
+  }
+  return shuffled;
+}
+
+function computeVocabDeck(avoidId) {
   let list = VOCAB.slice();
   if (vocabFilterDueOnly) {
     list = list.filter(w => vocabIsDue(w.id));
@@ -4081,7 +4090,7 @@ function computeVocabDeck() {
   if (q) {
     list = list.filter(w => w.word.toLowerCase().includes(q) || w.meaning.toLowerCase().includes(q));
   }
-  return list;
+  return shuffleAvoidingFirst(list, avoidId != null ? avoidId : null);
 }
 
 function updateVocabMeter() {
@@ -4170,10 +4179,14 @@ function evaluateCurrentVocabCard(level) {
   recordVocabEvaluation(w.id, level);
   updateVocabMeter();
   if (vocabFilterDueOnly) {
-    vocabDeck = computeVocabDeck();
+    vocabDeck = computeVocabDeck(w.id);
     if (vocabIndex >= vocabDeck.length) vocabIndex = 0;
   } else {
-    vocabIndex = (vocabIndex + 1) % vocabDeck.length;
+    vocabIndex += 1;
+    if (vocabIndex >= vocabDeck.length) {
+      vocabDeck = computeVocabDeck(w.id);
+      vocabIndex = 0;
+    }
   }
   renderVocabCard();
 }
